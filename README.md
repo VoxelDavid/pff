@@ -1,5 +1,5 @@
-### Project Final Farewell (Formerly Island Tycoon): A Roblox Project
-Project Final Farewell (PFF) is a full recreation of my old game Island Tycoon.
+### Project Final Farewell: A Roblox Project
+Project Final Farewell (PFF) is a full recreation of my old game [Island Tycoon](http://www.roblox.com/Island-Tycoon-place?id=15541427).
 It was my most successful game and really bad in terms of design and code. Leaving it in it's current state doesn't go it justice.
 
 Currently I lack motivation and any sort of inspiration to even get this started,
@@ -17,7 +17,4 @@ Once the game is complete I'll either put up the old version for download or mov
 + New Dock
 
 #### Changelog:
-+ v0.1
-	+ Initial Commit.
-	+ Added referance files
-	+ Created README.md
++ v0.1 First version
