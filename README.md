@@ -10,11 +10,13 @@ You can view the game in it's current state at [MonsterBone's](http://www.roblox
 The updated version will be put up on [MBPreviews](http://www.roblox.com/User.aspx?ID=5626931).
 Once the game is complete I'll either put up the old version for download or move it to MBPreview's place.
 
-#### Todo:
-+ Discounts for VIPs (If done, VIP room will likely be removed)
-+ Universal Button script
+#### Planned Features:
++ Abolish VIP.
+	+ Give some sort of compensation to those that bought the old VIP shirts.
+	+ Check the players inventory to see if they own them instead of if they're wearing them.
++ Universal Button script.
 + Upgrade buttons.
-+ New Dock
++ Some Hub for players to meet at.
 
 #### Changelog:
 + v0.1 First version
