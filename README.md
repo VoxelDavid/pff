@@ -17,6 +17,3 @@ Once the game is complete I'll either put up the old version for download or mov
 + Universal Button script.
 + Upgrade buttons.
 + Some Hub for players to meet at.
-
-#### Changelog:
-+ v0.1 First version

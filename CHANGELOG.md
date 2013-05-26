@@ -1,0 +1,2 @@
+## Changelog
++ Ban list cleared.
