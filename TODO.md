@@ -9,5 +9,6 @@
 + Heavily implement dynamic lighting.
 	+ Candles and fireplaces inside of houses that can be turned on and off.
 	+ Have lights turn on at a specific time of day.
-	+ Slowly transition between full bright and off durring time cycle.
-	+ Have Torches with flickering orange-red lights.
+	+ Transition the brightness of lights to be dim durring the day and bright durring the night.
+	+ Add the option for an IntValue to control how frequently a Lamp will flicker, if it exists in the part.
+	+ Add a flicker effect to all fire based lighting.
