@@ -1,10 +1,13 @@
 
---[[ TODO: (Do not include in final Script)
+--[[ ToDo: (Do not include in final Script)
    Get the time of day and adjust the brightness so it's dim
    (almost unnoticable) in the daylight and extremely visible
    at night.
 
    Flickering light.
+
+   The if block in the candle function does not seem as good
+   as it could be. Try to revise it.
 
    If I decide not to use a global script to manage
    everything change the active variable to true,
@@ -13,42 +16,43 @@
 
 
 sp = script.Parent
-game_light = game.Lighting
 
 -- Light the fire
-function set_alight()
-  local active = sp.Active
+function candle()
+  local active -- Debounce
   local light  = sp.PointLight
   local flame  = sp.Flame.Fire
-  local range  = 15 -- The Range value of the light.
+  local config = {
+    range   = 15, -- The Range value of the light source.
+    flicker = 3,  -- The frequency at which the light will flicker.
+  }
 
   -- @TODO I need to make these while loops better.
-  if active.Value == true then
+  if active then
     -- If the light is active, extinguise it quickly.
     flame.Enabled = false
 
-    -- Fade out the light.
     while light.Range > 0 do wait()
       light.Range = light.Range - 5
     end
 
-    active.Value = false
+    active = false
   else
     -- If the light is off, quickly, but smoothly, fade it in.
-    -- @TODO What's some better math to ensure it stops exactly at the predefined range?
     flame.Enabled = true
 
-    -- Fade in the light.
-    while light.Range < range do wait()
+    -- @TODO What's some better math to ensure it stops exactly at the predefined range?
+    -- Would a repeat loop work better?
+    while light.Range < config.range do wait()
       light.Range = light.Range + 2.5
     end
 
-    active.Value = true
+    active = true
   end
 end
 
 -- Connections go at the bottom for easy editing if there are multiples.
-sp.ClickDetector.MouseClick:connect(set_alight)
+sp.ClickDetector.MouseClick:connect(candle)
 
 
 --[[ Unused code. Keeping as a sort of archive.
