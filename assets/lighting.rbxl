@@ -27,18 +27,18 @@
 				<Ref name="CameraSubject">null</Ref>
 				<token name="CameraType">0</token>
 				<CoordinateFrame name="CoordinateFrame">
-					<X>33.7603912</X>
-					<Y>9.25085926</Y>
-					<Z>20.1908188</Z>
-					<R00>0.500482142</R00>
-					<R01>0.455134749</R01>
-					<R02>-0.736457705</R02>
+					<X>34.7119102</X>
+					<Y>9.26860428</Y>
+					<Z>20.9471321</Z>
+					<R00>0.951231003</R00>
+					<R01>0.164909005</R01>
+					<R02>-0.260700017</R02>
 					<R10>-0</R10>
-					<R11>0.850661695</R11>
-					<R12>0.525713444</R12>
-					<R20>0.865746856</R20>
-					<R21>-0.263110191</R21>
-					<R22>0.425740987</R22>
+					<R11>0.845113456</R11>
+					<R12>0.534586966</R12>
+					<R20>0.308479279</R20>
+					<R21>-0.508515716</R21>
+					<R22>0.803898215</R22>
 				</CoordinateFrame>
 				<float name="FieldOfView">70</float>
 				<CoordinateFrame name="Focus">
@@ -12595,27 +12595,19 @@ sp.Click.ClickDetector.MouseClick:connect(set_alight)</ProtectedString>
 						<Content name="LinkedSource"><null></null></Content>
 						<string name="Name">Candle</string>
 						<ProtectedString name="Source">sp = script.Parent
-gb = _G[game.Workspace.MASTER]
 
-local active = true -- Debounce
 function candle()
-  local light  = sp.PointLight
-  local flame  = sp.Flame.Fire
-  local config = {
+  light  = sp.PointLight
+  flame  = sp.Flame.Fire
+  config = {
     range   = 15, -- The Range value of the light source.
     flicker = 3,  -- The frequency at which the light will flicker.
   }
+
   -- @TODO I need to make these while loops better.
-  if active == true then
-    -- If the light is active, extinguise it quickly.
-    flame.Enabled = false
-
-    while light.Range &gt; 0 do wait()
-      light.Range = light.Range - 5
-    end
-
-    active = false
-  else
+  local active
+  return active
+  if active == false then
     -- If the light is off, quickly, but smoothly, fade it in.
     flame.Enabled = true
 
@@ -12626,11 +12618,20 @@ function candle()
     end
 
     active = true
+  else
+&#9;-- If the light is active, extinguise it quickly.
+    flame.Enabled = false
+
+    while light.Range &gt; 0 do wait()
+      light.Range = light.Range - 5
+    end
+
+    active = false
   end
 end
 sp.ClickDetector.MouseClick:connect(candle)
 
-print(&quot;Cats&quot; .. active)</ProtectedString>
+print(active)</ProtectedString>
 					</Properties>
 				</Item>
 			</Item>
@@ -13563,7 +13564,7 @@ end
 			<Properties>
 				<bool name="Disabled">false</bool>
 				<Content name="LinkedSource"><null></null></Content>
-				<string name="Name">MASTER</string>
+				<string name="Name">Global</string>
 				<ProtectedString name="Source">--[[
   This script holds all of the functions and major
   values used throughout the game.
@@ -13572,6 +13573,9 @@ end
 
   @ToDo
 ]]
+
+-- Use with the flickering function.
+-- math.random(range - light_flicker_frequecy, range)
 
 
 --[===================================[--
@@ -13586,28 +13590,27 @@ _G.light_brightness_when_night   = 1     -- How bright a light should be at nigh
 --[===================================[--
     FUNCTIONS
 --]===================================]--
-_G[script] = {} -- Create the &quot;Script&quot; sub-table that will hold all the functions.
-gb = _G[script] -- Asign the new sub-table a quick alias (Stands for &quot;Global&quot;).
+
 
 
 --========= LIGHTING =========--
 
-gb.light_candle = function()
+_G[&quot;light_candle&quot;] = function()
 
---[[ ToDo: (Do not include in final Script)
- Get the time of day and adjust the brightness so it&apos;s dim
- (almost unnoticable) in the daylight and extremely visible
- at night.
+  --[[ ToDo: (Do not include in final Script)
+   Get the time of day and adjust the brightness so it&apos;s dim
+   (almost unnoticable) in the daylight and extremely visible
+   at night.
 
- Flickering light.
+   Flickering light.
 
- The if block in the candle function does not seem as good
- as it could be. Try to revise it.
+   The if block in the candle function does not seem as good
+   as it could be. Try to revise it.
 
- If I decide not to use a global script to manage
- everything change the active variable to true,
- and remove .Value from all changes to it.
-]]
+   If I decide not to use a global script to manage
+   everything change the active variable to true,
+   and remove .Value from all changes to it.
+  ]]
 
   local sp = script.Parent
   local active -- Debounce
@@ -13620,7 +13623,7 @@ gb.light_candle = function()
   }
 
   -- @TODO I need to make these while loops better.
-  if active then
+  if not active then
     -- If the light is active, extinguise it quickly.
     flame.Enabled = false
 
@@ -13641,23 +13644,24 @@ gb.light_candle = function()
 
     active = true
   end
-  -- Bring in the Candle script and tweak them to
-  -- work properly.
 end
 
 -- Dim a light source in the day time.
-gb.dim_light_in_day = function()
+_G[&quot;brightness_adjustments&quot;] = function()
+  -- Put inside of a while loop:
+
+  -- if between start_time and end_time then
+    -- fade out lights
+  -- else
+    -- fade in lights
+  -- end
+
   -- Set global variables for when lights should
   -- start dimming and when they should brighten back up.
 end
 
--- Brighten a light source at night time.
-gb.brighten_light_at_night = function()
-
-end
-
 --Get the minutes after midnight / 60 and if it&apos;s a certain time do something.
-gb.get_the_time = function()
+_G[&quot;get_the_time&quot;] = function()
 end
 
 -- Once done print to the output that everything is running smoothly.
@@ -13667,7 +13671,10 @@ print(&quot;Master Script Loaded Successfully&quot;)
 
 --[[ Archive
 
--- Archived test function.
+-- _G test function.
+_G[script] = {} -- Create the &quot;Script&quot; sub-table that will hold all the functions.
+gb = _G[script] -- Asign the new sub-table a quick alias (Stands for &quot;Global&quot;).
+
 gb.YouTouchMyTralala = function()
   print(&quot;Mmm, my ding ding dong&quot;)
 end
