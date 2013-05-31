@@ -28,7 +28,7 @@ function candle()
   }
 
   -- @TODO I need to make these while loops better.
-  if active then
+  if active == true then
     -- If the light is active, extinguise it quickly.
     flame.Enabled = false
 

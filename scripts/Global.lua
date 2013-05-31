@@ -7,7 +7,7 @@
   @ToDo
 ]]
 
--- Used with the flickering function.
+-- Use with the flickering function.
 -- math.random(range - light_flicker_frequecy, range)
 
 
@@ -78,8 +78,6 @@ gb.light_candle = function()
 
     active = true
   end
-  -- Bring in the Candle script and tweak them to
-  -- work properly.
 end
 
 -- Dim a light source in the day time.

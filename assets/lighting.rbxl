@@ -27,24 +27,24 @@
 				<Ref name="CameraSubject">null</Ref>
 				<token name="CameraType">0</token>
 				<CoordinateFrame name="CoordinateFrame">
-					<X>38.4668579</X>
-					<Y>10.330019</Y>
-					<Z>6.99631786</Z>
-					<R00>-0.138629064</R00>
-					<R01>0.520634472</R01>
-					<R02>-0.842449903</R02>
-					<R10>3.7252903e-009</R10>
-					<R11>0.850663602</R11>
-					<R12>0.525710523</R12>
-					<R20>0.990344405</R20>
-					<R21>0.0728787556</R21>
-					<R22>-0.117926694</R22>
+					<X>33.7603912</X>
+					<Y>9.25085926</Y>
+					<Z>20.1908188</Z>
+					<R00>0.500482142</R00>
+					<R01>0.455134749</R01>
+					<R02>-0.736457705</R02>
+					<R10>-0</R10>
+					<R11>0.850661695</R11>
+					<R12>0.525713444</R12>
+					<R20>0.865746856</R20>
+					<R21>-0.263110191</R21>
+					<R22>0.425740987</R22>
 				</CoordinateFrame>
 				<float name="FieldOfView">70</float>
 				<CoordinateFrame name="Focus">
-					<X>40.1517563</X>
-					<Y>9.27859879</Y>
-					<Z>7.23217106</Z>
+					<X>35.2333107</X>
+					<Y>8.19942951</Y>
+					<Z>19.3393345</Z>
 					<R00>1</R00>
 					<R01>0</R01>
 					<R02>0</R02>
@@ -12574,33 +12574,13 @@ sp.Click.ClickDetector.MouseClick:connect(set_alight)</ProtectedString>
 						</Properties>
 					</Item>
 				</Item>
-				<Item class="BoolValue" referent="RBX231">
-					<Properties>
-						<string name="Name">Active</string>
-						<bool name="Value">false</bool>
-					</Properties>
-				</Item>
-				<Item class="Script" referent="RBX232">
-					<Properties>
-						<bool name="Disabled">false</bool>
-						<Content name="LinkedSource"><null></null></Content>
-						<string name="Name">Candle</string>
-						<ProtectedString name="Source">sp = script.Parent
-gb = _G[game.Workspace.MASTER]
-
-function candle()
-&#9;gb.light_candle()
-end
-sp.ClickDetector.MouseClick:connect(candle)</ProtectedString>
-					</Properties>
-				</Item>
-				<Item class="ClickDetector" referent="RBX233">
+				<Item class="ClickDetector" referent="RBX231">
 					<Properties>
 						<float name="MaxActivationDistance">14</float>
 						<string name="Name">ClickDetector</string>
 					</Properties>
 				</Item>
-				<Item class="PointLight" referent="RBX234">
+				<Item class="PointLight" referent="RBX232">
 					<Properties>
 						<float name="Brightness">1</float>
 						<Color3 name="Color">4292247560</Color3>
@@ -12609,8 +12589,52 @@ sp.ClickDetector.MouseClick:connect(candle)</ProtectedString>
 						<float name="Range">0</float>
 					</Properties>
 				</Item>
+				<Item class="Script" referent="RBX233">
+					<Properties>
+						<bool name="Disabled">false</bool>
+						<Content name="LinkedSource"><null></null></Content>
+						<string name="Name">Candle</string>
+						<ProtectedString name="Source">sp = script.Parent
+gb = _G[game.Workspace.MASTER]
+
+local active = true -- Debounce
+function candle()
+  local light  = sp.PointLight
+  local flame  = sp.Flame.Fire
+  local config = {
+    range   = 15, -- The Range value of the light source.
+    flicker = 3,  -- The frequency at which the light will flicker.
+  }
+  -- @TODO I need to make these while loops better.
+  if active == true then
+    -- If the light is active, extinguise it quickly.
+    flame.Enabled = false
+
+    while light.Range &gt; 0 do wait()
+      light.Range = light.Range - 5
+    end
+
+    active = false
+  else
+    -- If the light is off, quickly, but smoothly, fade it in.
+    flame.Enabled = true
+
+    -- @TODO What&apos;s some better math to ensure it stops exactly at the predefined range?
+    -- Would a repeat loop work better?
+    while light.Range &lt; config.range do wait()
+      light.Range = light.Range + 2.5
+    end
+
+    active = true
+  end
+end
+sp.ClickDetector.MouseClick:connect(candle)
+
+print(&quot;Cats&quot; .. active)</ProtectedString>
+					</Properties>
+				</Item>
 			</Item>
-			<Item class="Part" referent="RBX235">
+			<Item class="Part" referent="RBX234">
 				<Properties>
 					<bool name="Anchored">true</bool>
 					<float name="BackParamA">-0.5</float>
@@ -12678,7 +12702,7 @@ sp.ClickDetector.MouseClick:connect(candle)</ProtectedString>
 						<Z>1</Z>
 					</Vector3>
 				</Properties>
-				<Item class="CylinderMesh" referent="RBX236">
+				<Item class="CylinderMesh" referent="RBX235">
 					<Properties>
 						<float name="Bevel">0</float>
 						<float name="Bevel Roundness">0</float>
@@ -12703,7 +12727,7 @@ sp.ClickDetector.MouseClick:connect(candle)</ProtectedString>
 						</Vector3>
 					</Properties>
 				</Item>
-				<Item class="Part" referent="RBX237">
+				<Item class="Part" referent="RBX236">
 					<Properties>
 						<bool name="Anchored">true</bool>
 						<float name="BackParamA">-0.5</float>
@@ -12771,7 +12795,7 @@ sp.ClickDetector.MouseClick:connect(candle)</ProtectedString>
 							<Z>1</Z>
 						</Vector3>
 					</Properties>
-					<Item class="CylinderMesh" referent="RBX238">
+					<Item class="CylinderMesh" referent="RBX237">
 						<Properties>
 							<float name="Bevel">0</float>
 							<float name="Bevel Roundness">0</float>
@@ -12797,7 +12821,7 @@ sp.ClickDetector.MouseClick:connect(candle)</ProtectedString>
 						</Properties>
 					</Item>
 				</Item>
-				<Item class="Part" referent="RBX239">
+				<Item class="Part" referent="RBX238">
 					<Properties>
 						<bool name="Anchored">true</bool>
 						<float name="BackParamA">-0.5</float>
@@ -12865,7 +12889,7 @@ sp.ClickDetector.MouseClick:connect(candle)</ProtectedString>
 							<Z>1</Z>
 						</Vector3>
 					</Properties>
-					<Item class="CylinderMesh" referent="RBX240">
+					<Item class="CylinderMesh" referent="RBX239">
 						<Properties>
 							<float name="Bevel">0</float>
 							<float name="Bevel Roundness">0</float>
@@ -12891,7 +12915,7 @@ sp.ClickDetector.MouseClick:connect(candle)</ProtectedString>
 						</Properties>
 					</Item>
 				</Item>
-				<Item class="Part" referent="RBX241">
+				<Item class="Part" referent="RBX240">
 					<Properties>
 						<bool name="Anchored">true</bool>
 						<float name="BackParamA">-0.5</float>
@@ -12959,7 +12983,7 @@ sp.ClickDetector.MouseClick:connect(candle)</ProtectedString>
 							<Z>1</Z>
 						</Vector3>
 					</Properties>
-					<Item class="Fire" referent="RBX242">
+					<Item class="Fire" referent="RBX241">
 						<Properties>
 							<Color3 name="Color">4294934528</Color3>
 							<bool name="Enabled">false</bool>
@@ -12970,13 +12994,13 @@ sp.ClickDetector.MouseClick:connect(candle)</ProtectedString>
 						</Properties>
 					</Item>
 				</Item>
-				<Item class="BoolValue" referent="RBX243">
+				<Item class="BoolValue" referent="RBX242">
 					<Properties>
 						<string name="Name">Active</string>
 						<bool name="Value">false</bool>
 					</Properties>
 				</Item>
-				<Item class="Script" referent="RBX244">
+				<Item class="Script" referent="RBX243">
 					<Properties>
 						<bool name="Disabled">false</bool>
 						<Content name="LinkedSource"><null></null></Content>
@@ -13056,13 +13080,13 @@ end
 ]]</ProtectedString>
 					</Properties>
 				</Item>
-				<Item class="ClickDetector" referent="RBX245">
+				<Item class="ClickDetector" referent="RBX244">
 					<Properties>
 						<float name="MaxActivationDistance">14</float>
 						<string name="Name">ClickDetector</string>
 					</Properties>
 				</Item>
-				<Item class="PointLight" referent="RBX246">
+				<Item class="PointLight" referent="RBX245">
 					<Properties>
 						<float name="Brightness">1</float>
 						<Color3 name="Color">4292247560</Color3>
@@ -13072,7 +13096,7 @@ end
 					</Properties>
 				</Item>
 			</Item>
-			<Item class="Part" referent="RBX247">
+			<Item class="Part" referent="RBX246">
 				<Properties>
 					<bool name="Anchored">true</bool>
 					<float name="BackParamA">-0.5</float>
@@ -13140,7 +13164,7 @@ end
 						<Z>1</Z>
 					</Vector3>
 				</Properties>
-				<Item class="CylinderMesh" referent="RBX248">
+				<Item class="CylinderMesh" referent="RBX247">
 					<Properties>
 						<float name="Bevel">0</float>
 						<float name="Bevel Roundness">0</float>
@@ -13165,7 +13189,7 @@ end
 						</Vector3>
 					</Properties>
 				</Item>
-				<Item class="Part" referent="RBX249">
+				<Item class="Part" referent="RBX248">
 					<Properties>
 						<bool name="Anchored">true</bool>
 						<float name="BackParamA">-0.5</float>
@@ -13233,7 +13257,7 @@ end
 							<Z>1</Z>
 						</Vector3>
 					</Properties>
-					<Item class="CylinderMesh" referent="RBX250">
+					<Item class="CylinderMesh" referent="RBX249">
 						<Properties>
 							<float name="Bevel">0</float>
 							<float name="Bevel Roundness">0</float>
@@ -13259,7 +13283,7 @@ end
 						</Properties>
 					</Item>
 				</Item>
-				<Item class="Part" referent="RBX251">
+				<Item class="Part" referent="RBX250">
 					<Properties>
 						<bool name="Anchored">true</bool>
 						<float name="BackParamA">-0.5</float>
@@ -13327,7 +13351,7 @@ end
 							<Z>1</Z>
 						</Vector3>
 					</Properties>
-					<Item class="CylinderMesh" referent="RBX252">
+					<Item class="CylinderMesh" referent="RBX251">
 						<Properties>
 							<float name="Bevel">0</float>
 							<float name="Bevel Roundness">0</float>
@@ -13353,7 +13377,7 @@ end
 						</Properties>
 					</Item>
 				</Item>
-				<Item class="Part" referent="RBX253">
+				<Item class="Part" referent="RBX252">
 					<Properties>
 						<bool name="Anchored">true</bool>
 						<float name="BackParamA">-0.5</float>
@@ -13421,7 +13445,7 @@ end
 							<Z>1</Z>
 						</Vector3>
 					</Properties>
-					<Item class="Fire" referent="RBX254">
+					<Item class="Fire" referent="RBX253">
 						<Properties>
 							<Color3 name="Color">4294934528</Color3>
 							<bool name="Enabled">false</bool>
@@ -13432,13 +13456,13 @@ end
 						</Properties>
 					</Item>
 				</Item>
-				<Item class="BoolValue" referent="RBX255">
+				<Item class="BoolValue" referent="RBX254">
 					<Properties>
 						<string name="Name">Active</string>
 						<bool name="Value">false</bool>
 					</Properties>
 				</Item>
-				<Item class="Script" referent="RBX256">
+				<Item class="Script" referent="RBX255">
 					<Properties>
 						<bool name="Disabled">false</bool>
 						<Content name="LinkedSource"><null></null></Content>
@@ -13518,13 +13542,13 @@ end
 ]]</ProtectedString>
 					</Properties>
 				</Item>
-				<Item class="ClickDetector" referent="RBX257">
+				<Item class="ClickDetector" referent="RBX256">
 					<Properties>
 						<float name="MaxActivationDistance">14</float>
 						<string name="Name">ClickDetector</string>
 					</Properties>
 				</Item>
-				<Item class="PointLight" referent="RBX258">
+				<Item class="PointLight" referent="RBX257">
 					<Properties>
 						<float name="Brightness">1</float>
 						<Color3 name="Color">4292247560</Color3>
@@ -13535,7 +13559,7 @@ end
 				</Item>
 			</Item>
 		</Item>
-		<Item class="Script" referent="RBX259">
+		<Item class="Script" referent="RBX258">
 			<Properties>
 				<bool name="Disabled">false</bool>
 				<Content name="LinkedSource"><null></null></Content>
@@ -13653,18 +13677,18 @@ end
 			</Properties>
 		</Item>
 	</Item>
-	<Item class="StarterPack" referent="RBX260">
+	<Item class="StarterPack" referent="RBX259">
 		<Properties>
 			<string name="Name">StarterPack</string>
 		</Properties>
 	</Item>
-	<Item class="StarterGui" referent="RBX261">
+	<Item class="StarterGui" referent="RBX260">
 		<Properties>
 			<string name="Name">StarterGui</string>
 			<bool name="ShowDevelopmentGui">true</bool>
 		</Properties>
 	</Item>
-	<Item class="SoundService" referent="RBX262">
+	<Item class="SoundService" referent="RBX261">
 		<Properties>
 			<token name="AmbientReverb">0</token>
 			<float name="DistanceFactor">10</float>
@@ -13673,104 +13697,104 @@ end
 			<float name="RolloffScale">1</float>
 		</Properties>
 	</Item>
-	<Item class="CollectionService" referent="RBX263">
+	<Item class="CollectionService" referent="RBX262">
 		<Properties>
 			<string name="Name">CollectionService</string>
 		</Properties>
 	</Item>
-	<Item class="PhysicsService" referent="RBX264">
+	<Item class="PhysicsService" referent="RBX263">
 		<Properties>
 			<string name="Name">PhysicsService</string>
 		</Properties>
 	</Item>
-	<Item class="BadgeService" referent="RBX265">
+	<Item class="BadgeService" referent="RBX264">
 		<Properties>
 			<string name="Name">BadgeService</string>
 		</Properties>
 	</Item>
-	<Item class="Geometry" referent="RBX266">
+	<Item class="Geometry" referent="RBX265">
 		<Properties>
 			<string name="Name">Geometry</string>
 		</Properties>
 	</Item>
-	<Item class="RenderHooksService" referent="RBX267">
+	<Item class="RenderHooksService" referent="RBX266">
 		<Properties>
 			<string name="Name">RenderHooksService</string>
 		</Properties>
 	</Item>
-	<Item class="SocialService" referent="RBX268">
+	<Item class="SocialService" referent="RBX267">
 		<Properties>
 			<string name="Name">SocialService</string>
 		</Properties>
 	</Item>
-	<Item class="GamePassService" referent="RBX269">
+	<Item class="GamePassService" referent="RBX268">
 		<Properties>
 			<string name="Name">GamePassService</string>
 		</Properties>
 	</Item>
-	<Item class="Debris" referent="RBX270">
+	<Item class="Debris" referent="RBX269">
 		<Properties>
 			<int name="MaxItems">1000</int>
 			<string name="Name">Debris</string>
 		</Properties>
 	</Item>
-	<Item class="TimerService" referent="RBX271">
+	<Item class="TimerService" referent="RBX270">
 		<Properties>
 			<string name="Name">Instance</string>
 		</Properties>
 	</Item>
-	<Item class="ScriptInformationProvider" referent="RBX272">
+	<Item class="ScriptInformationProvider" referent="RBX271">
 		<Properties>
 			<string name="Name">Instance</string>
 		</Properties>
 	</Item>
-	<Item class="CookiesService" referent="RBX273">
+	<Item class="CookiesService" referent="RBX272">
 		<Properties>
 			<string name="Name">CookiesService</string>
 		</Properties>
 	</Item>
-	<Item class="TeleportService" referent="RBX274">
+	<Item class="TeleportService" referent="RBX273">
 		<Properties>
 			<string name="Name">Teleport Service</string>
 		</Properties>
 	</Item>
-	<Item class="Players" referent="RBX275">
+	<Item class="Players" referent="RBX274">
 		<Properties>
 			<bool name="CharacterAutoLoads">true</bool>
 			<string name="Name">Players</string>
 		</Properties>
 	</Item>
-	<Item class="FWService" referent="RBX276">
+	<Item class="FWService" referent="RBX275">
 		<Properties>
 			<string name="Name">Instance</string>
 		</Properties>
 	</Item>
-	<Item class="UserInputService" referent="RBX277">
+	<Item class="UserInputService" referent="RBX276">
 		<Properties>
 			<string name="Name">Instance</string>
 		</Properties>
 	</Item>
-	<Item class="ContextActionService" referent="RBX278">
+	<Item class="ContextActionService" referent="RBX277">
 		<Properties>
 			<string name="Name">ContextActionService</string>
 		</Properties>
 	</Item>
-	<Item class="ScriptService" referent="RBX279">
+	<Item class="ScriptService" referent="RBX278">
 		<Properties>
 			<string name="Name">Instance</string>
 		</Properties>
 	</Item>
-	<Item class="Selection" referent="RBX280">
+	<Item class="Selection" referent="RBX279">
 		<Properties>
 			<string name="Name">Selection</string>
 		</Properties>
 	</Item>
-	<Item class="ChangeHistoryService" referent="RBX281">
+	<Item class="ChangeHistoryService" referent="RBX280">
 		<Properties>
 			<string name="Name">ChangeHistoryService</string>
 		</Properties>
 	</Item>
-	<Item class="Lighting" referent="RBX282">
+	<Item class="Lighting" referent="RBX281">
 		<Properties>
 			<Color3 name="Ambient">4282795592</Color3>
 			<float name="Brightness">1.5</float>
@@ -13786,7 +13810,7 @@ end
 			<Color3 name="ShadowColor">4289967032</Color3>
 			<string name="TimeOfDay">00:00:00</string>
 		</Properties>
-		<Item class="Sky" referent="RBX283">
+		<Item class="Sky" referent="RBX282">
 			<Properties>
 				<bool name="CelestialBodiesShown">true</bool>
 				<string name="Name">Sky</string>
