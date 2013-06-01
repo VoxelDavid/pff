@@ -12,4 +12,3 @@ _G.light_candle_range            = 15    -- Light source range of a Candle.
 
 
 print("_G.variables Loaded")
---script:Destroy() -- Destroy the script after iniialization to prevent theft

@@ -2,5 +2,5 @@
   [Allan please add description]
 --]===================================]--
 
-_G["light_lamp"] = function()
+function _G.light_lamp()
 end
