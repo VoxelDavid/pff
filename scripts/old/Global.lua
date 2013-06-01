@@ -1,4 +1,7 @@
 --[[
+  ! Global functions have been seperated into their own files.
+  ! This script no longer used.
+
   This script holds all of the functions and major
   values used throughout the game.
 

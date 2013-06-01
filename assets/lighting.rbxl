@@ -27,24 +27,24 @@
 				<Ref name="CameraSubject">null</Ref>
 				<token name="CameraType">0</token>
 				<CoordinateFrame name="CoordinateFrame">
-					<X>34.7119102</X>
-					<Y>9.26860428</Y>
-					<Z>20.9471321</Z>
-					<R00>0.951231003</R00>
-					<R01>0.164909005</R01>
-					<R02>-0.260700017</R02>
-					<R10>-0</R10>
-					<R11>0.845113456</R11>
-					<R12>0.534586966</R12>
-					<R20>0.308479279</R20>
-					<R21>-0.508515716</R21>
-					<R22>0.803898215</R22>
+					<X>55.7724838</X>
+					<Y>17.017622</Y>
+					<Z>60.7021637</Z>
+					<R00>0.709153295</R00>
+					<R01>-0.0983209834</R01>
+					<R02>0.698165178</R02>
+					<R10>-7.4505806e-009</R10>
+					<R11>0.990228891</R11>
+					<R12>0.139451638</R12>
+					<R20>-0.705054402</R20>
+					<R21>-0.0988925993</R21>
+					<R22>0.702224016</R22>
 				</CoordinateFrame>
 				<float name="FieldOfView">70</float>
 				<CoordinateFrame name="Focus">
-					<X>35.2333107</X>
-					<Y>8.19942951</Y>
-					<Z>19.3393345</Z>
+					<X>54.3761597</X>
+					<Y>16.7387199</Y>
+					<Z>59.2977219</Z>
 					<R00>1</R00>
 					<R01>0</R01>
 					<R02>0</R02>
@@ -12594,44 +12594,17 @@ sp.Click.ClickDetector.MouseClick:connect(set_alight)</ProtectedString>
 						<bool name="Disabled">false</bool>
 						<Content name="LinkedSource"><null></null></Content>
 						<string name="Name">Candle</string>
-						<ProtectedString name="Source">sp = script.Parent
+						<ProtectedString name="Source">repeat wait() until _G.light_candle -- Wait for the function to load before calling it.
 
-function candle()
-  light  = sp.PointLight
-  flame  = sp.Flame.Fire
-  config = {
-    range   = 15, -- The Range value of the light source.
-    flicker = 3,  -- The frequency at which the light will flicker.
-  }
-
-  -- @TODO I need to make these while loops better.
-  local active
-  return active
-  if active == false then
-    -- If the light is off, quickly, but smoothly, fade it in.
-    flame.Enabled = true
-
-    -- @TODO What&apos;s some better math to ensure it stops exactly at the predefined range?
-    -- Would a repeat loop work better?
-    while light.Range &lt; config.range do wait()
-      light.Range = light.Range + 2.5
-    end
-
-    active = true
-  else
-&#9;-- If the light is active, extinguise it quickly.
-    flame.Enabled = false
-
-    while light.Range &gt; 0 do wait()
-      light.Range = light.Range - 5
-    end
-
-    active = false
+local enabled
+local sp = script.Parent
+script.Parent.ClickDetector.MouseClick:connect(function()
+  if not enabled then
+    enabled = true
+    _G.light_candle(sp.PointLight, sp.Flame.Fire)
+    enabled = false
   end
-end
-sp.ClickDetector.MouseClick:connect(candle)
-
-print(active)</ProtectedString>
+end)</ProtectedString>
 					</Properties>
 				</Item>
 			</Item>
@@ -13564,40 +13537,484 @@ end
 			<Properties>
 				<bool name="Disabled">false</bool>
 				<Content name="LinkedSource"><null></null></Content>
-				<string name="Name">Global</string>
-				<ProtectedString name="Source">--[[
-  This script holds all of the functions and major
-  values used throughout the game.
+				<string name="Name">GlobalScripts</string>
+				<ProtectedString name="Source">--[===================================[--
+&#9;[Add GlobalScripts description]
+--]===================================]--</ProtectedString>
+			</Properties>
+			<Item class="Script" referent="RBX259">
+				<Properties>
+					<bool name="Disabled">false</bool>
+					<Content name="LinkedSource"><null></null></Content>
+					<string name="Name">variables</string>
+					<ProtectedString name="Source">--[===================================[--
+  This file holds all of the configurable variables used throughout the game.
 
-  Authored By: VoxelDavid (On Roblox as D3lego &amp; MonsterBone)
-
-  @ToDo
-]]
-
--- Use with the flickering function.
--- math.random(range - light_flicker_frequecy, range)
-
-
---[===================================[--
-    VARIABLES
---]===================================]--
-_G.light_flicker_frequency       = 3     -- The frequency of how many times a fire based light will flicker each second.
-_G.light_brightness_when_day     = 0.1   -- How bright a light should be in the day.
-_G.light_brightness_when_night   = 1     -- How bright a light should be at night.
-
-
-
---[===================================[--
-    FUNCTIONS
+  Be sure to describe the variable and comment well!
 --]===================================]--
 
+_G[&quot;base_wait_time&quot;]                 = 0.05  --
+_G[&quot;light_flicker_frequency&quot;]        = 3     -- How frequently a fire a fire based light will flicker each second.
+_G[&quot;light_brightness_when_day &quot;]     = 0.1   -- How bright a light should be in the day.
+_G[&quot;light_brightness_when_night&quot;]    = 1     -- How bright a light should be at night.
+_G[&quot;light_candle_range&quot;]             = 15    -- Light source range of a Candle.
 
+--script:Destroy()</ProtectedString>
+				</Properties>
+			</Item>
+			<Item class="Script" referent="RBX260">
+				<Properties>
+					<bool name="Disabled">false</bool>
+					<Content name="LinkedSource"><null></null></Content>
+					<string name="Name">light_candle</string>
+					<ProtectedString name="Source">--[===================================[--
+  @Description
+    Edits a PointLight and Fire to create a somewhat realistic candle effect.
 
---========= LIGHTING =========--
+    Clicking once expands the PointLight&apos;s range to the Range variable below and
+    hen enabling the Fire.
 
-_G[&quot;light_candle&quot;] = function()
+    Clicking it again &quot;extinguises&quot; the candle by shrinking the PointLight&apos;s
+    range to 0 and disabling the Fire.
 
-  --[[ ToDo: (Do not include in final Script)
+  @ToDo:
+    The If block could use some revising, as well as the while loops.
+    What&apos;s some better math to ensure the while loops stop exactly
+    at the predefined range? Would a repeat loop get that job done better?
+
+  @Calling the Function:
+    repeat wait() until _G.light_candle -- Wait for the function to load before calling it.
+
+    local enabled
+    local sp = script.Parent
+    script.Parent.ClickDetector.MouseClick:connect(function()
+      if not enabled then
+        enabled = true
+        _G.light_candle(sp.PointLight, sp.Flame.Fire)
+        enabled = false
+      end
+    end)
+--]===================================]--
+
+function _G.light_candle(light, flame)
+  print(&quot;Start&quot;)
+  active = false
+  if active == false then
+    print(&quot;Candle is out&quot;)
+    -- If the light is off, quickly, but smoothly, fade it in.
+    flame.Enabled = true
+    print(&quot;Lighting&quot;)
+    while light.Range &lt; _G.light_candle_range do
+      wait(_G.base_wait_time)
+      light.Range = light.Range + 2.5
+    end
+    active = true
+  else
+    print(&quot;Candle is lit&quot;)
+    -- If the light is active, extinguise it quickly.
+    flame.Enabled = false
+    print(&quot;Extinguise&quot;)
+    while light.Range &gt; 0 do wait()
+      light.Range = light.Range - 5
+    end
+    active = false
+  end
+end
+print(&quot;_G.light_candle Loaded&quot;)</ProtectedString>
+				</Properties>
+			</Item>
+		</Item>
+		<Item class="Model" referent="RBX261">
+			<Properties>
+				<CoordinateFrame name="ModelInPrimary">
+					<X>0</X>
+					<Y>0</Y>
+					<Z>0</Z>
+					<R00>1</R00>
+					<R01>0</R01>
+					<R02>0</R02>
+					<R10>0</R10>
+					<R11>1</R11>
+					<R12>0</R12>
+					<R20>0</R20>
+					<R21>0</R21>
+					<R22>1</R22>
+				</CoordinateFrame>
+				<string name="Name">getfenv()</string>
+				<Ref name="PrimaryPart">null</Ref>
+			</Properties>
+			<Item class="Part" referent="RBX262">
+				<Properties>
+					<bool name="Anchored">true</bool>
+					<float name="BackParamA">-0.5</float>
+					<float name="BackParamB">0.5</float>
+					<token name="BackSurface">0</token>
+					<token name="BackSurfaceInput">0</token>
+					<float name="BottomParamA">-0.5</float>
+					<float name="BottomParamB">0.5</float>
+					<token name="BottomSurface">4</token>
+					<token name="BottomSurfaceInput">0</token>
+					<int name="BrickColor">226</int>
+					<CoordinateFrame name="CFrame">
+						<X>48.5000038</X>
+						<Y>1.80000007</Y>
+						<Z>32.5</Z>
+						<R00>1</R00>
+						<R01>0</R01>
+						<R02>0</R02>
+						<R10>0</R10>
+						<R11>1</R11>
+						<R12>0</R12>
+						<R20>0</R20>
+						<R21>0</R21>
+						<R22>1</R22>
+					</CoordinateFrame>
+					<bool name="CanCollide">true</bool>
+					<float name="Elasticity">0.5</float>
+					<float name="Friction">0.300000012</float>
+					<float name="FrontParamA">-0.5</float>
+					<float name="FrontParamB">0.5</float>
+					<token name="FrontSurface">0</token>
+					<token name="FrontSurfaceInput">0</token>
+					<float name="LeftParamA">-0.5</float>
+					<float name="LeftParamB">0.5</float>
+					<token name="LeftSurface">0</token>
+					<token name="LeftSurfaceInput">0</token>
+					<bool name="Locked">false</bool>
+					<token name="Material">256</token>
+					<string name="Name">Candle</string>
+					<float name="Reflectance">0</float>
+					<float name="RightParamA">-0.5</float>
+					<float name="RightParamB">0.5</float>
+					<token name="RightSurface">0</token>
+					<token name="RightSurfaceInput">0</token>
+					<Vector3 name="RotVelocity">
+						<X>0</X>
+						<Y>0</Y>
+						<Z>0</Z>
+					</Vector3>
+					<float name="TopParamA">-0.5</float>
+					<float name="TopParamB">0.5</float>
+					<token name="TopSurface">3</token>
+					<token name="TopSurfaceInput">0</token>
+					<float name="Transparency">0</float>
+					<Vector3 name="Velocity">
+						<X>0</X>
+						<Y>0</Y>
+						<Z>0</Z>
+					</Vector3>
+					<token name="formFactorRaw">3</token>
+					<token name="shape">1</token>
+					<Vector3 name="size">
+						<X>1</X>
+						<Y>1.20000005</Y>
+						<Z>1</Z>
+					</Vector3>
+				</Properties>
+				<Item class="CylinderMesh" referent="RBX263">
+					<Properties>
+						<float name="Bevel">0</float>
+						<float name="Bevel Roundness">0</float>
+						<float name="Bulge">0</float>
+						<token name="LODX">2</token>
+						<token name="LODY">2</token>
+						<string name="Name">Mesh</string>
+						<Vector3 name="Offset">
+							<X>0</X>
+							<Y>0</Y>
+							<Z>0</Z>
+						</Vector3>
+						<Vector3 name="Scale">
+							<X>0.550000012</X>
+							<Y>1</Y>
+							<Z>0.550000012</Z>
+						</Vector3>
+						<Vector3 name="VertexColor">
+							<X>1</X>
+							<Y>1</Y>
+							<Z>1</Z>
+						</Vector3>
+					</Properties>
+				</Item>
+				<Item class="Part" referent="RBX264">
+					<Properties>
+						<bool name="Anchored">true</bool>
+						<float name="BackParamA">-0.5</float>
+						<float name="BackParamB">0.5</float>
+						<token name="BackSurface">0</token>
+						<token name="BackSurfaceInput">0</token>
+						<float name="BottomParamA">-0.5</float>
+						<float name="BottomParamB">0.5</float>
+						<token name="BottomSurface">4</token>
+						<token name="BottomSurfaceInput">0</token>
+						<int name="BrickColor">194</int>
+						<CoordinateFrame name="CFrame">
+							<X>48.5000038</X>
+							<Y>2.30000019</Y>
+							<Z>32.5</Z>
+							<R00>1</R00>
+							<R01>0</R01>
+							<R02>0</R02>
+							<R10>0</R10>
+							<R11>1</R11>
+							<R12>0</R12>
+							<R20>0</R20>
+							<R21>0</R21>
+							<R22>1</R22>
+						</CoordinateFrame>
+						<bool name="CanCollide">true</bool>
+						<float name="Elasticity">0.5</float>
+						<float name="Friction">0.300000012</float>
+						<float name="FrontParamA">-0.5</float>
+						<float name="FrontParamB">0.5</float>
+						<token name="FrontSurface">0</token>
+						<token name="FrontSurfaceInput">0</token>
+						<float name="LeftParamA">-0.5</float>
+						<float name="LeftParamB">0.5</float>
+						<token name="LeftSurface">0</token>
+						<token name="LeftSurfaceInput">0</token>
+						<bool name="Locked">false</bool>
+						<token name="Material">256</token>
+						<string name="Name">Tip</string>
+						<float name="Reflectance">0</float>
+						<float name="RightParamA">-0.5</float>
+						<float name="RightParamB">0.5</float>
+						<token name="RightSurface">0</token>
+						<token name="RightSurfaceInput">0</token>
+						<Vector3 name="RotVelocity">
+							<X>0</X>
+							<Y>0</Y>
+							<Z>0</Z>
+						</Vector3>
+						<float name="TopParamA">-0.5</float>
+						<float name="TopParamB">0.5</float>
+						<token name="TopSurface">3</token>
+						<token name="TopSurfaceInput">0</token>
+						<float name="Transparency">0</float>
+						<Vector3 name="Velocity">
+							<X>0</X>
+							<Y>0</Y>
+							<Z>0</Z>
+						</Vector3>
+						<token name="formFactorRaw">3</token>
+						<token name="shape">1</token>
+						<Vector3 name="size">
+							<X>1</X>
+							<Y>0.200000003</Y>
+							<Z>1</Z>
+						</Vector3>
+					</Properties>
+					<Item class="CylinderMesh" referent="RBX265">
+						<Properties>
+							<float name="Bevel">0</float>
+							<float name="Bevel Roundness">0</float>
+							<float name="Bulge">0</float>
+							<token name="LODX">2</token>
+							<token name="LODY">2</token>
+							<string name="Name">Mesh</string>
+							<Vector3 name="Offset">
+								<X>0</X>
+								<Y>0</Y>
+								<Z>0</Z>
+							</Vector3>
+							<Vector3 name="Scale">
+								<X>0.119999997</X>
+								<Y>2.5</Y>
+								<Z>0.119999997</Z>
+							</Vector3>
+							<Vector3 name="VertexColor">
+								<X>1</X>
+								<Y>1</Y>
+								<Z>1</Z>
+							</Vector3>
+						</Properties>
+					</Item>
+				</Item>
+				<Item class="Part" referent="RBX266">
+					<Properties>
+						<bool name="Anchored">true</bool>
+						<float name="BackParamA">-0.5</float>
+						<float name="BackParamB">0.5</float>
+						<token name="BackSurface">0</token>
+						<token name="BackSurfaceInput">0</token>
+						<float name="BottomParamA">-0.5</float>
+						<float name="BottomParamB">0.5</float>
+						<token name="BottomSurface">4</token>
+						<token name="BottomSurfaceInput">0</token>
+						<int name="BrickColor">1003</int>
+						<CoordinateFrame name="CFrame">
+							<X>48.5000038</X>
+							<Y>1.30000007</Y>
+							<Z>32.5</Z>
+							<R00>1</R00>
+							<R01>0</R01>
+							<R02>0</R02>
+							<R10>0</R10>
+							<R11>1</R11>
+							<R12>0</R12>
+							<R20>0</R20>
+							<R21>0</R21>
+							<R22>1</R22>
+						</CoordinateFrame>
+						<bool name="CanCollide">true</bool>
+						<float name="Elasticity">0.5</float>
+						<float name="Friction">0.300000012</float>
+						<float name="FrontParamA">-0.5</float>
+						<float name="FrontParamB">0.5</float>
+						<token name="FrontSurface">0</token>
+						<token name="FrontSurfaceInput">0</token>
+						<float name="LeftParamA">-0.5</float>
+						<float name="LeftParamB">0.5</float>
+						<token name="LeftSurface">0</token>
+						<token name="LeftSurfaceInput">0</token>
+						<bool name="Locked">false</bool>
+						<token name="Material">256</token>
+						<string name="Name">Holder</string>
+						<float name="Reflectance">0</float>
+						<float name="RightParamA">-0.5</float>
+						<float name="RightParamB">0.5</float>
+						<token name="RightSurface">0</token>
+						<token name="RightSurfaceInput">0</token>
+						<Vector3 name="RotVelocity">
+							<X>0</X>
+							<Y>0</Y>
+							<Z>0</Z>
+						</Vector3>
+						<float name="TopParamA">-0.5</float>
+						<float name="TopParamB">0.5</float>
+						<token name="TopSurface">3</token>
+						<token name="TopSurfaceInput">0</token>
+						<float name="Transparency">0</float>
+						<Vector3 name="Velocity">
+							<X>0</X>
+							<Y>0</Y>
+							<Z>0</Z>
+						</Vector3>
+						<token name="formFactorRaw">3</token>
+						<token name="shape">1</token>
+						<Vector3 name="size">
+							<X>1</X>
+							<Y>0.200000003</Y>
+							<Z>1</Z>
+						</Vector3>
+					</Properties>
+					<Item class="CylinderMesh" referent="RBX267">
+						<Properties>
+							<float name="Bevel">0</float>
+							<float name="Bevel Roundness">0</float>
+							<float name="Bulge">0</float>
+							<token name="LODX">2</token>
+							<token name="LODY">2</token>
+							<string name="Name">Mesh</string>
+							<Vector3 name="Offset">
+								<X>0</X>
+								<Y>-0.0500000007</Y>
+								<Z>0</Z>
+							</Vector3>
+							<Vector3 name="Scale">
+								<X>1</X>
+								<Y>0.5</Y>
+								<Z>1</Z>
+							</Vector3>
+							<Vector3 name="VertexColor">
+								<X>1</X>
+								<Y>1</Y>
+								<Z>1</Z>
+							</Vector3>
+						</Properties>
+					</Item>
+				</Item>
+				<Item class="Part" referent="RBX268">
+					<Properties>
+						<bool name="Anchored">true</bool>
+						<float name="BackParamA">-0.5</float>
+						<float name="BackParamB">0.5</float>
+						<token name="BackSurface">0</token>
+						<token name="BackSurfaceInput">0</token>
+						<float name="BottomParamA">-0.5</float>
+						<float name="BottomParamB">0.5</float>
+						<token name="BottomSurface">0</token>
+						<token name="BottomSurfaceInput">0</token>
+						<int name="BrickColor">194</int>
+						<CoordinateFrame name="CFrame">
+							<X>48.5000038</X>
+							<Y>2.9000001</Y>
+							<Z>32.5</Z>
+							<R00>1</R00>
+							<R01>0</R01>
+							<R02>0</R02>
+							<R10>0</R10>
+							<R11>1</R11>
+							<R12>0</R12>
+							<R20>0</R20>
+							<R21>0</R21>
+							<R22>1</R22>
+						</CoordinateFrame>
+						<bool name="CanCollide">false</bool>
+						<float name="Elasticity">0.5</float>
+						<float name="Friction">0.300000012</float>
+						<float name="FrontParamA">-0.5</float>
+						<float name="FrontParamB">0.5</float>
+						<token name="FrontSurface">0</token>
+						<token name="FrontSurfaceInput">0</token>
+						<float name="LeftParamA">-0.5</float>
+						<float name="LeftParamB">0.5</float>
+						<token name="LeftSurface">0</token>
+						<token name="LeftSurfaceInput">0</token>
+						<bool name="Locked">false</bool>
+						<token name="Material">256</token>
+						<string name="Name">Flame</string>
+						<float name="Reflectance">0</float>
+						<float name="RightParamA">-0.5</float>
+						<float name="RightParamB">0.5</float>
+						<token name="RightSurface">0</token>
+						<token name="RightSurfaceInput">0</token>
+						<Vector3 name="RotVelocity">
+							<X>0</X>
+							<Y>0</Y>
+							<Z>0</Z>
+						</Vector3>
+						<float name="TopParamA">-0.5</float>
+						<float name="TopParamB">0.5</float>
+						<token name="TopSurface">0</token>
+						<token name="TopSurfaceInput">0</token>
+						<float name="Transparency">1</float>
+						<Vector3 name="Velocity">
+							<X>0</X>
+							<Y>0</Y>
+							<Z>0</Z>
+						</Vector3>
+						<token name="formFactorRaw">2</token>
+						<token name="shape">1</token>
+						<Vector3 name="size">
+							<X>1</X>
+							<Y>0.400000006</Y>
+							<Z>1</Z>
+						</Vector3>
+					</Properties>
+					<Item class="Fire" referent="RBX269">
+						<Properties>
+							<Color3 name="Color">4294934528</Color3>
+							<bool name="Enabled">false</bool>
+							<string name="Name">Fire</string>
+							<Color3 name="SecondaryColor">4294901760</Color3>
+							<float name="heat_xml">20</float>
+							<float name="size_xml">2</float>
+						</Properties>
+					</Item>
+				</Item>
+				<Item class="BoolValue" referent="RBX270">
+					<Properties>
+						<string name="Name">Active</string>
+						<bool name="Value">false</bool>
+					</Properties>
+				</Item>
+				<Item class="Script" referent="RBX271">
+					<Properties>
+						<bool name="Disabled">false</bool>
+						<Content name="LinkedSource"><null></null></Content>
+						<string name="Name">Candle</string>
+						<ProtectedString name="Source">--[[ ToDo: (Do not include in final Script)
    Get the time of day and adjust the brightness so it&apos;s dim
    (almost unnoticable) in the daylight and extremely visible
    at night.
@@ -13610,20 +14027,24 @@ _G[&quot;light_candle&quot;] = function()
    If I decide not to use a global script to manage
    everything change the active variable to true,
    and remove .Value from all changes to it.
-  ]]
+]]
 
-  local sp = script.Parent
-  local active -- Debounce
 
+sp = script.Parent
+game_light = game.Lighting
+
+-- Light the fire
+function candle()
+  local active = sp.Active
   local light  = sp.PointLight
   local flame  = sp.Flame.Fire
   local config = {
-    range   = 15, -- The Range value of the light source.
+    range   = 15, -- The Range value of the light.
     flicker = 3,  -- The frequency at which the light will flicker.
   }
 
   -- @TODO I need to make these while loops better.
-  if not active then
+  if active.Value == true then
     -- If the light is active, extinguise it quickly.
     flame.Enabled = false
 
@@ -13631,71 +14052,73 @@ _G[&quot;light_candle&quot;] = function()
       light.Range = light.Range - 5
     end
 
-    active = false
+    active.Value = false
   else
-    -- If the light is off, quickly, but smoothly, fade it in.
+    -- Else, if the light is off, quickly, but smoothly, fade it in.
     flame.Enabled = true
 
     -- @TODO What&apos;s some better math to ensure it stops exactly at the predefined range?
-    -- Would a repeat loop work better?
     while light.Range &lt; config.range do wait()
       light.Range = light.Range + 2.5
     end
 
-    active = true
+    active.Value = true
   end
 end
 
--- Dim a light source in the day time.
-_G[&quot;brightness_adjustments&quot;] = function()
-  -- Put inside of a while loop:
+-- Connections go at the bottom for easy editing if there are multiples.
+sp.ClickDetector.MouseClick:connect(candle)
 
-  -- if between start_time and end_time then
-    -- fade out lights
-  -- else
-    -- fade in lights
-  -- end
 
-  -- Set global variables for when lights should
-  -- start dimming and when they should brighten back up.
+--[[ Unused code. Keeping as a sort of archive.
+
+while true do wait(0.5)
+  -- Quick test to see if the function can be used while this is looping.
+  -- Update: They can!
+  words = {&quot;Cats&quot;,&quot;Butts&quot;,&quot;Oranges&quot;,&quot;Rabbits&quot;,&quot;DEER HEAD&quot;}
+  for i = 1,#words do
+    print(words[math.random(i)])
+    wait()
+  end
 end
 
---Get the minutes after midnight / 60 and if it&apos;s a certain time do something.
-_G[&quot;get_the_time&quot;] = function()
+while true do wait(2)
+  local time_of_day = game.Lighting:GetMinutesAfterMidnight()
+  print(time_of_day)
 end
-
--- Once done print to the output that everything is running smoothly.
-print(&quot;Master Script Loaded Successfully&quot;)
-
-
-
---[[ Archive
-
--- _G test function.
-_G[script] = {} -- Create the &quot;Script&quot; sub-table that will hold all the functions.
-gb = _G[script] -- Asign the new sub-table a quick alias (Stands for &quot;Global&quot;).
-
-gb.YouTouchMyTralala = function()
-  print(&quot;Mmm, my ding ding dong&quot;)
-end
-
-]]
-</ProtectedString>
-			</Properties>
+]]</ProtectedString>
+					</Properties>
+				</Item>
+				<Item class="ClickDetector" referent="RBX272">
+					<Properties>
+						<float name="MaxActivationDistance">14</float>
+						<string name="Name">ClickDetector</string>
+					</Properties>
+				</Item>
+				<Item class="PointLight" referent="RBX273">
+					<Properties>
+						<float name="Brightness">1</float>
+						<Color3 name="Color">4292247560</Color3>
+						<bool name="Enabled">true</bool>
+						<string name="Name">PointLight</string>
+						<float name="Range">0</float>
+					</Properties>
+				</Item>
+			</Item>
 		</Item>
 	</Item>
-	<Item class="StarterPack" referent="RBX259">
+	<Item class="StarterPack" referent="RBX274">
 		<Properties>
 			<string name="Name">StarterPack</string>
 		</Properties>
 	</Item>
-	<Item class="StarterGui" referent="RBX260">
+	<Item class="StarterGui" referent="RBX275">
 		<Properties>
 			<string name="Name">StarterGui</string>
 			<bool name="ShowDevelopmentGui">true</bool>
 		</Properties>
 	</Item>
-	<Item class="SoundService" referent="RBX261">
+	<Item class="SoundService" referent="RBX276">
 		<Properties>
 			<token name="AmbientReverb">0</token>
 			<float name="DistanceFactor">10</float>
@@ -13704,104 +14127,104 @@ end
 			<float name="RolloffScale">1</float>
 		</Properties>
 	</Item>
-	<Item class="CollectionService" referent="RBX262">
+	<Item class="CollectionService" referent="RBX277">
 		<Properties>
 			<string name="Name">CollectionService</string>
 		</Properties>
 	</Item>
-	<Item class="PhysicsService" referent="RBX263">
+	<Item class="PhysicsService" referent="RBX278">
 		<Properties>
 			<string name="Name">PhysicsService</string>
 		</Properties>
 	</Item>
-	<Item class="BadgeService" referent="RBX264">
+	<Item class="BadgeService" referent="RBX279">
 		<Properties>
 			<string name="Name">BadgeService</string>
 		</Properties>
 	</Item>
-	<Item class="Geometry" referent="RBX265">
+	<Item class="Geometry" referent="RBX280">
 		<Properties>
 			<string name="Name">Geometry</string>
 		</Properties>
 	</Item>
-	<Item class="RenderHooksService" referent="RBX266">
+	<Item class="RenderHooksService" referent="RBX281">
 		<Properties>
 			<string name="Name">RenderHooksService</string>
 		</Properties>
 	</Item>
-	<Item class="SocialService" referent="RBX267">
+	<Item class="SocialService" referent="RBX282">
 		<Properties>
 			<string name="Name">SocialService</string>
 		</Properties>
 	</Item>
-	<Item class="GamePassService" referent="RBX268">
+	<Item class="GamePassService" referent="RBX283">
 		<Properties>
 			<string name="Name">GamePassService</string>
 		</Properties>
 	</Item>
-	<Item class="Debris" referent="RBX269">
+	<Item class="Debris" referent="RBX284">
 		<Properties>
 			<int name="MaxItems">1000</int>
 			<string name="Name">Debris</string>
 		</Properties>
 	</Item>
-	<Item class="TimerService" referent="RBX270">
+	<Item class="TimerService" referent="RBX285">
 		<Properties>
 			<string name="Name">Instance</string>
 		</Properties>
 	</Item>
-	<Item class="ScriptInformationProvider" referent="RBX271">
+	<Item class="ScriptInformationProvider" referent="RBX286">
 		<Properties>
 			<string name="Name">Instance</string>
 		</Properties>
 	</Item>
-	<Item class="CookiesService" referent="RBX272">
+	<Item class="CookiesService" referent="RBX287">
 		<Properties>
 			<string name="Name">CookiesService</string>
 		</Properties>
 	</Item>
-	<Item class="TeleportService" referent="RBX273">
+	<Item class="TeleportService" referent="RBX288">
 		<Properties>
 			<string name="Name">Teleport Service</string>
 		</Properties>
 	</Item>
-	<Item class="Players" referent="RBX274">
+	<Item class="Players" referent="RBX289">
 		<Properties>
 			<bool name="CharacterAutoLoads">true</bool>
 			<string name="Name">Players</string>
 		</Properties>
 	</Item>
-	<Item class="FWService" referent="RBX275">
+	<Item class="FWService" referent="RBX290">
 		<Properties>
 			<string name="Name">Instance</string>
 		</Properties>
 	</Item>
-	<Item class="UserInputService" referent="RBX276">
+	<Item class="UserInputService" referent="RBX291">
 		<Properties>
 			<string name="Name">Instance</string>
 		</Properties>
 	</Item>
-	<Item class="ContextActionService" referent="RBX277">
+	<Item class="ContextActionService" referent="RBX292">
 		<Properties>
 			<string name="Name">ContextActionService</string>
 		</Properties>
 	</Item>
-	<Item class="ScriptService" referent="RBX278">
+	<Item class="ScriptService" referent="RBX293">
 		<Properties>
 			<string name="Name">Instance</string>
 		</Properties>
 	</Item>
-	<Item class="Selection" referent="RBX279">
+	<Item class="Selection" referent="RBX294">
 		<Properties>
 			<string name="Name">Selection</string>
 		</Properties>
 	</Item>
-	<Item class="ChangeHistoryService" referent="RBX280">
+	<Item class="ChangeHistoryService" referent="RBX295">
 		<Properties>
 			<string name="Name">ChangeHistoryService</string>
 		</Properties>
 	</Item>
-	<Item class="Lighting" referent="RBX281">
+	<Item class="Lighting" referent="RBX296">
 		<Properties>
 			<Color3 name="Ambient">4282795592</Color3>
 			<float name="Brightness">1.5</float>
@@ -13817,7 +14240,7 @@ end
 			<Color3 name="ShadowColor">4289967032</Color3>
 			<string name="TimeOfDay">00:00:00</string>
 		</Properties>
-		<Item class="Sky" referent="RBX282">
+		<Item class="Sky" referent="RBX297">
 			<Properties>
 				<bool name="CelestialBodiesShown">true</bool>
 				<string name="Name">Sky</string>

@@ -1,6 +1,6 @@
-[===================================[
+--[===================================[--
   Dim a light source in the day time.
-]===================================]
+--]===================================]--
 
 _G["brightness_adjustments"] = function()
   -- Called inside of a while loop:
