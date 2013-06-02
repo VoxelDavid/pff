@@ -4,7 +4,7 @@ At this point I really have no direction as to what I want to make anymore. Curr
 
 #### Contributing
 I encourage you to take a look through everything I have up here on Github and send me pull requests with things I could improve on.
-I've made sure to document the code I've worked on the most well so its easier to get started. :)
+I've made sure to document the code I've worked on the most so its easier to get started. :)
 
 #### Planned Features:
 View [TODO.md](https://github.com/VoxelDavid/pff/blob/master/TODO.md)
