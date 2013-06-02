@@ -27,24 +27,24 @@
 				<Ref name="CameraSubject">null</Ref>
 				<token name="CameraType">0</token>
 				<CoordinateFrame name="CoordinateFrame">
-					<X>14.2118959</X>
-					<Y>10.7285175</Y>
-					<Z>3.02199793</Z>
-					<R00>0.901553869</R00>
-					<R01>-0.325610995</R01>
-					<R02>0.284917831</R02>
+					<X>31.4752674</X>
+					<Y>9.62875748</Y>
+					<Z>13.693861</Z>
+					<R00>-0.48118794</R00>
+					<R01>0.544497788</R01>
+					<R02>-0.687008142</R02>
 					<R10>-1.49011612e-008</R10>
-					<R11>0.658515453</R11>
-					<R12>0.752567291</R12>
-					<R20>-0.432666957</R20>
-					<R21>-0.67847997</R21>
-					<R22>0.593687057</R22>
+					<R11>0.783703446</R11>
+					<R12>0.621135056</R12>
+					<R20>0.876617432</R20>
+					<R21>0.298882693</R21>
+					<R22>-0.377108663</R22>
 				</CoordinateFrame>
 				<float name="FieldOfView">70</float>
 				<CoordinateFrame name="Focus">
-					<X>13.6420603</X>
-					<Y>9.22338295</Y>
-					<Z>1.83462381</Z>
+					<X>32.8492851</X>
+					<Y>8.38648605</Y>
+					<Z>14.4480791</Z>
 					<R00>1</R00>
 					<R01>0</R01>
 					<R02>0</R02>
@@ -11445,20 +11445,14 @@ end
 				<Properties>
 					<bool name="Disabled">false</bool>
 					<Content name="LinkedSource"><null></null></Content>
-					<string name="Name">Fireplace</string>
-					<ProtectedString name="Source">sp = script.Parent
-game_light = game.Lighting
-
--- Light the fire
+					<string name="Name">call_light_fireplace</string>
+					<ProtectedString name="Source">local sp = script.Parent
+local enabled
 function set_alight()
-  local active = sp.Active
-  local light  = sp.Flame.PointLight
-  local flame  = sp.Flame.Fire
-  local range  = 15 -- The Range value of the light.
-
+  -- Baby you can light my fire.
   print(&quot;FIRE!&quot;)
 end
-sp.Click.ClickDetector.MouseClick:connect(set_alight)</ProtectedString>
+sp.ClickDetector.MouseClick:connect(set_alight)</ProtectedString>
 				</Properties>
 			</Item>
 			<Item class="ClickDetector" referent="RBX206">
@@ -13460,10 +13454,9 @@ print(&quot;_G.variables Loaded&quot;)
     variables.lua must be present, or variables prefixed with _G must be replaced.
 
     Make sure that these objects exists in the same Parent as the Call script:
-
-    PointLight,
-    Part named Flame,
-      Fire inside Flame,
+    Boolean named &quot;Active&quot;,
+    Part named &quot;Light&quot;,
+      PointLight and Fire inside of Light
     Boolean named Active.
 
   @Calling the Function:
@@ -13474,33 +13467,36 @@ print(&quot;_G.variables Loaded&quot;)
     script.Parent.ClickDetector.MouseClick:connect(function()
       if not enabled then
         enabled = true
-        _G.light_candle(sp.PointLight, sp.Flame.Fire)
+        _G.light_candle(sp.Light.PointLight, sp.Light.Fire, sp.Active)
         enabled = false
       end
     end)
 --]===================================]--
 
-function _G.light_candle(light_path, flame_path)
-  light  = light_path
-  flame  = flame_path
-  active = game.Workspace:findFirstChild(&quot;Global Candles&quot;).Candle1.Active
+function _G.light_candle(light_source, fire_source, active)
+  light  = light_source
+  flame  = fire_source
+
+  if not light or not flame or not active then
+    error(&quot;One or more required objects is missing!&quot;)
+  end
 
   if active.Value == false then
     -- If the light is off fade it in
-    print(&quot;Candle is out... Lighting.&quot;)
+    print(&quot;Candle is out... Lighting.&quot;) -- Testing message, remove later.
     flame.Enabled = true
     while light.Range &lt; _G.light_candle_range do
-      wait(_G.base_wait_time)
       light.Range = light.Range + 2.5
+      wait()
     end
     active.Value = true
   else
     -- Otherwise if the light is on, &quot;extinguish&quot; it.
-    print(&quot;Candle is lit... Extinguishing&quot;)
+    print(&quot;Candle is lit... Extinguishing&quot;) -- Testing message, remove later.
     flame.Enabled = false
     while light.Range &gt; 0 do
-      wait(_G.base_wait_time)
       light.Range = light.Range - 5
+      wait()
     end
     active.Value = false
   end

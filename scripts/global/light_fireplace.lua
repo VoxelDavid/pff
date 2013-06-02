@@ -12,3 +12,8 @@
 		  end
 		end)
 --]===================================]--
+
+function _G.light_fireplace()
+end
+
+print("_G.light_fireplace Loaded")

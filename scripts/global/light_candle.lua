@@ -35,9 +35,13 @@
     end)
 --]===================================]--
 
-function _G.light_candle(light_path, flame_path, active)
-  light  = light_path
-  flame  = flame_path
+function _G.light_candle(light_source, fire_source, active)
+  light  = light_source
+  flame  = fire_source
+
+  if not light or not flame or not active then
+    error("One or more required objects is missing!")
+  end
 
   if active.Value == false then
     -- If the light is off fade it in

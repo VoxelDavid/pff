@@ -13,3 +13,5 @@ function _G.brightness_adjustments()
     -- fade in lights
   -- end
 end
+
+print("_G.brightness_adjustments Loaded")
