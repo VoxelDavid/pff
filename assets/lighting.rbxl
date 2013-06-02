@@ -27,24 +27,24 @@
 				<Ref name="CameraSubject">null</Ref>
 				<token name="CameraType">0</token>
 				<CoordinateFrame name="CoordinateFrame">
-					<X>31.4752674</X>
-					<Y>9.62875748</Y>
-					<Z>13.693861</Z>
-					<R00>-0.48118794</R00>
-					<R01>0.544497788</R01>
-					<R02>-0.687008142</R02>
-					<R10>-1.49011612e-008</R10>
-					<R11>0.783703446</R11>
-					<R12>0.621135056</R12>
-					<R20>0.876617432</R20>
-					<R21>0.298882693</R21>
-					<R22>-0.377108663</R22>
+					<X>28.6896858</X>
+					<Y>9.08984375</Y>
+					<Z>20.7256355</Z>
+					<R00>0.153633028</R00>
+					<R01>0.466922641</R01>
+					<R02>-0.870850265</R02>
+					<R10>7.4505806e-009</R10>
+					<R11>0.881313205</R11>
+					<R12>0.47253257</R12>
+					<R20>0.988127947</R20>
+					<R21>-0.072596617</R21>
+					<R22>0.13539882</R22>
 				</CoordinateFrame>
 				<float name="FieldOfView">70</float>
 				<CoordinateFrame name="Focus">
-					<X>32.8492851</X>
-					<Y>8.38648605</Y>
-					<Z>14.4480791</Z>
+					<X>30.4313869</X>
+					<Y>8.14477825</Y>
+					<Z>20.4548378</Z>
 					<R00>1</R00>
 					<R01>0</R01>
 					<R02>0</R02>
@@ -12592,10 +12592,17 @@ sp.ClickDetector.MouseClick:connect(set_alight)</ProtectedString>
 
 local enabled
 local sp = script.Parent
+
+-- There has to be a better way to pass variables to a global function.
+-- Until I find that solution I&apos;ll have to define the variables in the Call script.
+light  = sp.Light.PointLight
+flame  = sp.Light.Fire
+active = sp.Active
+
 script.Parent.ClickDetector.MouseClick:connect(function()
   if not enabled then
     enabled = true
-    _G.light_candle(sp.Light.PointLight, sp.Light.Fire, sp.Active)
+    _G.light_candle(light, flame, active)
     enabled = false
   end
 end)</ProtectedString>
@@ -12992,10 +12999,17 @@ end)</ProtectedString>
 
 local enabled
 local sp = script.Parent
+
+-- There has to be a better way to pass variables to a global function.
+-- Until I find that solution I&apos;ll have to define the variables in the Call script.
+light  = sp.Light.PointLight
+flame  = sp.Light.Fire
+active = sp.Active
+
 script.Parent.ClickDetector.MouseClick:connect(function()
   if not enabled then
     enabled = true
-    _G.light_candle(sp.Light.PointLight, sp.Light.Fire, sp.Active)
+    _G.light_candle(light, flame, active)
     enabled = false
   end
 end)</ProtectedString>
@@ -13392,10 +13406,17 @@ end)</ProtectedString>
 
 local enabled
 local sp = script.Parent
+
+-- There has to be a better way to pass variables to a global function.
+-- Until I find that solution I&apos;ll have to define the variables in the Call script.
+light  = sp.Light.PointLight
+flame  = sp.Light.Fire
+active = sp.Active
+
 script.Parent.ClickDetector.MouseClick:connect(function()
   if not enabled then
     enabled = true
-    _G.light_candle(sp.Light.PointLight, sp.Light.Fire, sp.Active)
+    _G.light_candle(light, flame, active)
     enabled = false
   end
 end)</ProtectedString>
@@ -13464,19 +13485,23 @@ print(&quot;_G.variables Loaded&quot;)
 
     local enabled
     local sp = script.Parent
+
+    -- There has to be a better way to pass variables to a global function.
+    -- Until I find that solution I&apos;ll have to define the variables in the Call script.
+    light  = sp.Light.PointLight
+    flame  = sp.Light.Fire
+    active = sp.Active
+
     script.Parent.ClickDetector.MouseClick:connect(function()
       if not enabled then
         enabled = true
-        _G.light_candle(sp.Light.PointLight, sp.Light.Fire, sp.Active)
+        _G.light_candle(light, flame, active)
         enabled = false
       end
     end)
 --]===================================]--
 
-function _G.light_candle(light_source, fire_source, active)
-  light  = light_source
-  flame  = fire_source
-
+function _G.light_candle(light, flame, active)
   if not light or not flame or not active then
     error(&quot;One or more required objects is missing!&quot;)
   end

@@ -13,32 +13,33 @@
     at the predefined range? Would a repeat loop get that job done better?
 
   @Prerequisites:
-    variables.lua must be present, or variables prefixed with _G must be replaced.
-
     Make sure that these objects exists in the same Parent as the Call script:
     Boolean named "Active",
     Part named "Light",
-      PointLight and Fire inside of Light
-    Boolean named Active.
+      PointLight and Fire inside of Light.
 
   @Calling the Function:
     repeat wait() until _G.light_candle -- Wait for the function to load before calling it.
 
     local enabled
     local sp = script.Parent
+
+    -- There has to be a better way to pass variables to a global function.
+    -- Until I find that solution I'll have to define the variables in the Call script.
+    light  = sp.Light.PointLight
+    flame  = sp.Light.Fire
+    active = sp.Active
+
     script.Parent.ClickDetector.MouseClick:connect(function()
       if not enabled then
         enabled = true
-        _G.light_candle(sp.Light.PointLight, sp.Light.Fire, sp.Active)
+        _G.light_candle(light, flame, active)
         enabled = false
       end
     end)
 --]===================================]--
 
-function _G.light_candle(light_source, fire_source, active)
-  light  = light_source
-  flame  = fire_source
-
+function _G.light_candle(light, flame, active)
   if not light or not flame or not active then
     error("One or more required objects is missing!")
   end
