@@ -63,4 +63,4 @@ function _G.light_fire(light, flame, active)
 	end
 end
 
-print("_G.light_candle Loaded")
+print("_G.light_fire Loaded")
