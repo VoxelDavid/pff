@@ -1,5 +1,8 @@
 --[===================================[--
 	Dim a light source in the day time.
+
+	I think this will have to be used as a coroutine since
+	I'll probably run multiple functions through a while loop.
 --]===================================]--
 
 repeat wait() until _G.variables()

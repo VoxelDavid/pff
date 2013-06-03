@@ -28,9 +28,9 @@
 		local sp = script.Parent
 
 		-- Variables
-		local light  = sp.Light.PointLight
-		local flame  = sp.Light.Fire
-		local active = sp.Active
+		local light  = sp.Light.PointLight  -- Path to the light source.
+		local flame  = sp.Light.Fire        -- Path to Fire.
+		local active = sp.Active            -- Path to Active boolean.
 
 		script.Parent.ClickDetector.MouseClick:connect(function()
 			if not enabled then
@@ -44,7 +44,6 @@
 function _G.light_fire(light, flame, active)
 	if active.Value == false then
 		-- If the light is off fade it in
-		print("Fire is out... Lighting.") -- Testing message, remove later.
 		flame.Enabled = true
 		while light.Range < _G.light_candle_range do
 			light.Range = light.Range + 2.5
@@ -53,7 +52,6 @@ function _G.light_fire(light, flame, active)
 		active.Value = true
 	else
 		-- Otherwise if the light is on, "extinguish" it.
-		print("Fire is lit... Extinguishing") -- Testing message, remove later.
 		flame.Enabled = false
 		while light.Range > 0 do
 			light.Range = light.Range - 5
