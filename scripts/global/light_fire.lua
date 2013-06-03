@@ -1,6 +1,8 @@
 --[===================================[--
 	@Description
-		Edits a PointLight and Fire objects to create a somewhat realistic fire effect.
+		Manage every fire based light throughout the game... In a single script!
+
+		Edits a PointLight and Fire object to create a somewhat realistic fire effect.
 
 		Clicking once expands the PointLight's range to the Range variable defined in
 		the function call and enables the Fire.
@@ -12,17 +14,24 @@
 		What's some better math to ensure the while loops stop exactly
 		at the predefined range? Would a repeat loop get that job done better?
 
-		Find a better way to pass variables to a global functions instead of having
-		to define each variable in the function call.
-
 	@Prerequisites:
 		Make sure that these objects exists in the same Parent as the Call script:
 		Boolean named "Active",
+		ClickDetector,
 		Part named "Light",
-			PointLight and Fire inside of Light.
+		PointLight and Fire inside of Light.
 
-	@Function call script:
-		repeat wait() until _G.light_candle -- Wait for the function to load before calling it.
+		File structure should look like this:
+		--Part
+		----Active
+		----ClickDetector
+		----call_light_fire -- The function calling script (Copy the below into it)
+		----Light
+		------Fire
+		------PointLight
+
+	@Calling the function:
+		repeat wait() until _G.light_fire -- Wait for the function to load before calling it.
 
 		local enabled
 		local sp = script.Parent
@@ -32,10 +41,10 @@
 		local flame  = sp.Light.Fire        -- Path to Fire.
 		local active = sp.Active            -- Path to Active boolean.
 
-		script.Parent.ClickDetector.MouseClick:connect(function()
+		sp.ClickDetector.MouseClick:connect(function()
 			if not enabled then
 				enabled = true
-				_G.light_candle(light, flame, active)
+				_G.light_fire(light, flame, active)
 				enabled = false
 			end
 		end)
