@@ -1,9 +1,38 @@
 --[===================================[--
-	This file holds all of the configurable variables used throughout the game.
+	@Description:
+		This file holds all of the configurable variables used throughout the game.
 
-	Be sure to describe the comment and variable well!
+	@Prerequisites:
+		Include "repeat wait() until _G.variables" in all functions.
+		Some may not need it, but it's better to be safe than sorry.
+
+	@Keeping Organized:
+		Order tables alphabetically.
+		Keep variables of the same type grouped together.
+		Singular variables should be kept above Tables.
 --]===================================]--
 
+_G.wait_time            = 0.06  -- Default wait() is about 0.03-0.04. Using a slightly higher wait time should increase performance, if just a tiny bit.
+
+-- Variables for all lighting related objects/scripts
+_G.lighting = {
+	brightness_when_day   = 0.2,   -- How bright a light should be in the day.
+	brightness_when_night = 1,     -- How bright a light should be at night.
+	flicker_frequency     = 3,     -- How frequently a fire based light will flicker each second.
+	ranges = {
+		candle              = 15,    -- Light source range of a Candle.
+		fireplace           = 17,    -- Light source range of a Fireplace.
+	}
+}
+
+-- Variables for the Day/Night time cycle.
+_G.time_cycle = {
+	enabled               = true,  -- If the Time Cycle should be enabled.
+	sun_ambient           = true,  -- If the ambient should change for sunrise and sunset.
+	speed                 = 1,     -- How fast the time will change.
+	day_length            = 8,     -- How many minutes it will take to go from sunrise to sunset.
+	night_length          = 4,     -- How many minutes it will take for night to pass.
+}
 
 -- Important users with access to exclucive utilities.
 _G.superusers = {
@@ -11,31 +40,6 @@ _G.superusers = {
 	"MonsterBone",
 	"Player1",
 }
--- I need to learn to implement tables so I can use something nice and organized like this.
--- _G.time_cycle = {
--- 	enabled      = true,
--- 	speed        = 1,
--- 	day_length   = 8,
--- 	night_length = 4,
--- 	sun_ambient  = true,
--- }
-
-_G.base_wait_time                  = 0.06  -- Default wait() is about 0.03-0.04. Using a slightly higher wait time should increase performance, if just a tiny bit.
-
--- Is it even nessecary to make these global?
-_G.time_cycle_enabled              = true  -- If the Time Cycle should be enabled.
-_G.time_cycle_speed                = 1     -- How fast the time will change.
-_G.time_cycle_day_length           = 8     -- How many minutes it will take to go from sunrise to sunset.
-_G.time_cycle_night_length         = 4     -- How many minutes it will take for night to pass.
-_G.time_cycle_sun_ambient          = true  -- If the ambient should change for sunrise and sunset.
-
-_G.light_brightness_when_day       = 0.1   -- How bright a light should be in the day.
-_G.light_brightness_when_night     = 1     -- How bright a light should be at night.
-
-_G.light_flicker_frequency         = 3     -- How frequently a fire based light will flicker each second.
-
-_G.light_candle_range              = 15    -- Light source range of a Candle.
-_G.light_fireplace_range           = 17    -- Light source range of a Fireplace.
 
 
 _G.variables = true
