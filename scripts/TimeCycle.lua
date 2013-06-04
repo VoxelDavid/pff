@@ -11,21 +11,19 @@
 		can hook into those values and adjust based on the time.
 --]===================================]--
 
--- I don't think Variables is a function, so if this script doesn't output anything adjust this.
-repeat wait() until _G.variables
+repeat wait() until _G.config -- Wait for the configuration file before doing anything else.
 
 local l = game:service("Lighting")
-local wait_time = _G.base_wait_time -- (0.06)
 
 function time_cycle()
-	if _G.time_cycle_enabled == false then return end
-	while wait(wait_time) do
+	if _G.time_cycle.enabled == false then return end
+	while wait(_G.wait_time) do
 		print(l:GetMinutesAfterMidnight()) -- Print the current time to the output (Testing).
 		-- Time Cycle
-		l:SetMinutesAfterMidnight(l:GetMinutesAfterMidnight() + _G.time_cycle_speed)
+		l:SetMinutesAfterMidnight(l:GetMinutesAfterMidnight() + _G.time_cycle.speed)
 
 		-- If Sunsets and Sunrises should change the ambient color, then:
-		if _G.time_cycle_sun_ambient == true then
+		if _G.time_cycle.sun_ambient == true then
 			sunrise_start = 300
 			sunrise_end   = sunrise_start + 60
 			sunset_start  = 1020

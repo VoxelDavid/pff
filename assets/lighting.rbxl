@@ -13595,22 +13595,53 @@ end)</ProtectedString>
 			<Properties>
 				<bool name="Disabled">false</bool>
 				<Content name="LinkedSource"><null></null></Content>
-				<string name="Name">variables</string>
+				<string name="Name">config</string>
 				<ProtectedString name="Source">--[===================================[--
-  This file holds all of the configurable variables used throughout the game.
+&#9;@Description:
+&#9;&#9;This file holds all of the configurable variables used throughout the game.
 
-  Be sure to describe the comment and variable well!
+&#9;@Prerequisites:
+&#9;&#9;Include &quot;repeat wait() until _G.config&quot; in all functions.
+&#9;&#9;Some may not need it, but it&apos;s better to be safe than sorry.
+
+&#9;@Keeping Organized:
+&#9;&#9;Order tables alphabetically.
+&#9;&#9;Keep variables of the same type grouped together.
+&#9;&#9;Singular variables should be kept above Tables.
 --]===================================]--
 
-_G.base_wait_time                = 0.05  --
-_G.light_flicker_frequency       = 3     -- How frequently a fire a fire based light will flicker each second.
-_G.light_brightness_when_day     = 0.1   -- How bright a light should be in the day.
-_G.light_brightness_when_night   = 1     -- How bright a light should be at night.
-_G.light_candle_range            = 15    -- Light source range of a Candle.
+_G.wait_time             = 0.06  -- Default wait() is about 0.03-0.04. Using a slightly higher wait time should increase performance, if just a tiny bit.
+
+-- Variables for all lighting related objects/scripts
+_G.lighting = {
+&#9;brightness_when_day    = 0.2,   -- How bright a light should be in the day.
+&#9;brightness_when_night  = 1,     -- How bright a light should be at night.
+&#9;flicker_frequency      = 3,     -- How frequently a fire based light will flicker each second.
+&#9;ranges = {
+&#9;&#9;candle               = 15,    -- Light source range of a Candle.
+&#9;&#9;fireplace            = 17,    -- Light source range of a Fireplace.
+&#9;}
+}
+
+-- Variables for the Day/Night time cycle.
+_G.time_cycle = {
+&#9;enabled                = true,  -- If the Time Cycle should be enabled.
+&#9;sun_ambient            = true,  -- If the ambient should change for sunrise and sunset.
+&#9;speed                  = 1,     -- How fast the time will change.
+&#9;day_length             = 8,     -- How many minutes it will take to go from sunrise to sunset.
+&#9;night_length           = 4,     -- How many minutes it will take for night to pass.
+}
+
+-- Important users with access to exclucive utilities.
+_G.superusers = {
+&#9;&quot;D3lego&quot;,
+&#9;&quot;MonsterBone&quot;,
+&#9;&quot;Player1&quot;,
+}
 
 
-print(&quot;_G.variables Loaded&quot;)
---script:Destroy() -- Destroy the script after iniialization to prevent theft</ProtectedString>
+_G.config = true
+print(&quot;Configuration Loaded&quot;)</ProtectedString>
 			</Properties>
 		</Item>
 		<Item class="Script" referent="RBX262">
@@ -13670,11 +13701,13 @@ print(&quot;_G.variables Loaded&quot;)
 &#9;&#9;end)
 --]===================================]--
 
+repeat wait() until _G.config -- Wait for the configuration file before doing anything else.
+
 function _G.light_fire(light, flame, active)
 &#9;if active.Value == false then
 &#9;&#9;-- If the light is off fade it in
 &#9;&#9;flame.Enabled = true
-&#9;&#9;while light.Range &lt; _G.light_candle_range do
+&#9;&#9;while light.Range &lt; _G.lighting.ranges.candle do
 &#9;&#9;&#9;light.Range = light.Range + 2.5
 &#9;&#9;&#9;wait()
 &#9;&#9;end

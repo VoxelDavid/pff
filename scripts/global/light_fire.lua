@@ -50,11 +50,13 @@
 		end)
 --]===================================]--
 
+repeat wait() until _G.config -- Wait for the configuration file before doing anything else.
+
 function _G.light_fire(light, flame, active)
 	if active.Value == false then
 		-- If the light is off fade it in
 		flame.Enabled = true
-		while light.Range < _G.light_candle_range do
+		while light.Range < _G.lighting.ranges.candle do
 			light.Range = light.Range + 2.5
 			wait()
 		end

@@ -10,7 +10,7 @@
 --]===================================]--
 
 -- I don't think Variables is a function, so if this script doesn't output anything adjust this.
-repeat wait() until _G.variables
+repeat wait() until _G.config
 
 function adjust_brightness()
 	-- Called inside of a while loop:
