@@ -34,12 +34,22 @@ _G.time_cycle = {
 	night_length           = 4,     -- How many minutes it will take for night to pass.
 }
 
--- Important users with access to exclucive utilities.
-_G.superusers = {
-	"D3lego",
-	"MonsterBone",
-	"Player1",
+-- Special Users
+_G.users = {
+	-- Adminitrators
+	admins = {
+		"D3lego",
+		"MonsterBone",
+		"Player1",
+	},
+
+	-- Friends and other important people.
+	vips = {
+		"Hamhampokecat",
+		"MidnightFlower",
+	}
 }
+
 
 
 _G.config = true
