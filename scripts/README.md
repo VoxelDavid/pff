@@ -1,2 +1,2 @@
-## Adding a new Function
-https://github.com/VoxelDavid/pff/wiki/Creating-a-new-Function
+## Creating & Adding New Functions
+https://github.com/VoxelDavid/pff/wiki/Creating-&-Adding-New-Functions
