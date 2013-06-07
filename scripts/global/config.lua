@@ -19,10 +19,23 @@ _G.lighting = {
 	brightness_when_day    = 0.2,   -- How bright a light should be in the day.
 	brightness_when_night  = 1,     -- How bright a light should be at night.
 	flicker_frequency      = 3,     -- How frequently a fire based light will flicker each second.
-	ranges = {
-		candle               = 15,    -- Light source range of a Candle.
-		fireplace            = 17,    -- Light source range of a Fireplace.
-	}
+	light_speed            = 6,
+	extinguish_speed       = 3,
+
+	candle = {
+		range = 15,    -- Candle's PointLight range.
+		speed = 6,     -- Divides the range. Bigger number = slower transition.
+	},
+
+	fireplace = {
+		range = 17,    -- Fireplace's PointLight range.
+		speed = 6,     -- Divides the range. Bigger number = slower transition.
+	},
+
+	torch = {
+		range = 0,    -- Torch's PointLight range.
+		speed = 0,    -- Divides the range. Bigger number = slower transition.
+	},
 }
 
 -- Variables for the Day/Night time cycle.

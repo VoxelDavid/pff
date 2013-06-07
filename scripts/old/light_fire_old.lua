@@ -10,6 +10,10 @@
 		Clicking it again "extinguish" the candle by shrinking the PointLight's
 		range to 0 and disabling the Fire.
 
+	@ToDo:
+		What's some better math to ensure the while loops stop exactly
+		at the predefined range? Would a repeat loop get that job done better?
+
 	@Prerequisites:
 		Make sure that these objects exists in the same Parent as the Call script:
 		Boolean named "Active",
@@ -33,7 +37,6 @@
 		local sp = script.Parent
 
 		-- Variables
-		local object = " "                  -- Applicable types: Candle, Fireplace, Torch
 		local light  = sp.Light.PointLight  -- Path to the light source.
 		local flame  = sp.Light.Fire        -- Path to Fire.
 		local active = sp.Active            -- Path to Active boolean.
@@ -41,7 +44,7 @@
 		sp.ClickDetector.MouseClick:connect(function()
 			if not enabled then
 				enabled = true
-				_G.light_fire(object, light, flame, active)
+				_G.light_fire(light, flame, active)
 				enabled = false
 			end
 		end)
@@ -49,25 +52,20 @@
 
 repeat wait() until _G.config -- Wait for the configuration file before doing anything else.
 
-function _G.light_fire(object, light, flame, active)
-	local object = string.lower(object) -- Get the type of object specified in the function call and lowercase it.
-
+function _G.light_fire(light, flame, active)
 	if active.Value == false then
 		-- If the light is off fade it in
 		flame.Enabled = true
-		while light.Range < _G.lighting[object].range do
+		while light.Range < _G.lighting.ranges.candle do
+			light.Range = light.Range + 2.5
 			wait()
-			-- Divide the object's range by it's speed to make sure it always stops at the correct range.
-			light.Range = light.Range + _G.lighting[object].range / _G.lighting[object].speed
 		end
 		active.Value = true
 	else
 		-- Otherwise if the light is on, "extinguish" it.
 		flame.Enabled = false
 		while light.Range > 0 do
-			-- Divide the object's range by extinguish_speed. This value is lower than
-			-- the object specific speed so it goes out very quickly.
-			light.Range = light.Range - _G.lighting[object].range/_G.lighting.extinguish_speed
+			light.Range = light.Range - 5
 			wait()
 		end
 		active.Value = false

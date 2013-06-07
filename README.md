@@ -9,7 +9,7 @@ on Github and send me pull requests with things I could improve on.
 I've made sure to document the code I've worked on the most so
 its easier to get started. :)
 
-Check out the [Wiki]() for (hopefully) comprehensive guides on some
+Check out the [Wiki](https://github.com/VoxelDavid/pff/wiki) for (hopefully) comprehensive guides on some
 of the important subjects to help you understand what's going on
 
 ### Planned Features:
