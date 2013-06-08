@@ -1,10 +1,5 @@
-
--- Ambient        : 44,44,44
--- Brightness     : 1.5
--- OutdoorAmbient : 80,80,80
-
 --[===================================[--
-	@Description
+	Description:
 		This function is used to change the time of day.
 
 		It outputs the time to values inside of this script so other scripts
@@ -23,22 +18,42 @@ function time_cycle()
 
 		-- If Sunsets and Sunrises should change the ambient color, then:
 		if _G.time_cycle.sun_ambient == true then
+			local time_of_day   = _G.values.time_of_day
+
+			-- These values should remain the same. They've been set to a very specific time.
 			local sunrise_start = 300
 			local sunrise_end   = sunrise_start + 60
 			local sunset_start  = 1020
-			local sunset_send   = sunset_start + 60
+			local sunset_end   = sunset_start + 60
 
-			-- Durring sunrise and sunset make the sky a nice orange color
+			--[[
+				So far this works as intended aside from the ambient changing. Something I'm unsure about is,
+				if I use while loops to change the lighting, will that stop the rest of the script from functioning?
+				WIll this be my first use of coroutines?
+
+				Another thing is, how can I still get time_of_day to be changed even if the ambient is set to off?
+			]]
+
+			-- During sunrise and sunset make the sky a nice orange color
 			if l:GetMinutesAfterMidnight() > sunrise_start and l:GetMinutesAfterMidnight() < sunrise_end then
-				-- If the time is after sunrise
+				time_of_day.Value = 1 -- Sunrise
+
+			-- Between Sunrises's end and Sunset's start
+			elseif l:GetMinutesAfterMidnight() > sunrise_end and l:GetMinutesAfterMidnight() < sunset_start then
+				time_of_day.Value = 2 -- Day
+
+			-- Between Sunset's start and Sunset's end
 			elseif l:GetMinutesAfterMidnight() > sunset_start and l:GetMinutesAfterMidnight() < sunset_end then
-				-- Otherwise if it's after sunset
-				l.OutdoorAmbient = Color3.new(100/255, 80/255, 80/255)
+				time_of_day.Value = 3 -- Sunset
+
+			-- Between Sunset's end and Sunrise's start
+			elseif l:GetMinutesAfterMidnight() > sunset_end and l:GetMinutesAfterMidnight() < sunrise_start then
+				time_of_day.Value = 4 -- Night
 			end
 		end
 	end
 end
 
-print("time_cycle Loaded")
+print("Loaded TimeCycle")
 
 time_cycle()

@@ -1,5 +1,5 @@
 --[===================================[--
-	@Description
+	Description
 		Manage every fire based light throughout the game... In a single script!
 
 		Edits a PointLight and Fire object to create a somewhat realistic fire effect.
@@ -10,7 +10,7 @@
 		Clicking it again "extinguish" the candle by shrinking the PointLight's
 		range to 0 and disabling the Fire.
 
-	@Prerequisites:
+	Prerequisites:
 		Make sure that these objects exists in the same Parent as the Call script:
 		Boolean named "Active",
 		ClickDetector,
@@ -26,7 +26,7 @@
 		|-|- Fire
 		|-|- PointLight
 
-	@Calling the function:
+	Calling the function:
 		repeat wait() until _G.light_fire -- Wait for the function to load before calling it.
 
 		local enabled
@@ -74,4 +74,4 @@ function _G.light_fire(object, light, flame, active)
 	end
 end
 
-print("_G.light_fire Loaded")
+print("Loaded _G.light_fire")

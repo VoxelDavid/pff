@@ -1,39 +1,39 @@
 --[===================================[--
-	Dim a light source in the day time.
+	Description:
+		Adjust light source depending on time of day.
 
-	How will I go about this? Will I have to add a loop to
-	every single function call? I can't think of any other
-	way right now.
+		TimeCycle controls everything to do with time passing, and outputs
+		if it's Sunrise, Day, Sunset or Night to the time_of_day value.
 
-	The call script needs to have the while loop inside of it. I can't execute
-	the while loop somewhere else... Only problem with this is that I want the
-	brightness adjustment to happen very quickly, but I want the flicker to
-	only happen a few times a second to optimize performance... Hmm
+		This script hooks into that value and if the value is 1 (Sunrise),
+		it decreases the Brightness and if the value is 3 (Sunset) it
+		returns it to normal.
+
+	Calling the function:
+		[Add the function call code]
 --]===================================]--
 
 repeat wait() until _G.config -- Wait for the configuration file before doing anything else.
 
 function _G.light_adjust(light)
-	local conf = game.Configuration
-	local times = {
-		sunset  = conf.time_sunset,
-		sunrise = conf.time_sunrise,
-		day     = conf.time_day,
-		night   = conf.time_night,
-	}
+	local time_of_day = _G.values.time_of_day
 
-	print(math.random(1,10))
-	for i,v_ in pairs(times) do
-		print(times[i], times[i].Value)
-	end
+	-- 1 = Sunrise, 2 = Day, 3 = Sunset, 3 = Night.
+	if time_of_day.Value == 1 then
 
-	if times.sunset.Value == true or times.night.Value == true then
-		-- Code
-	else
-		-- Code
+		while light.Brightness > _G.lighting.brightness_when_day do
+			wait(_G.wait_time)
+			light.Brightness = light.Brightness - 0.05
+		end
+
+	elseif time_of_day.Value == 3 then
+		-- Fade in the brightness of the light if it's night time
+		while light.Brightness < _G.lighting.brightness_when_night do
+			wait(_G.wait_time)
+			light.Brightness = light.Brightness + 0.05
+		end
+
 	end
 end
 
-print("_G.light_adjust Loaded")
-
-_G.light_adjust() -- Call the function for testing.
+print("Loaded _G.light_adjut")
