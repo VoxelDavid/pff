@@ -1,16 +1,16 @@
 --[===================================[--
-	Description:
-		Adjust light source depending on time of day.
+  Description:
+    Adjust light source depending on time of day.
 
-		TimeCycle controls everything to do with time passing, and outputs
-		if it's Sunrise, Day, Sunset or Night to the time_of_day value.
+    TimeCycle controls everything to do with time passing, and outputs
+    if it's Sunrise, Day, Sunset or Night to the time_of_day value.
 
-		This script hooks into that value and if the value is 1 (Sunrise),
-		it decreases the Brightness and if the value is 3 (Sunset) it
-		returns it to normal.
+    This script hooks into that value and if the value is 1 (Sunrise),
+    it decreases the Brightness and if the value is 3 (Sunset) it
+    returns it to normal.
 
-	Calling the function:
-		[Add the function call code]
+    Calling the function:
+    [Add the function call code]
 --]===================================]--
 
 repeat wait() until _G.config -- Wait for the configuration file before doing anything else.

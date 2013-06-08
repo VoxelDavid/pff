@@ -1,9 +1,9 @@
 --[===================================[--
-	Description:
-		This function is used to change the time of day.
+  Description:
+    This function is used to change the time of day.
 
-		It outputs the time to values inside of this script so other scripts
-		can hook into those values and adjust based on the time.
+    It outputs the time to values inside of this script so other scripts
+    can hook into those values and adjust based on the time.
 --]===================================]--
 
 repeat wait() until _G.config -- Wait for the configuration file before doing anything else.

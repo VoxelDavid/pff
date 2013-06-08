@@ -1,5 +1,5 @@
 --[===================================[--
-	[Allan please add description]
+  [Allan please add description]
 --]===================================]--
 
 repeat wait() until _G.config -- Wait for the configuration file before doing anything else.

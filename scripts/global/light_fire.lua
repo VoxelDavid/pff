@@ -1,50 +1,50 @@
 --[===================================[--
-	Description
-		Manage every fire based light throughout the game... In a single script!
+  Description
+    Manage every fire based light throughout the game... In a single script!
 
-		Edits a PointLight and Fire object to create a somewhat realistic fire effect.
+    Edits a PointLight and Fire object to create a somewhat realistic fire effect.
 
-		Clicking once expands the PointLight's range to the Range variable defined in
-		the function call and enables the Fire.
+    Clicking once expands the PointLight's range to the Range variable defined in
+    the function call and enables the Fire.
 
-		Clicking it again "extinguish" the candle by shrinking the PointLight's
-		range to 0 and disabling the Fire.
+    Clicking it again "extinguish" the candle by shrinking the PointLight's
+    range to 0 and disabling the Fire.
 
-	Prerequisites:
-		Make sure that these objects exists in the same Parent as the Call script:
-		Boolean named "Active",
-		ClickDetector,
-		Part named "Light",
-		PointLight and Fire inside of Light.
+  Prerequisites:
+    Make sure that these objects exists in the same Parent as the Call script:
+    Boolean named "Active",
+    ClickDetector,
+    Part named "Light",
+    PointLight and Fire inside of Light.
 
-		File structure should look like this:
-		- Part
-		|- Active
-		|- ClickDetector
-		|- call_light_fire -- The function calling script (Copy the below into it)
-		|- Light
-		|-|- Fire
-		|-|- PointLight
+    File structure should look like this:
+    - Part
+    |- Active
+    |- ClickDetector
+    |- call_light_fire -- The function calling script (Copy the below into it)
+    |- Light
+    |-|- Fire
+    |-|- PointLight
 
-	Calling the function:
-		repeat wait() until _G.light_fire -- Wait for the function to load before calling it.
+  Calling the function:
+    repeat wait() until _G.light_fire -- Wait for the function to load before calling it.
 
-		local enabled
-		local sp = script.Parent
+    local enabled
+    local sp = script.Parent
 
-		-- Variables
-		local object = " "                  -- Applicable types: Candle, Fireplace, Torch
-		local light  = sp.Light.PointLight  -- Path to the light source.
-		local flame  = sp.Light.Fire        -- Path to Fire.
-		local active = sp.Active            -- Path to Active boolean.
+    -- Variables
+    local object = " "                  -- Applicable types: Candle, Fireplace, Torch
+    local light  = sp.Light.PointLight  -- Path to the light source.
+    local flame  = sp.Light.Fire        -- Path to Fire.
+    local active = sp.Active            -- Path to Active boolean.
 
-		sp.ClickDetector.MouseClick:connect(function()
-			if not enabled then
-				enabled = true
-				_G.light_fire(object, light, flame, active)
-				enabled = false
-			end
-		end)
+    sp.ClickDetector.MouseClick:connect(function()
+    	if not enabled then
+    		enabled = true
+    		_G.light_fire(object, light, flame, active)
+    		enabled = false
+    	end
+    end)
 --]===================================]--
 
 repeat wait() until _G.config -- Wait for the configuration file before doing anything else.

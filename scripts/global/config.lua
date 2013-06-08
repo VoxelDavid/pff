@@ -1,15 +1,15 @@
 --[===================================[--
-	Description:
-		This file holds all of the configurable variables used throughout the game.
+  Description:
+    This file holds all of the configurable variables used throughout the game.
 
-	Prerequisites:
-		Include "repeat wait() until _G.config" in all functions.
-		Some may not need it, but it's better to be safe than sorry.
+  Prerequisites:
+    Include "repeat wait() until _G.config" in all functions.
+    Some may not need it, but it's better to be safe than sorry.
 
-	Keeping Organized:
-		Order tables alphabetically.
-		Keep variables of the same type grouped together.
-		Singular variables should be kept above Tables.
+  Keeping Organized:
+    Order tables alphabetically.
+    Keep variables of the same type grouped together.
+    Singular variables should be kept above Tables.
 --]===================================]--
 
 _G.version   = "Beta 0.1.0" -- The game Version. Be sure to keep this regularly updated!
