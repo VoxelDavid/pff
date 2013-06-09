@@ -21,9 +21,10 @@ function time_cycle()
 			local time_of_day   = _G.values.time_of_day
 
 			-- These values should remain the same. They've been set to a very specific time.
-			local sunrise_start = 300
+			-- Originals: Sunrise 300, Sunset 1020
+			local sunrise_start = 360
 			local sunrise_end   = sunrise_start + 60
-			local sunset_start  = 1020
+			local sunset_start  = 1060
 			local sunset_end   = sunset_start + 60
 
 			--[[
@@ -31,7 +32,8 @@ function time_cycle()
 				if I use while loops to change the lighting, will that stop the rest of the script from functioning?
 				WIll this be my first use of coroutines?
 
-				Another thing is, how can I still get time_of_day to be changed even if the ambient is set to off?
+				Another thing is, how can I still get time_of_day to be changed even if the ambient is set to off,
+				without repeating this mass amount of If statements?
 			]]
 
 			-- During sunrise and sunset make the sky a nice orange color
@@ -54,6 +56,6 @@ function time_cycle()
 	end
 end
 
-print("Loaded TimeCycle")
+print("Loaded " .. script.Name)
 
 time_cycle()

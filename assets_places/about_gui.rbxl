@@ -4,7 +4,7 @@
 	<Item class="Workspace" referent="RBX0">
 		<Properties>
 			<Ref name="CurrentCamera">RBX1</Ref>
-			<double name="DistributedGameTime">0</double>
+			<double name="DistributedGameTime">1.3333334028720856</double>
 			<CoordinateFrame name="ModelInPrimary">
 				<X>0</X>
 				<Y>0</Y>
@@ -27,18 +27,18 @@
 				<Ref name="CameraSubject">null</Ref>
 				<token name="CameraType">0</token>
 				<CoordinateFrame name="CoordinateFrame">
-					<X>92.2439423</X>
-					<Y>21.7809868</Y>
-					<Z>63.1712074</Z>
-					<R00>0.950728834</R00>
-					<R01>-0.20743826</R01>
-					<R02>0.230399758</R02>
+					<X>91.4421082</X>
+					<Y>21.5755882</Y>
+					<Z>63.3706894</Z>
+					<R00>0.978360772</R00>
+					<R01>0.117192894</R01>
+					<R02>-0.170516849</R02>
 					<R10>-0</R10>
-					<R11>0.743168235</R11>
-					<R12>0.669104576</R12>
-					<R20>-0.310023665</R20>
-					<R21>-0.636137009</R21>
-					<R22>0.706551492</R22>
+					<R11>0.824126422</R11>
+					<R12>0.566405892</R12>
+					<R20>0.206906199</R20>
+					<R21>-0.55414933</R21>
+					<R22>0.806292951</R22>
 				</CoordinateFrame>
 				<float name="FieldOfView">70</float>
 				<CoordinateFrame name="Focus">
@@ -457,62 +457,21 @@
 						</Properties>
 					</Item>
 				</Item>
-				<Item class="TextButton" referent="RBX15">
-					<Properties>
-						<bool name="Active">true</bool>
-						<bool name="AutoButtonColor">true</bool>
-						<Color3 name="BackgroundColor3">4288914085</Color3>
-						<float name="BackgroundTransparency">0</float>
-						<Color3 name="BorderColor3">4279970357</Color3>
-						<int name="BorderSizePixel">1</int>
-						<bool name="ClipsDescendants">false</bool>
-						<bool name="Draggable">false</bool>
-						<token name="Font">0</token>
-						<token name="FontSize">2</token>
-						<bool name="Modal">false</bool>
-						<string name="Name">Open</string>
-						<UDim2 name="Position">
-							<XS>0</XS>
-							<XO>0</XO>
-							<YS>0</YS>
-							<YO>0</YO>
-						</UDim2>
-						<bool name="Selected">false</bool>
-						<UDim2 name="Size">
-							<XS>0.0799999982</XS>
-							<XO>0</XO>
-							<YS>0.0599999987</YS>
-							<YO>0</YO>
-						</UDim2>
-						<token name="SizeConstraint">0</token>
-						<token name="Style">2</token>
-						<string name="Text">Open About</string>
-						<Color3 name="TextColor3">4293651435</Color3>
-						<bool name="TextScaled">false</bool>
-						<Color3 name="TextStrokeColor3">4278190080</Color3>
-						<float name="TextStrokeTransparency">1</float>
-						<float name="TextTransparency">0</float>
-						<bool name="TextWrapped">false</bool>
-						<token name="TextXAlignment">2</token>
-						<token name="TextYAlignment">1</token>
-						<bool name="Visible">true</bool>
-						<int name="ZIndex">1</int>
-					</Properties>
-				</Item>
-				<Item class="LocalScript" referent="RBX16">
+				<Item class="LocalScript" referent="RBX15">
 					<Properties>
 						<bool name="Disabled">false</bool>
 						<Content name="LinkedSource"><null></null></Content>
-						<string name="Name">Manager</string>
+						<string name="Name">about_manager</string>
 						<ProtectedString name="Source">local sp = script.Parent
 local RbxGui = assert(LoadLibrary(&quot;RbxGui&quot;))
+local ui = game.Players.LocalPlayer.PlayerGui.Interface -- Path to the User Interface
 
 local text = {
 &#9;title      = &quot;Project Final Farewell&quot;,
 &#9;paragraph1 = &quot;After discovering how to harness a wireless signal, Archimedes was able to wirelessly transfer his cat&apos;s thoughts into readable text. Archimedes and his cat are working on writing about feline societies.&quot;,
 &#9;paragraph2 = &quot;Archimedes found that ear wax is a great biofuel. Due to the fact that most people just toss their ear wax he gave up his research.&quot;,
 &#9;repo_link  = &quot;https://github.com/VoxelDavid/pff&quot;,
-&#9;version    = &quot;Server Version&quot; .. _G.version,
+&#9;version    = &quot;Server Version: &quot; .. _G.version,
 }
 
 sp.Main.Title.Text      = text.title
@@ -530,15 +489,57 @@ function toggle_gui()
 &#9;end
 end
 sp.Main.Close.MouseButton1Click:connect(toggle_gui)
-sp.Open.MouseButton1Click:connect(toggle_gui)</ProtectedString>
+ui.Open_About.MouseButton1Click:connect(toggle_gui)</ProtectedString>
 					</Properties>
 				</Item>
-				<Item class="BoolValue" referent="RBX17">
+				<Item class="BoolValue" referent="RBX16">
 					<Properties>
 						<string name="Name">Active</string>
 						<bool name="Value">false</bool>
 					</Properties>
 				</Item>
+			</Item>
+			<Item class="TextButton" referent="RBX17">
+				<Properties>
+					<bool name="Active">true</bool>
+					<bool name="AutoButtonColor">true</bool>
+					<Color3 name="BackgroundColor3">4288914085</Color3>
+					<float name="BackgroundTransparency">0</float>
+					<Color3 name="BorderColor3">4279970357</Color3>
+					<int name="BorderSizePixel">1</int>
+					<bool name="ClipsDescendants">false</bool>
+					<bool name="Draggable">false</bool>
+					<token name="Font">0</token>
+					<token name="FontSize">2</token>
+					<bool name="Modal">false</bool>
+					<string name="Name">Open_About</string>
+					<UDim2 name="Position">
+						<XS>0</XS>
+						<XO>0</XO>
+						<YS>0</YS>
+						<YO>0</YO>
+					</UDim2>
+					<bool name="Selected">false</bool>
+					<UDim2 name="Size">
+						<XS>0.0799999982</XS>
+						<XO>0</XO>
+						<YS>0.0599999987</YS>
+						<YO>0</YO>
+					</UDim2>
+					<token name="SizeConstraint">0</token>
+					<token name="Style">2</token>
+					<string name="Text">Open About</string>
+					<Color3 name="TextColor3">4293651435</Color3>
+					<bool name="TextScaled">false</bool>
+					<Color3 name="TextStrokeColor3">4278190080</Color3>
+					<float name="TextStrokeTransparency">1</float>
+					<float name="TextTransparency">0</float>
+					<bool name="TextWrapped">false</bool>
+					<token name="TextXAlignment">2</token>
+					<token name="TextYAlignment">1</token>
+					<bool name="Visible">true</bool>
+					<int name="ZIndex">1</int>
+				</Properties>
 			</Item>
 		</Item>
 	</Item>

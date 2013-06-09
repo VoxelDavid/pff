@@ -8,47 +8,48 @@
 
   Keeping Organized:
     Order tables alphabetically.
-    Keep variables of the same type grouped together.
+    Keep variables of the same class (IE: Bool, Int, etc.) grouped together.
     Singular variables should be kept above Tables.
 --]===================================]--
 
-_G.version   = "Beta 0.1.0" -- The game Version. Be sure to keep this regularly updated!
+-- Game Version
+_G.version   = "Beta 0.1.0"  -- The game Version. Be sure to keep this regularly updated!
 
 -- Loose Variables
 _G.values    = game.Workspace.GlobalScripts.Values -- Where all Values are stored.
-_G.wait_time = 0.05 -- Default wait() is about 0.03. Using a slightly higher wait time should increase performance, if just a tiny bit.
 
 -- Variables for all lighting related objects/scripts
 _G.lighting = {
-	brightness_when_day    = 0.5,  -- How bright a light should be in the day.
+	brightness_when_day    = 0.3,  -- How bright a light should be in the day.
 	brightness_when_night  = 1,    -- How bright a light should be at night.
 	flicker_frequency      = 3,    -- How frequently a fire based light will flicker each second.
-	light_speed            = 6,
-	extinguish_speed       = 3,
 
 	candle = {
-		range = 15,  -- Candle's PointLight range.
-		speed = 6,   -- Divides the range. Bigger number = slower transition.
+		range = 14,        -- Candle's PointLight range.
+		light_speed = 6,   -- How quickly the fire will be lit. Bigger number = slower transition.
+		ext_speed   = 3,   -- How quickly the fire will be extinguished. Bigger number = slower transition.
 	},
 
 	fireplace = {
-		range = 20,  -- Fireplace's PointLight range.
-		speed = 6,   -- Divides the range. Bigger number = slower transition.
+		range = 18,        -- Fireplace's PointLight range.
+		light_speed = 12,  -- How quickly the fire will be lit. Bigger number = slower transition.
+		ext_speed   = 3,   -- How quickly the fire will be extinguished. Bigger number = slower transition.
 	},
 
 	torch = {
-		range = 15,  -- Torch's PointLight range.
-		speed = 6,   -- Divides the range. Bigger number = slower transition.
+		range = 16,        -- Torch's PointLight range.
+		light_speed = 8,   -- How quickly the fire will be lit. Bigger number = slower transition.
+		ext_speed   = 3,   -- How quickly the fire will be extinguished. Bigger number = slower transition.
 	},
 }
 
 -- Variables for the Day/Night time cycle.
 _G.time_cycle = {
-	enabled                = true,  -- If the Time Cycle should be enabled.
-	sun_ambient            = true,  -- If the ambient should change for sunrise and sunset.
-	speed                  = 1,     -- How fast the time will change.
-	day_length             = 8,     -- How many minutes it will take to go from sunrise to sunset.
-	night_length           = 4,     -- How many minutes it will take for night to pass.
+	enabled      = true,  -- If the Time Cycle should be enabled.
+	sun_ambient  = true,  -- If the ambient should change for sunrise and sunset. (Not implemented)
+	speed        = 1,     -- How fast the time will change.
+	day_length   = 8,     -- How many minutes it will take to go from sunrise to sunset. (Not implemented)
+	night_length = 4,     -- How many minutes it will take for night to pass. (Not implemented)
 }
 
 -- Special Users
@@ -62,10 +63,11 @@ _G.users = {
 
 	-- Friends and other important people.
 	vips = {
-		"Hamhampokecat",
-		"MidnightFlower",
+		"",
+		"",
+		"",
 	}
 }
 
 _G.config = true
-print("Loaded Configuration")
+print("Loaded _G." .. script.Name)

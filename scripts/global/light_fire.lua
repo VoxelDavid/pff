@@ -1,5 +1,5 @@
 --[===================================[--
-  Description
+  Description:
     Manage every fire based light throughout the game... In a single script!
 
     Edits a PointLight and Fire object to create a somewhat realistic fire effect.
@@ -10,21 +10,9 @@
     Clicking it again "extinguish" the candle by shrinking the PointLight's
     range to 0 and disabling the Fire.
 
-  Prerequisites:
-    Make sure that these objects exists in the same Parent as the Call script:
-    Boolean named "Active",
-    ClickDetector,
-    Part named "Light",
-    PointLight and Fire inside of Light.
-
-    File structure should look like this:
-    - Part
-    |- Active
-    |- ClickDetector
-    |- call_light_fire -- The function calling script (Copy the below into it)
-    |- Light
-    |-|- Fire
-    |-|- PointLight
+	Prerequisites:
+		Copy one of the fire based lighting models from assets_models in the root directory
+		of the repo to the game.
 
   Calling the function:
     repeat wait() until _G.light_fire -- Wait for the function to load before calling it.
@@ -47,10 +35,12 @@
     end)
 --]===================================]--
 
-repeat wait() until _G.config -- Wait for the configuration file before doing anything else.
+-- Wait for the configuration file before doing anything else.
+repeat wait() until _G.config
 
 function _G.light_fire(object, light, flame, active)
-	local object = string.lower(object) -- Get the type of object specified in the function call and lowercase it.
+	-- Get the type of object specified in the function call and lowercase it.
+	local object = string.lower(object)
 
 	if active.Value == false then
 		-- If the light is off fade it in
@@ -58,20 +48,19 @@ function _G.light_fire(object, light, flame, active)
 		while light.Range < _G.lighting[object].range do
 			wait()
 			-- Divide the object's range by it's speed to make sure it always stops at the correct range.
-			light.Range = light.Range + _G.lighting[object].range / _G.lighting[object].speed
+			light.Range = light.Range + _G.lighting[object].range / _G.lighting[object].light_speed
 		end
 		active.Value = true
 	else
 		-- Otherwise if the light is on, "extinguish" it.
 		flame.Enabled = false
 		while light.Range > 0 do
-			-- Divide the object's range by extinguish_speed. This value is lower than
-			-- the object specific speed so it goes out very quickly.
-			light.Range = light.Range - _G.lighting[object].range/_G.lighting.extinguish_speed
+			-- Divide the object's range by ext_speed. This value is lower than light_speed so it goes out quicker.
+			light.Range = light.Range - _G.lighting[object].range/_G.lighting[object].ext_speed
 			wait()
 		end
 		active.Value = false
 	end
 end
 
-print("Loaded _G.light_fire")
+print("Loaded _G." .. script.Name)
