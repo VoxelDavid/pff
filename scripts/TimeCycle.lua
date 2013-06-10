@@ -25,7 +25,7 @@ function time_cycle()
 			local sunrise_start = 360
 			local sunrise_end   = sunrise_start + 60
 			local sunset_start  = 1060
-			local sunset_end   = sunset_start + 60
+			local sunset_end    = sunset_start + 60
 
 			--[[
 				So far this works as intended aside from the ambient changing. Something I'm unsure about is,

@@ -27,24 +27,24 @@
 				<Ref name="CameraSubject">null</Ref>
 				<token name="CameraType">0</token>
 				<CoordinateFrame name="CoordinateFrame">
-					<X>91.4421082</X>
-					<Y>21.5755882</Y>
-					<Z>63.3706894</Z>
-					<R00>0.978360772</R00>
-					<R01>0.117192894</R01>
-					<R02>-0.170516849</R02>
+					<X>104.235962</X>
+					<Y>14.8705177</Y>
+					<Z>64.707283</Z>
+					<R00>0.775451362</R00>
+					<R01>0.12156795</R01>
+					<R02>-0.61959368</R02>
 					<R10>-0</R10>
-					<R11>0.824126422</R11>
-					<R12>0.566405892</R12>
-					<R20>0.206906199</R20>
-					<R21>-0.55414933</R21>
-					<R22>0.806292951</R22>
+					<R11>0.981290102</R11>
+					<R12>0.192534924</R12>
+					<R20>0.631407261</R20>
+					<R21>-0.149301469</R21>
+					<R22>0.760942757</R22>
 				</CoordinateFrame>
 				<float name="FieldOfView">70</float>
 				<CoordinateFrame name="Focus">
-					<X>91.7831421</X>
-					<Y>20.4427757</Y>
-					<Z>61.7581024</Z>
+					<X>105.475189</X>
+					<Y>14.4854355</Y>
+					<Z>63.1853485</Z>
 					<R00>1</R00>
 					<R01>0</R01>
 					<R02>0</R02>
@@ -218,288 +218,7 @@
 			<Properties>
 				<string name="Name">Interface</string>
 			</Properties>
-			<Item class="Frame" referent="RBX8">
-				<Properties>
-					<bool name="Active">false</bool>
-					<Color3 name="BackgroundColor3">4288914085</Color3>
-					<float name="BackgroundTransparency">1</float>
-					<Color3 name="BorderColor3">4279970357</Color3>
-					<int name="BorderSizePixel">1</int>
-					<bool name="ClipsDescendants">false</bool>
-					<bool name="Draggable">false</bool>
-					<string name="Name">About</string>
-					<UDim2 name="Position">
-						<XS>0</XS>
-						<XO>0</XO>
-						<YS>0</YS>
-						<YO>0</YO>
-					</UDim2>
-					<UDim2 name="Size">
-						<XS>1</XS>
-						<XO>0</XO>
-						<YS>1</YS>
-						<YO>0</YO>
-					</UDim2>
-					<token name="SizeConstraint">0</token>
-					<token name="Style">0</token>
-					<bool name="Visible">true</bool>
-					<int name="ZIndex">1</int>
-				</Properties>
-				<Item class="Frame" referent="RBX9">
-					<Properties>
-						<bool name="Active">false</bool>
-						<Color3 name="BackgroundColor3">4288914085</Color3>
-						<float name="BackgroundTransparency">0</float>
-						<Color3 name="BorderColor3">4279970357</Color3>
-						<int name="BorderSizePixel">1</int>
-						<bool name="ClipsDescendants">false</bool>
-						<bool name="Draggable">false</bool>
-						<string name="Name">Main</string>
-						<UDim2 name="Position">
-							<XS>0.25</XS>
-							<XO>0</XO>
-							<YS>0.25</YS>
-							<YO>0</YO>
-						</UDim2>
-						<UDim2 name="Size">
-							<XS>0.5</XS>
-							<XO>0</XO>
-							<YS>0.5</YS>
-							<YO>0</YO>
-						</UDim2>
-						<token name="SizeConstraint">0</token>
-						<token name="Style">3</token>
-						<bool name="Visible">true</bool>
-						<int name="ZIndex">1</int>
-					</Properties>
-					<Item class="TextLabel" referent="RBX10">
-						<Properties>
-							<bool name="Active">false</bool>
-							<Color3 name="BackgroundColor3">4288914085</Color3>
-							<float name="BackgroundTransparency">1</float>
-							<Color3 name="BorderColor3">4279970357</Color3>
-							<int name="BorderSizePixel">1</int>
-							<bool name="ClipsDescendants">false</bool>
-							<bool name="Draggable">false</bool>
-							<token name="Font">0</token>
-							<token name="FontSize">5</token>
-							<string name="Name">Title</string>
-							<UDim2 name="Position">
-								<XS>0</XS>
-								<XO>0</XO>
-								<YS>0</YS>
-								<YO>0</YO>
-							</UDim2>
-							<UDim2 name="Size">
-								<XS>1</XS>
-								<XO>0</XO>
-								<YS>0.100000001</YS>
-								<YO>0</YO>
-							</UDim2>
-							<token name="SizeConstraint">0</token>
-							<string name="Text">Project Final Farewell</string>
-							<Color3 name="TextColor3">4293651435</Color3>
-							<bool name="TextScaled">false</bool>
-							<Color3 name="TextStrokeColor3">4278190080</Color3>
-							<float name="TextStrokeTransparency">1</float>
-							<float name="TextTransparency">0</float>
-							<bool name="TextWrapped">true</bool>
-							<token name="TextXAlignment">2</token>
-							<token name="TextYAlignment">1</token>
-							<bool name="Visible">true</bool>
-							<int name="ZIndex">1</int>
-						</Properties>
-					</Item>
-					<Item class="TextLabel" referent="RBX11">
-						<Properties>
-							<bool name="Active">false</bool>
-							<Color3 name="BackgroundColor3">4288914085</Color3>
-							<float name="BackgroundTransparency">1</float>
-							<Color3 name="BorderColor3">4279970357</Color3>
-							<int name="BorderSizePixel">1</int>
-							<bool name="ClipsDescendants">false</bool>
-							<bool name="Draggable">false</bool>
-							<token name="Font">0</token>
-							<token name="FontSize">2</token>
-							<string name="Name">Paragraph1</string>
-							<UDim2 name="Position">
-								<XS>0</XS>
-								<XO>0</XO>
-								<YS>0.200000003</YS>
-								<YO>0</YO>
-							</UDim2>
-							<UDim2 name="Size">
-								<XS>1</XS>
-								<XO>0</XO>
-								<YS>0.25</YS>
-								<YO>0</YO>
-							</UDim2>
-							<token name="SizeConstraint">0</token>
-							<string name="Text">After discovering how to harness a wireless signal, Archimedes was able to wirelessly transfer his cat&apos;s thoughts into readable text. Archimedes and his cat are working on writing about feline societies.</string>
-							<Color3 name="TextColor3">4293651435</Color3>
-							<bool name="TextScaled">false</bool>
-							<Color3 name="TextStrokeColor3">4278190080</Color3>
-							<float name="TextStrokeTransparency">1</float>
-							<float name="TextTransparency">0</float>
-							<bool name="TextWrapped">true</bool>
-							<token name="TextXAlignment">2</token>
-							<token name="TextYAlignment">1</token>
-							<bool name="Visible">true</bool>
-							<int name="ZIndex">1</int>
-						</Properties>
-					</Item>
-					<Item class="TextLabel" referent="RBX12">
-						<Properties>
-							<bool name="Active">false</bool>
-							<Color3 name="BackgroundColor3">4288914085</Color3>
-							<float name="BackgroundTransparency">1</float>
-							<Color3 name="BorderColor3">4279970357</Color3>
-							<int name="BorderSizePixel">1</int>
-							<bool name="ClipsDescendants">false</bool>
-							<bool name="Draggable">false</bool>
-							<token name="Font">0</token>
-							<token name="FontSize">2</token>
-							<string name="Name">Paragraph2</string>
-							<UDim2 name="Position">
-								<XS>0</XS>
-								<XO>0</XO>
-								<YS>0.5</YS>
-								<YO>0</YO>
-							</UDim2>
-							<UDim2 name="Size">
-								<XS>1</XS>
-								<XO>0</XO>
-								<YS>0.25</YS>
-								<YO>0</YO>
-							</UDim2>
-							<token name="SizeConstraint">0</token>
-							<string name="Text">Archimedes found that ear wax is a great biofuel. Due to the fact that most people just toss their ear wax he gave up his research.</string>
-							<Color3 name="TextColor3">4293651435</Color3>
-							<bool name="TextScaled">false</bool>
-							<Color3 name="TextStrokeColor3">4278190080</Color3>
-							<float name="TextStrokeTransparency">1</float>
-							<float name="TextTransparency">0</float>
-							<bool name="TextWrapped">true</bool>
-							<token name="TextXAlignment">2</token>
-							<token name="TextYAlignment">1</token>
-							<bool name="Visible">true</bool>
-							<int name="ZIndex">1</int>
-						</Properties>
-					</Item>
-					<Item class="TextLabel" referent="RBX13">
-						<Properties>
-							<bool name="Active">false</bool>
-							<Color3 name="BackgroundColor3">4288914085</Color3>
-							<float name="BackgroundTransparency">1</float>
-							<Color3 name="BorderColor3">4279970357</Color3>
-							<int name="BorderSizePixel">1</int>
-							<bool name="ClipsDescendants">false</bool>
-							<bool name="Draggable">false</bool>
-							<token name="Font">0</token>
-							<token name="FontSize">2</token>
-							<string name="Name">Version</string>
-							<UDim2 name="Position">
-								<XS>0</XS>
-								<XO>0</XO>
-								<YS>0.899999976</YS>
-								<YO>0</YO>
-							</UDim2>
-							<UDim2 name="Size">
-								<XS>1</XS>
-								<XO>0</XO>
-								<YS>0.100000001</YS>
-								<YO>0</YO>
-							</UDim2>
-							<token name="SizeConstraint">0</token>
-							<string name="Text"></string>
-							<Color3 name="TextColor3">4293651435</Color3>
-							<bool name="TextScaled">false</bool>
-							<Color3 name="TextStrokeColor3">4278190080</Color3>
-							<float name="TextStrokeTransparency">1</float>
-							<float name="TextTransparency">0</float>
-							<bool name="TextWrapped">true</bool>
-							<token name="TextXAlignment">1</token>
-							<token name="TextYAlignment">1</token>
-							<bool name="Visible">true</bool>
-							<int name="ZIndex">1</int>
-						</Properties>
-					</Item>
-					<Item class="ImageButton" referent="RBX14">
-						<Properties>
-							<bool name="Active">true</bool>
-							<bool name="AutoButtonColor">true</bool>
-							<Color3 name="BackgroundColor3">4288914085</Color3>
-							<float name="BackgroundTransparency">1</float>
-							<Color3 name="BorderColor3">4279970357</Color3>
-							<int name="BorderSizePixel">1</int>
-							<bool name="ClipsDescendants">false</bool>
-							<bool name="Draggable">false</bool>
-							<Content name="Image"><null></null></Content>
-							<bool name="Modal">false</bool>
-							<string name="Name">Close</string>
-							<UDim2 name="Position">
-								<XS>0.959999979</XS>
-								<XO>0</XO>
-								<YS>0</YS>
-								<YO>0</YO>
-							</UDim2>
-							<bool name="Selected">false</bool>
-							<UDim2 name="Size">
-								<XS>0.0399999991</XS>
-								<XO>0</XO>
-								<YS>0.0399999991</YS>
-								<YO>0</YO>
-							</UDim2>
-							<token name="SizeConstraint">1</token>
-							<token name="Style">2</token>
-							<bool name="Visible">true</bool>
-							<int name="ZIndex">1</int>
-						</Properties>
-					</Item>
-				</Item>
-				<Item class="LocalScript" referent="RBX15">
-					<Properties>
-						<bool name="Disabled">false</bool>
-						<Content name="LinkedSource"><null></null></Content>
-						<string name="Name">about_manager</string>
-						<ProtectedString name="Source">local sp = script.Parent
-local RbxGui = assert(LoadLibrary(&quot;RbxGui&quot;))
-local ui = game.Players.LocalPlayer.PlayerGui.Interface -- Path to the User Interface
-
-local text = {
-&#9;title      = &quot;Project Final Farewell&quot;,
-&#9;paragraph1 = &quot;After discovering how to harness a wireless signal, Archimedes was able to wirelessly transfer his cat&apos;s thoughts into readable text. Archimedes and his cat are working on writing about feline societies.&quot;,
-&#9;paragraph2 = &quot;Archimedes found that ear wax is a great biofuel. Due to the fact that most people just toss their ear wax he gave up his research.&quot;,
-&#9;repo_link  = &quot;https://github.com/VoxelDavid/pff&quot;,
-&#9;version    = &quot;Server Version: &quot; .. _G.version,
-}
-
-sp.Main.Title.Text      = text.title
-sp.Main.Paragraph1.Text = text.paragraph1
-sp.Main.Paragraph2.Text = text.paragraph2
-sp.Main.Version.Text    = text.version
-
-function toggle_gui()
-&#9;if sp.Active == true then
-&#9;&#9;sp.Active = false
-&#9;&#9;sp.Main.Visible = false
-&#9;else
-&#9;&#9;sp.Active = true
-&#9;&#9;sp.Main.Visible = true
-&#9;end
-end
-sp.Main.Close.MouseButton1Click:connect(toggle_gui)
-ui.Open_About.MouseButton1Click:connect(toggle_gui)</ProtectedString>
-					</Properties>
-				</Item>
-				<Item class="BoolValue" referent="RBX16">
-					<Properties>
-						<string name="Name">Active</string>
-						<bool name="Value">false</bool>
-					</Properties>
-				</Item>
-			</Item>
-			<Item class="TextButton" referent="RBX17">
+			<Item class="TextButton" referent="RBX8">
 				<Properties>
 					<bool name="Active">true</bool>
 					<bool name="AutoButtonColor">true</bool>
@@ -512,38 +231,267 @@ ui.Open_About.MouseButton1Click:connect(toggle_gui)</ProtectedString>
 					<token name="Font">0</token>
 					<token name="FontSize">2</token>
 					<bool name="Modal">false</bool>
-					<string name="Name">Open_About</string>
+					<string name="Name">OpenButton_About</string>
 					<UDim2 name="Position">
-						<XS>0</XS>
+						<XS>0.939999998</XS>
 						<XO>0</XO>
-						<YS>0</YS>
+						<YS>0.699999988</YS>
 						<YO>0</YO>
 					</UDim2>
 					<bool name="Selected">false</bool>
 					<UDim2 name="Size">
-						<XS>0.0799999982</XS>
+						<XS>0.0649999976</XS>
 						<XO>0</XO>
 						<YS>0.0599999987</YS>
 						<YO>0</YO>
 					</UDim2>
 					<token name="SizeConstraint">0</token>
 					<token name="Style">2</token>
-					<string name="Text">Open About</string>
+					<string name="Text">About</string>
 					<Color3 name="TextColor3">4293651435</Color3>
-					<bool name="TextScaled">false</bool>
+					<bool name="TextScaled">true</bool>
 					<Color3 name="TextStrokeColor3">4278190080</Color3>
 					<float name="TextStrokeTransparency">1</float>
 					<float name="TextTransparency">0</float>
-					<bool name="TextWrapped">false</bool>
-					<token name="TextXAlignment">2</token>
+					<bool name="TextWrapped">true</bool>
+					<token name="TextXAlignment">0</token>
 					<token name="TextYAlignment">1</token>
 					<bool name="Visible">true</bool>
 					<int name="ZIndex">1</int>
 				</Properties>
 			</Item>
+			<Item class="Frame" referent="RBX9">
+				<Properties>
+					<bool name="Active">false</bool>
+					<Color3 name="BackgroundColor3">4288914085</Color3>
+					<float name="BackgroundTransparency">0</float>
+					<Color3 name="BorderColor3">4279970357</Color3>
+					<int name="BorderSizePixel">1</int>
+					<bool name="ClipsDescendants">false</bool>
+					<bool name="Draggable">false</bool>
+					<string name="Name">About</string>
+					<UDim2 name="Position">
+						<XS>0.324999988</XS>
+						<XO>0</XO>
+						<YS>-0.5</YS>
+						<YO>0</YO>
+					</UDim2>
+					<UDim2 name="Size">
+						<XS>0.349999994</XS>
+						<XO>0</XO>
+						<YS>0.349999994</YS>
+						<YO>0</YO>
+					</UDim2>
+					<token name="SizeConstraint">0</token>
+					<token name="Style">3</token>
+					<bool name="Visible">true</bool>
+					<int name="ZIndex">1</int>
+				</Properties>
+				<Item class="TextLabel" referent="RBX10">
+					<Properties>
+						<bool name="Active">false</bool>
+						<Color3 name="BackgroundColor3">4288914085</Color3>
+						<float name="BackgroundTransparency">1</float>
+						<Color3 name="BorderColor3">4279970357</Color3>
+						<int name="BorderSizePixel">1</int>
+						<bool name="ClipsDescendants">false</bool>
+						<bool name="Draggable">false</bool>
+						<token name="Font">0</token>
+						<token name="FontSize">6</token>
+						<string name="Name">Title</string>
+						<UDim2 name="Position">
+							<XS>0</XS>
+							<XO>0</XO>
+							<YS>0</YS>
+							<YO>0</YO>
+						</UDim2>
+						<UDim2 name="Size">
+							<XS>1</XS>
+							<XO>0</XO>
+							<YS>0.119999997</YS>
+							<YO>0</YO>
+						</UDim2>
+						<token name="SizeConstraint">0</token>
+						<string name="Text"></string>
+						<Color3 name="TextColor3">4294967295</Color3>
+						<bool name="TextScaled">false</bool>
+						<Color3 name="TextStrokeColor3">4278190080</Color3>
+						<float name="TextStrokeTransparency">1</float>
+						<float name="TextTransparency">0</float>
+						<bool name="TextWrapped">false</bool>
+						<token name="TextXAlignment">2</token>
+						<token name="TextYAlignment">1</token>
+						<bool name="Visible">true</bool>
+						<int name="ZIndex">1</int>
+					</Properties>
+				</Item>
+				<Item class="TextLabel" referent="RBX11">
+					<Properties>
+						<bool name="Active">false</bool>
+						<Color3 name="BackgroundColor3">4288914085</Color3>
+						<float name="BackgroundTransparency">1</float>
+						<Color3 name="BorderColor3">4279970357</Color3>
+						<int name="BorderSizePixel">1</int>
+						<bool name="ClipsDescendants">false</bool>
+						<bool name="Draggable">false</bool>
+						<token name="Font">0</token>
+						<token name="FontSize">4</token>
+						<string name="Name">Paragraph</string>
+						<UDim2 name="Position">
+							<XS>0</XS>
+							<XO>0</XO>
+							<YS>0.150000006</YS>
+							<YO>0</YO>
+						</UDim2>
+						<UDim2 name="Size">
+							<XS>1</XS>
+							<XO>0</XO>
+							<YS>0.649999976</YS>
+							<YO>0</YO>
+						</UDim2>
+						<token name="SizeConstraint">0</token>
+						<string name="Text"></string>
+						<Color3 name="TextColor3">4293651435</Color3>
+						<bool name="TextScaled">true</bool>
+						<Color3 name="TextStrokeColor3">4278190080</Color3>
+						<float name="TextStrokeTransparency">1</float>
+						<float name="TextTransparency">0</float>
+						<bool name="TextWrapped">true</bool>
+						<token name="TextXAlignment">2</token>
+						<token name="TextYAlignment">1</token>
+						<bool name="Visible">true</bool>
+						<int name="ZIndex">1</int>
+					</Properties>
+				</Item>
+				<Item class="TextLabel" referent="RBX12">
+					<Properties>
+						<bool name="Active">false</bool>
+						<Color3 name="BackgroundColor3">4288914085</Color3>
+						<float name="BackgroundTransparency">1</float>
+						<Color3 name="BorderColor3">4279970357</Color3>
+						<int name="BorderSizePixel">1</int>
+						<bool name="ClipsDescendants">false</bool>
+						<bool name="Draggable">false</bool>
+						<token name="Font">0</token>
+						<token name="FontSize">4</token>
+						<string name="Name">Version</string>
+						<UDim2 name="Position">
+							<XS>0.5</XS>
+							<XO>0</XO>
+							<YS>0.939999998</YS>
+							<YO>0</YO>
+						</UDim2>
+						<UDim2 name="Size">
+							<XS>0.5</XS>
+							<XO>0</XO>
+							<YS>0.0799999982</YS>
+							<YO>0</YO>
+						</UDim2>
+						<token name="SizeConstraint">0</token>
+						<string name="Text">Server Version: Alpha 0.1.0</string>
+						<Color3 name="TextColor3">4293651435</Color3>
+						<bool name="TextScaled">true</bool>
+						<Color3 name="TextStrokeColor3">4278190080</Color3>
+						<float name="TextStrokeTransparency">1</float>
+						<float name="TextTransparency">0</float>
+						<bool name="TextWrapped">true</bool>
+						<token name="TextXAlignment">1</token>
+						<token name="TextYAlignment">1</token>
+						<bool name="Visible">true</bool>
+						<int name="ZIndex">1</int>
+					</Properties>
+				</Item>
+				<Item class="TextButton" referent="RBX13">
+					<Properties>
+						<bool name="Active">true</bool>
+						<bool name="AutoButtonColor">true</bool>
+						<Color3 name="BackgroundColor3">4288914085</Color3>
+						<float name="BackgroundTransparency">1</float>
+						<Color3 name="BorderColor3">4279970357</Color3>
+						<int name="BorderSizePixel">1</int>
+						<bool name="ClipsDescendants">false</bool>
+						<bool name="Draggable">false</bool>
+						<token name="Font">2</token>
+						<token name="FontSize">5</token>
+						<bool name="Modal">false</bool>
+						<string name="Name">CloseButton</string>
+						<UDim2 name="Position">
+							<XS>0.949999988</XS>
+							<XO>0</XO>
+							<YS>0</YS>
+							<YO>0</YO>
+						</UDim2>
+						<bool name="Selected">false</bool>
+						<UDim2 name="Size">
+							<XS>0.0599999987</XS>
+							<XO>0</XO>
+							<YS>0.0599999987</YS>
+							<YO>0</YO>
+						</UDim2>
+						<token name="SizeConstraint">1</token>
+						<token name="Style">2</token>
+						<string name="Text">X</string>
+						<Color3 name="TextColor3">4291875024</Color3>
+						<bool name="TextScaled">false</bool>
+						<Color3 name="TextStrokeColor3">4278190080</Color3>
+						<float name="TextStrokeTransparency">1</float>
+						<float name="TextTransparency">0</float>
+						<bool name="TextWrapped">false</bool>
+						<token name="TextXAlignment">2</token>
+						<token name="TextYAlignment">1</token>
+						<bool name="Visible">true</bool>
+						<int name="ZIndex">1</int>
+					</Properties>
+				</Item>
+				<Item class="LocalScript" referent="RBX14">
+					<Properties>
+						<bool name="Disabled">false</bool>
+						<Content name="LinkedSource"><null></null></Content>
+						<string name="Name">about_manager</string>
+						<ProtectedString name="Source">--[[
+&#9;How should I go about getting the current game version?
+&#9;I could output it to a variable in the Values config, though outputting it might be a little weird.
+
+&#9;http://wiki.roblox.com/index.php/Tweening
+]]--
+
+local sp = script.Parent
+local player = game.Players.LocalPlayer
+local ui = player.PlayerGui.Interface -- Path to the User Interface
+
+local text = {
+&#9;title      = &quot;Project Final Farewell&quot;,
+&#9;par1       = &quot;After discovering how to harness a wireless signal, Archimedes was able to wirelessly transfer his cat&apos;s thoughts into readable text. Archimedes and his cat are working on writing about feline societies.&quot;,
+&#9;par2       = &quot;\n\n Archimedes found that ear wax is a great biofuel. Due to the fact that most people just toss their ear wax he gave up his research.&quot;&#9;,
+&#9;version    = &quot;Server Version: &quot;,
+}
+
+sp.Title.Text     = text.title
+sp.Paragraph.Text = text.par1 .. text.par2
+sp.Version.Text   = text.version
+
+local enabled
+function toggle_gui()
+&#9;local speed = 1
+
+&#9;-- If it&apos;s not enabled, send it to the center of the screen, otherwise send it back up off screen.
+&#9;if not enabled then
+&#9;&#9;enabled = true
+&#9;&#9;sp:TweenPosition(UDim2.new(0.325,0, 0.2,0), &quot;Out&quot;, &quot;Elastic&quot;, speed, true)
+&#9;else
+&#9;&#9;sp:TweenPosition(UDim2.new(0.325,0, -0.5,0), &quot;Out&quot;, &quot;Quint&quot;, speed, true)
+&#9;&#9;enabled = false
+&#9;end
+end
+
+sp.CloseButton.MouseButton1Click:connect(toggle_gui)
+ui.OpenButton_About.MouseButton1Click:connect(toggle_gui)</ProtectedString>
+					</Properties>
+				</Item>
+			</Item>
 		</Item>
 	</Item>
-	<Item class="SoundService" referent="RBX18">
+	<Item class="SoundService" referent="RBX15">
 		<Properties>
 			<token name="AmbientReverb">0</token>
 			<float name="DistanceFactor">10</float>
@@ -552,104 +500,104 @@ ui.Open_About.MouseButton1Click:connect(toggle_gui)</ProtectedString>
 			<float name="RolloffScale">1</float>
 		</Properties>
 	</Item>
-	<Item class="CollectionService" referent="RBX19">
+	<Item class="CollectionService" referent="RBX16">
 		<Properties>
 			<string name="Name">CollectionService</string>
 		</Properties>
 	</Item>
-	<Item class="PhysicsService" referent="RBX20">
+	<Item class="PhysicsService" referent="RBX17">
 		<Properties>
 			<string name="Name">PhysicsService</string>
 		</Properties>
 	</Item>
-	<Item class="BadgeService" referent="RBX21">
+	<Item class="BadgeService" referent="RBX18">
 		<Properties>
 			<string name="Name">BadgeService</string>
 		</Properties>
 	</Item>
-	<Item class="Geometry" referent="RBX22">
+	<Item class="Geometry" referent="RBX19">
 		<Properties>
 			<string name="Name">Geometry</string>
 		</Properties>
 	</Item>
-	<Item class="RenderHooksService" referent="RBX23">
+	<Item class="RenderHooksService" referent="RBX20">
 		<Properties>
 			<string name="Name">RenderHooksService</string>
 		</Properties>
 	</Item>
-	<Item class="SocialService" referent="RBX24">
+	<Item class="SocialService" referent="RBX21">
 		<Properties>
 			<string name="Name">SocialService</string>
 		</Properties>
 	</Item>
-	<Item class="GamePassService" referent="RBX25">
+	<Item class="GamePassService" referent="RBX22">
 		<Properties>
 			<string name="Name">GamePassService</string>
 		</Properties>
 	</Item>
-	<Item class="Debris" referent="RBX26">
+	<Item class="Debris" referent="RBX23">
 		<Properties>
 			<int name="MaxItems">1000</int>
 			<string name="Name">Debris</string>
 		</Properties>
 	</Item>
-	<Item class="TimerService" referent="RBX27">
+	<Item class="TimerService" referent="RBX24">
 		<Properties>
 			<string name="Name">Instance</string>
 		</Properties>
 	</Item>
-	<Item class="ScriptInformationProvider" referent="RBX28">
+	<Item class="ScriptInformationProvider" referent="RBX25">
 		<Properties>
 			<string name="Name">Instance</string>
 		</Properties>
 	</Item>
-	<Item class="CookiesService" referent="RBX29">
+	<Item class="CookiesService" referent="RBX26">
 		<Properties>
 			<string name="Name">CookiesService</string>
 		</Properties>
 	</Item>
-	<Item class="TeleportService" referent="RBX30">
+	<Item class="TeleportService" referent="RBX27">
 		<Properties>
 			<string name="Name">Teleport Service</string>
 		</Properties>
 	</Item>
-	<Item class="Players" referent="RBX31">
+	<Item class="Players" referent="RBX28">
 		<Properties>
 			<bool name="CharacterAutoLoads">true</bool>
 			<string name="Name">Players</string>
 		</Properties>
 	</Item>
-	<Item class="FWService" referent="RBX32">
+	<Item class="FWService" referent="RBX29">
 		<Properties>
 			<string name="Name">Instance</string>
 		</Properties>
 	</Item>
-	<Item class="UserInputService" referent="RBX33">
+	<Item class="UserInputService" referent="RBX30">
 		<Properties>
 			<string name="Name">Instance</string>
 		</Properties>
 	</Item>
-	<Item class="ContextActionService" referent="RBX34">
+	<Item class="ContextActionService" referent="RBX31">
 		<Properties>
 			<string name="Name">ContextActionService</string>
 		</Properties>
 	</Item>
-	<Item class="ScriptService" referent="RBX35">
+	<Item class="ScriptService" referent="RBX32">
 		<Properties>
 			<string name="Name">Instance</string>
 		</Properties>
 	</Item>
-	<Item class="Selection" referent="RBX36">
+	<Item class="Selection" referent="RBX33">
 		<Properties>
 			<string name="Name">Selection</string>
 		</Properties>
 	</Item>
-	<Item class="ChangeHistoryService" referent="RBX37">
+	<Item class="ChangeHistoryService" referent="RBX34">
 		<Properties>
 			<string name="Name">ChangeHistoryService</string>
 		</Properties>
 	</Item>
-	<Item class="Lighting" referent="RBX38">
+	<Item class="Lighting" referent="RBX35">
 		<Properties>
 			<Color3 name="Ambient">4286611584</Color3>
 			<float name="Brightness">1</float>
@@ -665,7 +613,7 @@ ui.Open_About.MouseButton1Click:connect(toggle_gui)</ProtectedString>
 			<Color3 name="ShadowColor">4289967032</Color3>
 			<string name="TimeOfDay">14:00:00</string>
 		</Properties>
-		<Item class="Sky" referent="RBX39">
+		<Item class="Sky" referent="RBX36">
 			<Properties>
 				<bool name="CelestialBodiesShown">true</bool>
 				<string name="Name">Sky</string>
@@ -678,5 +626,10 @@ ui.Open_About.MouseButton1Click:connect(toggle_gui)</ProtectedString>
 				<int name="StarCount">3000</int>
 			</Properties>
 		</Item>
+	</Item>
+	<Item class="Configuration" referent="RBX37">
+		<Properties>
+			<string name="Name">Configuration</string>
+		</Properties>
 	</Item>
 </roblox>
