@@ -1,6 +1,6 @@
 --[===================================[--
   Description:
-    This file holds all of the configurable variables used throughout the game.
+    This script holds all of the configurable variables used throughout the game.
 
   Prerequisites:
     Include "repeat wait() until _G.config" in all functions.
@@ -13,10 +13,10 @@
 --]===================================]--
 
 -- Game Version
-_G.version   = "Beta 0.1.0"  -- The game Version. Be sure to keep this regularly updated!
+_G.version = "Alpha 0.1.0"  -- The game Version. Be sure to keep this regularly updated!
 
 -- Loose Variables
-_G.values    = game.Workspace.GlobalScripts.Values -- Where all Values are stored.
+_G.conf = script.Configuration -- Where all Values are stored.
 
 -- Variables for all lighting related objects/scripts
 _G.lighting = {
@@ -70,4 +70,4 @@ _G.users = {
 }
 
 _G.config = true
-print("Loaded _G." .. script.Name)
+print("Loaded " .. script.Name)
