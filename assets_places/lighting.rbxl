@@ -27,24 +27,24 @@
 				<Ref name="CameraSubject">null</Ref>
 				<token name="CameraType">0</token>
 				<CoordinateFrame name="CoordinateFrame">
-					<X>15.0010624</X>
-					<Y>9.39114189</Y>
-					<Z>21.2811146</Z>
-					<R00>-0.859092057</R00>
-					<R01>-0.150497273</R01>
-					<R02>0.489194721</R02>
-					<R10>-0</R10>
-					<R11>0.955792308</R11>
-					<R12>0.294042706</R12>
-					<R20>-0.511821151</R20>
-					<R21>0.25260976</R21>
-					<R22>-0.821113527</R22>
+					<X>27.7240105</X>
+					<Y>18.1926479</Y>
+					<Z>35.4515228</Z>
+					<R00>0.361409217</R00>
+					<R01>-0.374779284</R01>
+					<R02>0.853770375</R02>
+					<R10>-7.4505806e-009</R10>
+					<R11>0.915662467</R11>
+					<R12>0.401948035</R12>
+					<R20>-0.93240732</R20>
+					<R21>-0.145267725</R21>
+					<R22>0.330928832</R22>
 				</CoordinateFrame>
 				<float name="FieldOfView">70</float>
 				<CoordinateFrame name="Focus">
-					<X>14.0226717</X>
-					<Y>8.80305576</Y>
-					<Z>22.9233437</Z>
+					<X>26.01647</X>
+					<Y>17.388752</Y>
+					<Z>34.7896652</Z>
 					<R00>1</R00>
 					<R01>0</R01>
 					<R02>0</R02>
@@ -1777,7 +1777,7 @@ script.Parent.ClickDetector.MouseClick:connect(function()
 end)
 
 -- Light Adjust
-_G.values.time_of_day.Changed:connect(function()
+_G.conf.time_of_day.Changed:connect(function()
 &#9;_G.light_adjust(v.light)
 end)</ProtectedString>
 				</Properties>
@@ -10617,7 +10617,7 @@ end
 					<R21>0</R21>
 					<R22>1</R22>
 				</CoordinateFrame>
-				<string name="Name">Fireplace</string>
+				<string name="Name">Firewood</string>
 				<Ref name="PrimaryPart">null</Ref>
 			</Properties>
 			<Item class="Part" referent="RBX182">
@@ -11094,7 +11094,7 @@ script.Parent.ClickDetector.MouseClick:connect(function()
 end)
 
 -- Light Adjust
-_G.values.time_of_day.Changed:connect(function()
+_G.conf.time_of_day.Changed:connect(function()
 &#9;_G.light_adjust(v.light)
 end)</ProtectedString>
 				</Properties>
@@ -11131,7 +11131,7 @@ function time_cycle()
 
 &#9;&#9;-- If Sunsets and Sunrises should change the ambient color, then:
 &#9;&#9;if _G.time_cycle.sun_ambient == true then
-&#9;&#9;&#9;local time_of_day   = _G.values.time_of_day
+&#9;&#9;&#9;local time_of_day   = _G.conf.time_of_day
 
 &#9;&#9;&#9;-- These values should remain the same. They&apos;ve been set to a very specific time.
 &#9;&#9;&#9;-- Originals: Sunrise 300, Sunset 1020
@@ -13165,8 +13165,80 @@ end)</ProtectedString>
 			<Properties>
 				<bool name="Disabled">false</bool>
 				<Content name="LinkedSource"><null></null></Content>
-				<string name="Name">GlobalScripts</string>
-				<ProtectedString name="Source"></ProtectedString>
+				<string name="Name">Global</string>
+				<ProtectedString name="Source">--[===================================[--
+  Description:
+    This script holds all of the configurable variables used throughout the game.
+
+  Prerequisites:
+    Include &quot;repeat wait() until _G.config&quot; in all functions.
+    Some may not need it, but it&apos;s better to be safe than sorry.
+
+  Keeping Organized:
+    Order tables alphabetically.
+    Keep variables of the same class (IE: Bool, Int, etc.) grouped together.
+    Singular variables should be kept above Tables.
+--]===================================]--
+
+-- Game Version
+_G.version = &quot;Alpha 0.1.0&quot;  -- The game Version. Be sure to keep this regularly updated!
+
+-- Loose Variables
+_G.conf = script.Configuration -- Where all Values are stored.
+
+-- Variables for all lighting related objects/scripts
+_G.lighting = {
+&#9;brightness_when_day    = 0.3,  -- How bright a light should be in the day.
+&#9;brightness_when_night  = 1,    -- How bright a light should be at night.
+&#9;flicker_frequency      = 3,    -- How frequently a fire based light will flicker each second.
+
+&#9;candle = {
+&#9;&#9;range = 14,        -- Candle&apos;s PointLight range.
+&#9;&#9;light_speed = 6,   -- How quickly the fire will be lit. Bigger number = slower transition.
+&#9;&#9;ext_speed   = 3,   -- How quickly the fire will be extinguished. Bigger number = slower transition.
+&#9;},
+
+&#9;fireplace = {
+&#9;&#9;range = 18,        -- Fireplace&apos;s PointLight range.
+&#9;&#9;light_speed = 12,  -- How quickly the fire will be lit. Bigger number = slower transition.
+&#9;&#9;ext_speed   = 3,   -- How quickly the fire will be extinguished. Bigger number = slower transition.
+&#9;},
+
+&#9;torch = {
+&#9;&#9;range = 16,        -- Torch&apos;s PointLight range.
+&#9;&#9;light_speed = 8,   -- How quickly the fire will be lit. Bigger number = slower transition.
+&#9;&#9;ext_speed   = 3,   -- How quickly the fire will be extinguished. Bigger number = slower transition.
+&#9;},
+}
+
+-- Variables for the Day/Night time cycle.
+_G.time_cycle = {
+&#9;enabled      = true,  -- If the Time Cycle should be enabled.
+&#9;sun_ambient  = true,  -- If the ambient should change for sunrise and sunset. (Not implemented)
+&#9;speed        = 1,     -- How fast the time will change.
+&#9;day_length   = 8,     -- How many minutes it will take to go from sunrise to sunset. (Not implemented)
+&#9;night_length = 4,     -- How many minutes it will take for night to pass. (Not implemented)
+}
+
+-- Special Users
+_G.users = {
+&#9;-- Adminitrators
+&#9;admins = {
+&#9;&#9;&quot;D3lego&quot;,
+&#9;&#9;&quot;MonsterBone&quot;,
+&#9;&#9;&quot;Player1&quot;,
+&#9;},
+
+&#9;-- Friends and other important people.
+&#9;vips = {
+&#9;&#9;&quot;&quot;,
+&#9;&#9;&quot;&quot;,
+&#9;&#9;&quot;&quot;,
+&#9;}
+}
+
+_G.config = true
+print(&quot;Loaded &quot; .. script.Name)</ProtectedString>
 			</Properties>
 			<Item class="Script" referent="RBX250">
 				<Properties>
@@ -13257,86 +13329,6 @@ print(&quot;Loaded _G.&quot; .. script.Name)</ProtectedString>
 				<Properties>
 					<bool name="Disabled">false</bool>
 					<Content name="LinkedSource"><null></null></Content>
-					<string name="Name">config</string>
-					<ProtectedString name="Source">--[===================================[--
-  Description:
-    This file holds all of the configurable variables used throughout the game.
-
-  Prerequisites:
-    Include &quot;repeat wait() until _G.config&quot; in all functions.
-    Some may not need it, but it&apos;s better to be safe than sorry.
-
-  Keeping Organized:
-    Order tables alphabetically.
-    Keep variables of the same class (IE: Bool, Int, etc.) grouped together.
-    Singular variables should be kept above Tables.
---]===================================]--
-
--- Game Version
-_G.version   = &quot;Beta 0.1.0&quot;  -- The game Version. Be sure to keep this regularly updated!
-
--- Loose Variables
-_G.values    = game.Workspace.GlobalScripts.Values -- Where all Values are stored.
-
--- Variables for all lighting related objects/scripts
-_G.lighting = {
-&#9;brightness_when_day    = 0.3,  -- How bright a light should be in the day.
-&#9;brightness_when_night  = 1,    -- How bright a light should be at night.
-&#9;flicker_frequency      = 3,    -- How frequently a fire based light will flicker each second.
-
-&#9;candle = {
-&#9;&#9;range = 14,        -- Candle&apos;s PointLight range.
-&#9;&#9;light_speed = 6,   -- How quickly the fire will be lit. Bigger number = slower transition.
-&#9;&#9;ext_speed   = 3,   -- How quickly the fire will be extinguished. Bigger number = slower transition.
-&#9;},
-
-&#9;fireplace = {
-&#9;&#9;range = 18,        -- Fireplace&apos;s PointLight range.
-&#9;&#9;light_speed = 12,  -- How quickly the fire will be lit. Bigger number = slower transition.
-&#9;&#9;ext_speed   = 3,   -- How quickly the fire will be extinguished. Bigger number = slower transition.
-&#9;},
-
-&#9;torch = {
-&#9;&#9;range = 16,        -- Torch&apos;s PointLight range.
-&#9;&#9;light_speed = 8,   -- How quickly the fire will be lit. Bigger number = slower transition.
-&#9;&#9;ext_speed   = 3,   -- How quickly the fire will be extinguished. Bigger number = slower transition.
-&#9;},
-}
-
--- Variables for the Day/Night time cycle.
-_G.time_cycle = {
-&#9;enabled      = true,  -- If the Time Cycle should be enabled.
-&#9;sun_ambient  = true,  -- If the ambient should change for sunrise and sunset. (Not implemented)
-&#9;speed        = 1,     -- How fast the time will change.
-&#9;day_length   = 8,     -- How many minutes it will take to go from sunrise to sunset. (Not implemented)
-&#9;night_length = 4,     -- How many minutes it will take for night to pass. (Not implemented)
-}
-
--- Special Users
-_G.users = {
-&#9;-- Adminitrators
-&#9;admins = {
-&#9;&#9;&quot;D3lego&quot;,
-&#9;&#9;&quot;MonsterBone&quot;,
-&#9;&#9;&quot;Player1&quot;,
-&#9;},
-
-&#9;-- Friends and other important people.
-&#9;vips = {
-&#9;&#9;&quot;&quot;,
-&#9;&#9;&quot;&quot;,
-&#9;&#9;&quot;&quot;,
-&#9;}
-}
-
-_G.config = true
-print(&quot;Loaded _G.&quot; .. script.Name)</ProtectedString>
-				</Properties>
-			</Item>
-			<Item class="Script" referent="RBX252">
-				<Properties>
-					<bool name="Disabled">false</bool>
-					<Content name="LinkedSource"><null></null></Content>
 					<string name="Name">light_adjust</string>
 					<ProtectedString name="Source">--[===================================[--
   Description:
@@ -13357,7 +13349,7 @@ print(&quot;Loaded _G.&quot; .. script.Name)</ProtectedString>
 repeat wait() until _G.config
 
 function _G.light_adjust(light)
-&#9;local time_of_day = _G.values.time_of_day
+&#9;local time_of_day   = _G.conf.time_of_day
 
 &#9;-- 1 = Sunrise, 2 = Day, 3 = Sunset, 3 = Night.
 &#9;if time_of_day.Value == 1 then
@@ -13378,7 +13370,7 @@ end
 print(&quot;Loaded _G.&quot; .. script.Name)</ProtectedString>
 				</Properties>
 			</Item>
-			<Item class="Script" referent="RBX253">
+			<Item class="Script" referent="RBX252">
 				<Properties>
 					<bool name="Disabled">false</bool>
 					<Content name="LinkedSource"><null></null></Content>
@@ -13398,11 +13390,11 @@ end
 print(&quot;Loaded _G.&quot; .. script.Name)</ProtectedString>
 				</Properties>
 			</Item>
-			<Item class="Configuration" referent="RBX254">
+			<Item class="Configuration" referent="RBX253">
 				<Properties>
-					<string name="Name">Values</string>
+					<string name="Name">Configuration</string>
 				</Properties>
-				<Item class="IntValue" referent="RBX255">
+				<Item class="IntValue" referent="RBX254">
 					<Properties>
 						<string name="Name">time_of_day</string>
 						<int name="Value">0</int>
@@ -13410,7 +13402,7 @@ print(&quot;Loaded _G.&quot; .. script.Name)</ProtectedString>
 				</Item>
 			</Item>
 		</Item>
-		<Item class="Model" referent="RBX256">
+		<Item class="Model" referent="RBX255">
 			<Properties>
 				<CoordinateFrame name="ModelInPrimary">
 					<X>0</X>
@@ -13429,7 +13421,7 @@ print(&quot;Loaded _G.&quot; .. script.Name)</ProtectedString>
 				<string name="Name">Island</string>
 				<Ref name="PrimaryPart">null</Ref>
 			</Properties>
-			<Item class="Model" referent="RBX257">
+			<Item class="Model" referent="RBX256">
 				<Properties>
 					<CoordinateFrame name="ModelInPrimary">
 						<X>0</X>
@@ -13448,7 +13440,7 @@ print(&quot;Loaded _G.&quot; .. script.Name)</ProtectedString>
 					<string name="Name">Roof</string>
 					<Ref name="PrimaryPart">null</Ref>
 				</Properties>
-				<Item class="Part" referent="RBX258">
+				<Item class="Part" referent="RBX257">
 					<Properties>
 						<bool name="Anchored">true</bool>
 						<float name="BackParamA">-0.5</float>
@@ -13516,7 +13508,7 @@ print(&quot;Loaded _G.&quot; .. script.Name)</ProtectedString>
 							<Z>6</Z>
 						</Vector3>
 					</Properties>
-					<Item class="CylinderMesh" referent="RBX259">
+					<Item class="CylinderMesh" referent="RBX258">
 						<Properties>
 							<float name="Bevel">0</float>
 							<float name="Bevel Roundness">0</float>
@@ -13542,7 +13534,7 @@ print(&quot;Loaded _G.&quot; .. script.Name)</ProtectedString>
 						</Properties>
 					</Item>
 				</Item>
-				<Item class="Part" referent="RBX260">
+				<Item class="Part" referent="RBX259">
 					<Properties>
 						<bool name="Anchored">true</bool>
 						<float name="BackParamA">-0.5</float>
@@ -13610,7 +13602,7 @@ print(&quot;Loaded _G.&quot; .. script.Name)</ProtectedString>
 							<Z>10</Z>
 						</Vector3>
 					</Properties>
-					<Item class="CylinderMesh" referent="RBX261">
+					<Item class="CylinderMesh" referent="RBX260">
 						<Properties>
 							<float name="Bevel">0</float>
 							<float name="Bevel Roundness">0</float>
@@ -13636,7 +13628,7 @@ print(&quot;Loaded _G.&quot; .. script.Name)</ProtectedString>
 						</Properties>
 					</Item>
 				</Item>
-				<Item class="Part" referent="RBX262">
+				<Item class="Part" referent="RBX261">
 					<Properties>
 						<bool name="Anchored">true</bool>
 						<float name="BackParamA">-0.5</float>
@@ -13704,7 +13696,7 @@ print(&quot;Loaded _G.&quot; .. script.Name)</ProtectedString>
 							<Z>8</Z>
 						</Vector3>
 					</Properties>
-					<Item class="CylinderMesh" referent="RBX263">
+					<Item class="CylinderMesh" referent="RBX262">
 						<Properties>
 							<float name="Bevel">0</float>
 							<float name="Bevel Roundness">0</float>
@@ -13730,7 +13722,7 @@ print(&quot;Loaded _G.&quot; .. script.Name)</ProtectedString>
 						</Properties>
 					</Item>
 				</Item>
-				<Item class="Part" referent="RBX264">
+				<Item class="Part" referent="RBX263">
 					<Properties>
 						<bool name="Anchored">true</bool>
 						<float name="BackParamA">-0.5</float>
@@ -13798,7 +13790,7 @@ print(&quot;Loaded _G.&quot; .. script.Name)</ProtectedString>
 							<Z>12</Z>
 						</Vector3>
 					</Properties>
-					<Item class="CylinderMesh" referent="RBX265">
+					<Item class="CylinderMesh" referent="RBX264">
 						<Properties>
 							<float name="Bevel">0</float>
 							<float name="Bevel Roundness">0</float>
@@ -13825,7 +13817,7 @@ print(&quot;Loaded _G.&quot; .. script.Name)</ProtectedString>
 					</Item>
 				</Item>
 			</Item>
-			<Item class="Part" referent="RBX266">
+			<Item class="Part" referent="RBX265">
 				<Properties>
 					<bool name="Anchored">true</bool>
 					<float name="BackParamA">-0.5</float>
@@ -13893,7 +13885,7 @@ print(&quot;Loaded _G.&quot; .. script.Name)</ProtectedString>
 						<Z>10</Z>
 					</Vector3>
 				</Properties>
-				<Item class="CylinderMesh" referent="RBX267">
+				<Item class="CylinderMesh" referent="RBX266">
 					<Properties>
 						<float name="Bevel">0</float>
 						<float name="Bevel Roundness">0</float>
@@ -13919,7 +13911,7 @@ print(&quot;Loaded _G.&quot; .. script.Name)</ProtectedString>
 					</Properties>
 				</Item>
 			</Item>
-			<Item class="Model" referent="RBX268">
+			<Item class="Model" referent="RBX267">
 				<Properties>
 					<CoordinateFrame name="ModelInPrimary">
 						<X>0</X>
@@ -13938,7 +13930,7 @@ print(&quot;Loaded _G.&quot; .. script.Name)</ProtectedString>
 					<string name="Name">Lighthouse</string>
 					<Ref name="PrimaryPart">null</Ref>
 				</Properties>
-				<Item class="Part" referent="RBX269">
+				<Item class="Part" referent="RBX268">
 					<Properties>
 						<bool name="Anchored">true</bool>
 						<float name="BackParamA">-0.5</float>
@@ -14006,7 +13998,7 @@ print(&quot;Loaded _G.&quot; .. script.Name)</ProtectedString>
 							<Z>12</Z>
 						</Vector3>
 					</Properties>
-					<Item class="CylinderMesh" referent="RBX270">
+					<Item class="CylinderMesh" referent="RBX269">
 						<Properties>
 							<float name="Bevel">0</float>
 							<float name="Bevel Roundness">0</float>
@@ -14032,7 +14024,7 @@ print(&quot;Loaded _G.&quot; .. script.Name)</ProtectedString>
 						</Properties>
 					</Item>
 				</Item>
-				<Item class="Part" referent="RBX271">
+				<Item class="Part" referent="RBX270">
 					<Properties>
 						<bool name="Anchored">true</bool>
 						<float name="BackParamA">-0.5</float>
@@ -14100,7 +14092,7 @@ print(&quot;Loaded _G.&quot; .. script.Name)</ProtectedString>
 							<Z>12</Z>
 						</Vector3>
 					</Properties>
-					<Item class="CylinderMesh" referent="RBX272">
+					<Item class="CylinderMesh" referent="RBX271">
 						<Properties>
 							<float name="Bevel">0</float>
 							<float name="Bevel Roundness">0</float>
@@ -14126,7 +14118,7 @@ print(&quot;Loaded _G.&quot; .. script.Name)</ProtectedString>
 						</Properties>
 					</Item>
 				</Item>
-				<Item class="Part" referent="RBX273">
+				<Item class="Part" referent="RBX272">
 					<Properties>
 						<bool name="Anchored">true</bool>
 						<float name="BackParamA">-0.5</float>
@@ -14194,7 +14186,7 @@ print(&quot;Loaded _G.&quot; .. script.Name)</ProtectedString>
 							<Z>12</Z>
 						</Vector3>
 					</Properties>
-					<Item class="CylinderMesh" referent="RBX274">
+					<Item class="CylinderMesh" referent="RBX273">
 						<Properties>
 							<float name="Bevel">0</float>
 							<float name="Bevel Roundness">0</float>
@@ -14220,7 +14212,7 @@ print(&quot;Loaded _G.&quot; .. script.Name)</ProtectedString>
 						</Properties>
 					</Item>
 				</Item>
-				<Item class="Part" referent="RBX275">
+				<Item class="Part" referent="RBX274">
 					<Properties>
 						<bool name="Anchored">true</bool>
 						<float name="BackParamA">-0.5</float>
@@ -14288,7 +14280,7 @@ print(&quot;Loaded _G.&quot; .. script.Name)</ProtectedString>
 							<Z>12</Z>
 						</Vector3>
 					</Properties>
-					<Item class="CylinderMesh" referent="RBX276">
+					<Item class="CylinderMesh" referent="RBX275">
 						<Properties>
 							<float name="Bevel">0</float>
 							<float name="Bevel Roundness">0</float>
@@ -14314,7 +14306,7 @@ print(&quot;Loaded _G.&quot; .. script.Name)</ProtectedString>
 						</Properties>
 					</Item>
 				</Item>
-				<Item class="Part" referent="RBX277">
+				<Item class="Part" referent="RBX276">
 					<Properties>
 						<bool name="Anchored">true</bool>
 						<float name="BackParamA">-0.5</float>
@@ -14382,7 +14374,7 @@ print(&quot;Loaded _G.&quot; .. script.Name)</ProtectedString>
 							<Z>12</Z>
 						</Vector3>
 					</Properties>
-					<Item class="CylinderMesh" referent="RBX278">
+					<Item class="CylinderMesh" referent="RBX277">
 						<Properties>
 							<float name="Bevel">0</float>
 							<float name="Bevel Roundness">0</float>
@@ -14408,7 +14400,7 @@ print(&quot;Loaded _G.&quot; .. script.Name)</ProtectedString>
 						</Properties>
 					</Item>
 				</Item>
-				<Item class="Part" referent="RBX279">
+				<Item class="Part" referent="RBX278">
 					<Properties>
 						<bool name="Anchored">true</bool>
 						<float name="BackParamA">-0.5</float>
@@ -14476,7 +14468,7 @@ print(&quot;Loaded _G.&quot; .. script.Name)</ProtectedString>
 							<Z>12</Z>
 						</Vector3>
 					</Properties>
-					<Item class="CylinderMesh" referent="RBX280">
+					<Item class="CylinderMesh" referent="RBX279">
 						<Properties>
 							<float name="Bevel">0</float>
 							<float name="Bevel Roundness">0</float>
@@ -14502,7 +14494,7 @@ print(&quot;Loaded _G.&quot; .. script.Name)</ProtectedString>
 						</Properties>
 					</Item>
 				</Item>
-				<Item class="Part" referent="RBX281">
+				<Item class="Part" referent="RBX280">
 					<Properties>
 						<bool name="Anchored">true</bool>
 						<float name="BackParamA">-0.5</float>
@@ -14570,7 +14562,7 @@ print(&quot;Loaded _G.&quot; .. script.Name)</ProtectedString>
 							<Z>12</Z>
 						</Vector3>
 					</Properties>
-					<Item class="CylinderMesh" referent="RBX282">
+					<Item class="CylinderMesh" referent="RBX281">
 						<Properties>
 							<float name="Bevel">0</float>
 							<float name="Bevel Roundness">0</float>
@@ -14596,7 +14588,7 @@ print(&quot;Loaded _G.&quot; .. script.Name)</ProtectedString>
 						</Properties>
 					</Item>
 				</Item>
-				<Item class="Part" referent="RBX283">
+				<Item class="Part" referent="RBX282">
 					<Properties>
 						<bool name="Anchored">true</bool>
 						<float name="BackParamA">-0.5</float>
@@ -14664,7 +14656,7 @@ print(&quot;Loaded _G.&quot; .. script.Name)</ProtectedString>
 							<Z>12</Z>
 						</Vector3>
 					</Properties>
-					<Item class="CylinderMesh" referent="RBX284">
+					<Item class="CylinderMesh" referent="RBX283">
 						<Properties>
 							<float name="Bevel">0</float>
 							<float name="Bevel Roundness">0</float>
@@ -14690,7 +14682,7 @@ print(&quot;Loaded _G.&quot; .. script.Name)</ProtectedString>
 						</Properties>
 					</Item>
 				</Item>
-				<Item class="Part" referent="RBX285">
+				<Item class="Part" referent="RBX284">
 					<Properties>
 						<bool name="Anchored">true</bool>
 						<float name="BackParamA">-0.5</float>
@@ -14758,7 +14750,7 @@ print(&quot;Loaded _G.&quot; .. script.Name)</ProtectedString>
 							<Z>12</Z>
 						</Vector3>
 					</Properties>
-					<Item class="CylinderMesh" referent="RBX286">
+					<Item class="CylinderMesh" referent="RBX285">
 						<Properties>
 							<float name="Bevel">0</float>
 							<float name="Bevel Roundness">0</float>
@@ -14784,7 +14776,7 @@ print(&quot;Loaded _G.&quot; .. script.Name)</ProtectedString>
 						</Properties>
 					</Item>
 				</Item>
-				<Item class="Part" referent="RBX287">
+				<Item class="Part" referent="RBX286">
 					<Properties>
 						<bool name="Anchored">true</bool>
 						<float name="BackParamA">-0.5</float>
@@ -14852,7 +14844,7 @@ print(&quot;Loaded _G.&quot; .. script.Name)</ProtectedString>
 							<Z>12</Z>
 						</Vector3>
 					</Properties>
-					<Item class="CylinderMesh" referent="RBX288">
+					<Item class="CylinderMesh" referent="RBX287">
 						<Properties>
 							<float name="Bevel">0</float>
 							<float name="Bevel Roundness">0</float>
@@ -14878,7 +14870,7 @@ print(&quot;Loaded _G.&quot; .. script.Name)</ProtectedString>
 						</Properties>
 					</Item>
 				</Item>
-				<Item class="Part" referent="RBX289">
+				<Item class="Part" referent="RBX288">
 					<Properties>
 						<bool name="Anchored">true</bool>
 						<float name="BackParamA">-0.5</float>
@@ -14946,7 +14938,7 @@ print(&quot;Loaded _G.&quot; .. script.Name)</ProtectedString>
 							<Z>12</Z>
 						</Vector3>
 					</Properties>
-					<Item class="CylinderMesh" referent="RBX290">
+					<Item class="CylinderMesh" referent="RBX289">
 						<Properties>
 							<float name="Bevel">0</float>
 							<float name="Bevel Roundness">0</float>
@@ -14972,7 +14964,7 @@ print(&quot;Loaded _G.&quot; .. script.Name)</ProtectedString>
 						</Properties>
 					</Item>
 				</Item>
-				<Item class="Part" referent="RBX291">
+				<Item class="Part" referent="RBX290">
 					<Properties>
 						<bool name="Anchored">true</bool>
 						<float name="BackParamA">-0.5</float>
@@ -15040,7 +15032,7 @@ print(&quot;Loaded _G.&quot; .. script.Name)</ProtectedString>
 							<Z>12</Z>
 						</Vector3>
 					</Properties>
-					<Item class="CylinderMesh" referent="RBX292">
+					<Item class="CylinderMesh" referent="RBX291">
 						<Properties>
 							<float name="Bevel">0</float>
 							<float name="Bevel Roundness">0</float>
@@ -15066,7 +15058,7 @@ print(&quot;Loaded _G.&quot; .. script.Name)</ProtectedString>
 						</Properties>
 					</Item>
 				</Item>
-				<Item class="Part" referent="RBX293">
+				<Item class="Part" referent="RBX292">
 					<Properties>
 						<bool name="Anchored">true</bool>
 						<float name="BackParamA">-0.5</float>
@@ -15134,7 +15126,7 @@ print(&quot;Loaded _G.&quot; .. script.Name)</ProtectedString>
 							<Z>12</Z>
 						</Vector3>
 					</Properties>
-					<Item class="CylinderMesh" referent="RBX294">
+					<Item class="CylinderMesh" referent="RBX293">
 						<Properties>
 							<float name="Bevel">0</float>
 							<float name="Bevel Roundness">0</float>
@@ -15160,7 +15152,7 @@ print(&quot;Loaded _G.&quot; .. script.Name)</ProtectedString>
 						</Properties>
 					</Item>
 				</Item>
-				<Item class="Part" referent="RBX295">
+				<Item class="Part" referent="RBX294">
 					<Properties>
 						<bool name="Anchored">true</bool>
 						<float name="BackParamA">-0.5</float>
@@ -15228,7 +15220,7 @@ print(&quot;Loaded _G.&quot; .. script.Name)</ProtectedString>
 							<Z>12</Z>
 						</Vector3>
 					</Properties>
-					<Item class="CylinderMesh" referent="RBX296">
+					<Item class="CylinderMesh" referent="RBX295">
 						<Properties>
 							<float name="Bevel">0</float>
 							<float name="Bevel Roundness">0</float>
@@ -15254,7 +15246,7 @@ print(&quot;Loaded _G.&quot; .. script.Name)</ProtectedString>
 						</Properties>
 					</Item>
 				</Item>
-				<Item class="Part" referent="RBX297">
+				<Item class="Part" referent="RBX296">
 					<Properties>
 						<bool name="Anchored">true</bool>
 						<float name="BackParamA">-0.5</float>
@@ -15322,7 +15314,7 @@ print(&quot;Loaded _G.&quot; .. script.Name)</ProtectedString>
 							<Z>12</Z>
 						</Vector3>
 					</Properties>
-					<Item class="CylinderMesh" referent="RBX298">
+					<Item class="CylinderMesh" referent="RBX297">
 						<Properties>
 							<float name="Bevel">0</float>
 							<float name="Bevel Roundness">0</float>
@@ -15348,7 +15340,7 @@ print(&quot;Loaded _G.&quot; .. script.Name)</ProtectedString>
 						</Properties>
 					</Item>
 				</Item>
-				<Item class="Part" referent="RBX299">
+				<Item class="Part" referent="RBX298">
 					<Properties>
 						<bool name="Anchored">true</bool>
 						<float name="BackParamA">-0.5</float>
@@ -15416,7 +15408,7 @@ print(&quot;Loaded _G.&quot; .. script.Name)</ProtectedString>
 							<Z>12</Z>
 						</Vector3>
 					</Properties>
-					<Item class="CylinderMesh" referent="RBX300">
+					<Item class="CylinderMesh" referent="RBX299">
 						<Properties>
 							<float name="Bevel">0</float>
 							<float name="Bevel Roundness">0</float>
@@ -15443,7 +15435,7 @@ print(&quot;Loaded _G.&quot; .. script.Name)</ProtectedString>
 					</Item>
 				</Item>
 			</Item>
-			<Item class="Part" referent="RBX301">
+			<Item class="Part" referent="RBX300">
 				<Properties>
 					<bool name="Anchored">true</bool>
 					<float name="BackParamA">-0.5</float>
@@ -15460,14 +15452,14 @@ print(&quot;Loaded _G.&quot; .. script.Name)</ProtectedString>
 						<Y>34</Y>
 						<Z>-117.000008</Z>
 						<R00>0</R00>
-						<R01>-1</R01>
-						<R02>0</R02>
+						<R01>0.112594016</R01>
+						<R02>0.993643701</R02>
 						<R10>-1</R10>
 						<R11>0</R11>
 						<R12>0</R12>
 						<R20>0</R20>
-						<R21>0</R21>
-						<R22>-1</R22>
+						<R21>-0.993643701</R21>
+						<R22>0.112594016</R22>
 					</CoordinateFrame>
 					<bool name="CanCollide">true</bool>
 					<float name="Elasticity">0.5</float>
@@ -15511,7 +15503,7 @@ print(&quot;Loaded _G.&quot; .. script.Name)</ProtectedString>
 						<Z>2</Z>
 					</Vector3>
 				</Properties>
-				<Item class="CylinderMesh" referent="RBX302">
+				<Item class="CylinderMesh" referent="RBX301">
 					<Properties>
 						<float name="Bevel">0</float>
 						<float name="Bevel Roundness">0</float>
@@ -15536,7 +15528,7 @@ print(&quot;Loaded _G.&quot; .. script.Name)</ProtectedString>
 						</Vector3>
 					</Properties>
 				</Item>
-				<Item class="Script" referent="RBX303">
+				<Item class="Script" referent="RBX302">
 					<Properties>
 						<bool name="Disabled">false</bool>
 						<Content name="LinkedSource"><null></null></Content>
@@ -15558,7 +15550,7 @@ end
 ]]</ProtectedString>
 					</Properties>
 				</Item>
-				<Item class="PointLight" referent="RBX304">
+				<Item class="PointLight" referent="RBX303">
 					<Properties>
 						<float name="Brightness">0.600000024</float>
 						<Color3 name="Color">4294967295</Color3>
@@ -15568,7 +15560,7 @@ end
 					</Properties>
 				</Item>
 			</Item>
-			<Item class="Model" referent="RBX305">
+			<Item class="Model" referent="RBX304">
 				<Properties>
 					<CoordinateFrame name="ModelInPrimary">
 						<X>0</X>
@@ -15587,7 +15579,7 @@ end
 					<string name="Name">LightHolder</string>
 					<Ref name="PrimaryPart">null</Ref>
 				</Properties>
-				<Item class="Part" referent="RBX306">
+				<Item class="Part" referent="RBX305">
 					<Properties>
 						<bool name="Anchored">true</bool>
 						<float name="BackParamA">-0.5</float>
@@ -15655,7 +15647,7 @@ end
 							<Z>1</Z>
 						</Vector3>
 					</Properties>
-					<Item class="BlockMesh" referent="RBX307">
+					<Item class="BlockMesh" referent="RBX306">
 						<Properties>
 							<float name="Bevel">0</float>
 							<float name="Bevel Roundness">0</float>
@@ -15681,7 +15673,7 @@ end
 						</Properties>
 					</Item>
 				</Item>
-				<Item class="Part" referent="RBX308">
+				<Item class="Part" referent="RBX307">
 					<Properties>
 						<bool name="Anchored">true</bool>
 						<float name="BackParamA">-0.5</float>
@@ -15749,7 +15741,7 @@ end
 							<Z>4</Z>
 						</Vector3>
 					</Properties>
-					<Item class="BlockMesh" referent="RBX309">
+					<Item class="BlockMesh" referent="RBX308">
 						<Properties>
 							<float name="Bevel">0</float>
 							<float name="Bevel Roundness">0</float>
@@ -15775,7 +15767,7 @@ end
 						</Properties>
 					</Item>
 				</Item>
-				<Item class="Part" referent="RBX310">
+				<Item class="Part" referent="RBX309">
 					<Properties>
 						<bool name="Anchored">true</bool>
 						<float name="BackParamA">-0.5</float>
@@ -15843,7 +15835,7 @@ end
 							<Z>1</Z>
 						</Vector3>
 					</Properties>
-					<Item class="BlockMesh" referent="RBX311">
+					<Item class="BlockMesh" referent="RBX310">
 						<Properties>
 							<float name="Bevel">0</float>
 							<float name="Bevel Roundness">0</float>
@@ -15869,7 +15861,7 @@ end
 						</Properties>
 					</Item>
 				</Item>
-				<Item class="Part" referent="RBX312">
+				<Item class="Part" referent="RBX311">
 					<Properties>
 						<bool name="Anchored">true</bool>
 						<float name="BackParamA">-0.5</float>
@@ -15937,7 +15929,7 @@ end
 							<Z>1</Z>
 						</Vector3>
 					</Properties>
-					<Item class="BlockMesh" referent="RBX313">
+					<Item class="BlockMesh" referent="RBX312">
 						<Properties>
 							<float name="Bevel">0</float>
 							<float name="Bevel Roundness">0</float>
@@ -15963,7 +15955,7 @@ end
 						</Properties>
 					</Item>
 				</Item>
-				<Item class="Part" referent="RBX314">
+				<Item class="Part" referent="RBX313">
 					<Properties>
 						<bool name="Anchored">true</bool>
 						<float name="BackParamA">-0.5</float>
@@ -16031,7 +16023,7 @@ end
 							<Z>4</Z>
 						</Vector3>
 					</Properties>
-					<Item class="BlockMesh" referent="RBX315">
+					<Item class="BlockMesh" referent="RBX314">
 						<Properties>
 							<float name="Bevel">0</float>
 							<float name="Bevel Roundness">0</float>
@@ -16057,7 +16049,7 @@ end
 						</Properties>
 					</Item>
 				</Item>
-				<Item class="Part" referent="RBX316">
+				<Item class="Part" referent="RBX315">
 					<Properties>
 						<bool name="Anchored">true</bool>
 						<float name="BackParamA">-0.5</float>
@@ -16125,7 +16117,7 @@ end
 							<Z>1</Z>
 						</Vector3>
 					</Properties>
-					<Item class="BlockMesh" referent="RBX317">
+					<Item class="BlockMesh" referent="RBX316">
 						<Properties>
 							<float name="Bevel">0</float>
 							<float name="Bevel Roundness">0</float>
@@ -16152,7 +16144,7 @@ end
 					</Item>
 				</Item>
 			</Item>
-			<Item class="Part" referent="RBX318">
+			<Item class="Part" referent="RBX317">
 				<Properties>
 					<bool name="Anchored">true</bool>
 					<float name="BackParamA">-0.5</float>
@@ -16220,7 +16212,7 @@ end
 						<Z>20</Z>
 					</Vector3>
 				</Properties>
-				<Item class="BlockMesh" referent="RBX319">
+				<Item class="BlockMesh" referent="RBX318">
 					<Properties>
 						<float name="Bevel">0</float>
 						<float name="Bevel Roundness">0</float>
@@ -16246,7 +16238,7 @@ end
 					</Properties>
 				</Item>
 			</Item>
-			<Item class="Part" referent="RBX320">
+			<Item class="Part" referent="RBX319">
 				<Properties>
 					<bool name="Anchored">true</bool>
 					<float name="BackParamA">-0.5</float>
@@ -16314,7 +16306,7 @@ end
 						<Z>22</Z>
 					</Vector3>
 				</Properties>
-				<Item class="BlockMesh" referent="RBX321">
+				<Item class="BlockMesh" referent="RBX320">
 					<Properties>
 						<float name="Bevel">0</float>
 						<float name="Bevel Roundness">0</float>
@@ -16341,7 +16333,7 @@ end
 				</Item>
 			</Item>
 		</Item>
-		<Item class="Part" referent="RBX322">
+		<Item class="Part" referent="RBX321">
 			<Properties>
 				<bool name="Anchored">true</bool>
 				<float name="BackParamA">-0.5</float>
@@ -16409,7 +16401,7 @@ end
 					<Z>1</Z>
 				</Vector3>
 			</Properties>
-			<Item class="CylinderMesh" referent="RBX323">
+			<Item class="CylinderMesh" referent="RBX322">
 				<Properties>
 					<float name="Bevel">0</float>
 					<float name="Bevel Roundness">0</float>
@@ -16434,7 +16426,7 @@ end
 					</Vector3>
 				</Properties>
 			</Item>
-			<Item class="Part" referent="RBX324">
+			<Item class="Part" referent="RBX323">
 				<Properties>
 					<bool name="Anchored">true</bool>
 					<float name="BackParamA">-0.5</float>
@@ -16502,7 +16494,7 @@ end
 						<Z>1</Z>
 					</Vector3>
 				</Properties>
-				<Item class="CylinderMesh" referent="RBX325">
+				<Item class="CylinderMesh" referent="RBX324">
 					<Properties>
 						<float name="Bevel">0</float>
 						<float name="Bevel Roundness">0</float>
@@ -16528,7 +16520,7 @@ end
 					</Properties>
 				</Item>
 			</Item>
-			<Item class="Part" referent="RBX326">
+			<Item class="Part" referent="RBX325">
 				<Properties>
 					<bool name="Anchored">true</bool>
 					<float name="BackParamA">-0.5</float>
@@ -16596,7 +16588,7 @@ end
 						<Z>1</Z>
 					</Vector3>
 				</Properties>
-				<Item class="CylinderMesh" referent="RBX327">
+				<Item class="CylinderMesh" referent="RBX326">
 					<Properties>
 						<float name="Bevel">0</float>
 						<float name="Bevel Roundness">0</float>
@@ -16622,7 +16614,7 @@ end
 					</Properties>
 				</Item>
 			</Item>
-			<Item class="Part" referent="RBX328">
+			<Item class="Part" referent="RBX327">
 				<Properties>
 					<bool name="Anchored">true</bool>
 					<float name="BackParamA">-0.5</float>
@@ -16690,7 +16682,7 @@ end
 						<Z>1</Z>
 					</Vector3>
 				</Properties>
-				<Item class="Fire" referent="RBX329">
+				<Item class="Fire" referent="RBX328">
 					<Properties>
 						<Color3 name="Color">4294934528</Color3>
 						<bool name="Enabled">false</bool>
@@ -16700,7 +16692,7 @@ end
 						<float name="size_xml">2</float>
 					</Properties>
 				</Item>
-				<Item class="PointLight" referent="RBX330">
+				<Item class="PointLight" referent="RBX329">
 					<Properties>
 						<float name="Brightness">1</float>
 						<Color3 name="Color">4292247560</Color3>
@@ -16710,19 +16702,19 @@ end
 					</Properties>
 				</Item>
 			</Item>
-			<Item class="ClickDetector" referent="RBX331">
+			<Item class="ClickDetector" referent="RBX330">
 				<Properties>
 					<float name="MaxActivationDistance">14</float>
 					<string name="Name">ClickDetector</string>
 				</Properties>
 			</Item>
-			<Item class="BoolValue" referent="RBX332">
+			<Item class="BoolValue" referent="RBX331">
 				<Properties>
 					<string name="Name">Active</string>
 					<bool name="Value">false</bool>
 				</Properties>
 			</Item>
-			<Item class="Script" referent="RBX333">
+			<Item class="Script" referent="RBX332">
 				<Properties>
 					<bool name="Disabled">false</bool>
 					<Content name="LinkedSource"><null></null></Content>
@@ -16748,13 +16740,13 @@ script.Parent.ClickDetector.MouseClick:connect(function()
 end)
 
 -- Light Adjust
-_G.values.time_of_day.Changed:connect(function()
+_G.conf.time_of_day.Changed:connect(function()
 &#9;_G.light_adjust(v.light)
 end)</ProtectedString>
 				</Properties>
 			</Item>
 		</Item>
-		<Item class="Model" referent="RBX334">
+		<Item class="Model" referent="RBX333">
 			<Properties>
 				<CoordinateFrame name="ModelInPrimary">
 					<X>0</X>
@@ -16773,7 +16765,7 @@ end)</ProtectedString>
 				<string name="Name">Firewood</string>
 				<Ref name="PrimaryPart">null</Ref>
 			</Properties>
-			<Item class="Part" referent="RBX335">
+			<Item class="Part" referent="RBX334">
 				<Properties>
 					<bool name="Anchored">true</bool>
 					<float name="BackParamA">-0.5</float>
@@ -16841,7 +16833,7 @@ end)</ProtectedString>
 						<Z>1</Z>
 					</Vector3>
 				</Properties>
-				<Item class="SpecialMesh" referent="RBX336">
+				<Item class="SpecialMesh" referent="RBX335">
 					<Properties>
 						<token name="LODX">2</token>
 						<token name="LODY">2</token>
@@ -16867,7 +16859,7 @@ end)</ProtectedString>
 					</Properties>
 				</Item>
 			</Item>
-			<Item class="Part" referent="RBX337">
+			<Item class="Part" referent="RBX336">
 				<Properties>
 					<bool name="Anchored">true</bool>
 					<float name="BackParamA">-0.5</float>
@@ -16935,7 +16927,7 @@ end)</ProtectedString>
 						<Z>1</Z>
 					</Vector3>
 				</Properties>
-				<Item class="SpecialMesh" referent="RBX338">
+				<Item class="SpecialMesh" referent="RBX337">
 					<Properties>
 						<token name="LODX">2</token>
 						<token name="LODY">2</token>
@@ -16961,7 +16953,7 @@ end)</ProtectedString>
 					</Properties>
 				</Item>
 			</Item>
-			<Item class="Part" referent="RBX339">
+			<Item class="Part" referent="RBX338">
 				<Properties>
 					<bool name="Anchored">true</bool>
 					<float name="BackParamA">-0.5</float>
@@ -17029,7 +17021,7 @@ end)</ProtectedString>
 						<Z>1</Z>
 					</Vector3>
 				</Properties>
-				<Item class="SpecialMesh" referent="RBX340">
+				<Item class="SpecialMesh" referent="RBX339">
 					<Properties>
 						<token name="LODX">2</token>
 						<token name="LODY">2</token>
@@ -17055,7 +17047,7 @@ end)</ProtectedString>
 					</Properties>
 				</Item>
 			</Item>
-			<Item class="Part" referent="RBX341">
+			<Item class="Part" referent="RBX340">
 				<Properties>
 					<bool name="Anchored">true</bool>
 					<float name="BackParamA">-0.5</float>
@@ -17123,7 +17115,7 @@ end)</ProtectedString>
 						<Z>1</Z>
 					</Vector3>
 				</Properties>
-				<Item class="Fire" referent="RBX342">
+				<Item class="Fire" referent="RBX341">
 					<Properties>
 						<Color3 name="Color">4294934528</Color3>
 						<bool name="Enabled">false</bool>
@@ -17133,7 +17125,7 @@ end)</ProtectedString>
 						<float name="size_xml">7.5</float>
 					</Properties>
 				</Item>
-				<Item class="PointLight" referent="RBX343">
+				<Item class="PointLight" referent="RBX342">
 					<Properties>
 						<float name="Brightness">1</float>
 						<Color3 name="Color">4292247560</Color3>
@@ -17143,7 +17135,7 @@ end)</ProtectedString>
 					</Properties>
 				</Item>
 			</Item>
-			<Item class="Part" referent="RBX344">
+			<Item class="Part" referent="RBX343">
 				<Properties>
 					<bool name="Anchored">true</bool>
 					<float name="BackParamA">-0.5</float>
@@ -17212,13 +17204,13 @@ end)</ProtectedString>
 					</Vector3>
 				</Properties>
 			</Item>
-			<Item class="BoolValue" referent="RBX345">
+			<Item class="BoolValue" referent="RBX344">
 				<Properties>
 					<string name="Name">Active</string>
 					<bool name="Value">false</bool>
 				</Properties>
 			</Item>
-			<Item class="Script" referent="RBX346">
+			<Item class="Script" referent="RBX345">
 				<Properties>
 					<bool name="Disabled">false</bool>
 					<Content name="LinkedSource"><null></null></Content>
@@ -17247,12 +17239,12 @@ script.Parent.ClickDetector.MouseClick:connect(function()
 end)
 
 -- Light Adjust
-_G.values.time_of_day.Changed:connect(function()
+_G.conf.time_of_day.Changed:connect(function()
 &#9;_G.light_adjust(v.light)
 end)</ProtectedString>
 				</Properties>
 			</Item>
-			<Item class="ClickDetector" referent="RBX347">
+			<Item class="ClickDetector" referent="RBX346">
 				<Properties>
 					<float name="MaxActivationDistance">20</float>
 					<string name="Name">ClickDetector</string>
@@ -17260,18 +17252,18 @@ end)</ProtectedString>
 			</Item>
 		</Item>
 	</Item>
-	<Item class="StarterPack" referent="RBX348">
+	<Item class="StarterPack" referent="RBX347">
 		<Properties>
 			<string name="Name">StarterPack</string>
 		</Properties>
 	</Item>
-	<Item class="StarterGui" referent="RBX349">
+	<Item class="StarterGui" referent="RBX348">
 		<Properties>
 			<string name="Name">StarterGui</string>
 			<bool name="ShowDevelopmentGui">true</bool>
 		</Properties>
 	</Item>
-	<Item class="SoundService" referent="RBX350">
+	<Item class="SoundService" referent="RBX349">
 		<Properties>
 			<token name="AmbientReverb">0</token>
 			<float name="DistanceFactor">10</float>
@@ -17280,104 +17272,104 @@ end)</ProtectedString>
 			<float name="RolloffScale">1</float>
 		</Properties>
 	</Item>
-	<Item class="CollectionService" referent="RBX351">
+	<Item class="CollectionService" referent="RBX350">
 		<Properties>
 			<string name="Name">CollectionService</string>
 		</Properties>
 	</Item>
-	<Item class="PhysicsService" referent="RBX352">
+	<Item class="PhysicsService" referent="RBX351">
 		<Properties>
 			<string name="Name">PhysicsService</string>
 		</Properties>
 	</Item>
-	<Item class="BadgeService" referent="RBX353">
+	<Item class="BadgeService" referent="RBX352">
 		<Properties>
 			<string name="Name">BadgeService</string>
 		</Properties>
 	</Item>
-	<Item class="Geometry" referent="RBX354">
+	<Item class="Geometry" referent="RBX353">
 		<Properties>
 			<string name="Name">Geometry</string>
 		</Properties>
 	</Item>
-	<Item class="RenderHooksService" referent="RBX355">
+	<Item class="RenderHooksService" referent="RBX354">
 		<Properties>
 			<string name="Name">RenderHooksService</string>
 		</Properties>
 	</Item>
-	<Item class="SocialService" referent="RBX356">
+	<Item class="SocialService" referent="RBX355">
 		<Properties>
 			<string name="Name">SocialService</string>
 		</Properties>
 	</Item>
-	<Item class="GamePassService" referent="RBX357">
+	<Item class="GamePassService" referent="RBX356">
 		<Properties>
 			<string name="Name">GamePassService</string>
 		</Properties>
 	</Item>
-	<Item class="Debris" referent="RBX358">
+	<Item class="Debris" referent="RBX357">
 		<Properties>
 			<int name="MaxItems">1000</int>
 			<string name="Name">Debris</string>
 		</Properties>
 	</Item>
-	<Item class="TimerService" referent="RBX359">
+	<Item class="TimerService" referent="RBX358">
 		<Properties>
 			<string name="Name">Instance</string>
 		</Properties>
 	</Item>
-	<Item class="ScriptInformationProvider" referent="RBX360">
+	<Item class="ScriptInformationProvider" referent="RBX359">
 		<Properties>
 			<string name="Name">Instance</string>
 		</Properties>
 	</Item>
-	<Item class="CookiesService" referent="RBX361">
+	<Item class="CookiesService" referent="RBX360">
 		<Properties>
 			<string name="Name">CookiesService</string>
 		</Properties>
 	</Item>
-	<Item class="TeleportService" referent="RBX362">
+	<Item class="TeleportService" referent="RBX361">
 		<Properties>
 			<string name="Name">Teleport Service</string>
 		</Properties>
 	</Item>
-	<Item class="Players" referent="RBX363">
+	<Item class="Players" referent="RBX362">
 		<Properties>
 			<bool name="CharacterAutoLoads">true</bool>
 			<string name="Name">Players</string>
 		</Properties>
 	</Item>
-	<Item class="FWService" referent="RBX364">
+	<Item class="FWService" referent="RBX363">
 		<Properties>
 			<string name="Name">Instance</string>
 		</Properties>
 	</Item>
-	<Item class="UserInputService" referent="RBX365">
+	<Item class="UserInputService" referent="RBX364">
 		<Properties>
 			<string name="Name">Instance</string>
 		</Properties>
 	</Item>
-	<Item class="ContextActionService" referent="RBX366">
+	<Item class="ContextActionService" referent="RBX365">
 		<Properties>
 			<string name="Name">ContextActionService</string>
 		</Properties>
 	</Item>
-	<Item class="ScriptService" referent="RBX367">
+	<Item class="ScriptService" referent="RBX366">
 		<Properties>
 			<string name="Name">Instance</string>
 		</Properties>
 	</Item>
-	<Item class="Selection" referent="RBX368">
+	<Item class="Selection" referent="RBX367">
 		<Properties>
 			<string name="Name">Selection</string>
 		</Properties>
 	</Item>
-	<Item class="ChangeHistoryService" referent="RBX369">
+	<Item class="ChangeHistoryService" referent="RBX368">
 		<Properties>
 			<string name="Name">ChangeHistoryService</string>
 		</Properties>
 	</Item>
-	<Item class="Lighting" referent="RBX370">
+	<Item class="Lighting" referent="RBX369">
 		<Properties>
 			<Color3 name="Ambient">4282795592</Color3>
 			<float name="Brightness">1</float>
@@ -17391,9 +17383,9 @@ end)</ProtectedString>
 			<string name="Name">Lighting</string>
 			<Color3 name="OutdoorAmbient">4286611584</Color3>
 			<Color3 name="ShadowColor">4289967032</Color3>
-			<string name="TimeOfDay">00:00:00</string>
+			<string name="TimeOfDay">04:21:00</string>
 		</Properties>
-		<Item class="Sky" referent="RBX371">
+		<Item class="Sky" referent="RBX370">
 			<Properties>
 				<bool name="CelestialBodiesShown">true</bool>
 				<string name="Name">Sky</string>
