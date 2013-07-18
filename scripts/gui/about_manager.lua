@@ -1,9 +1,3 @@
---[[
-	How should I go about getting the current game version?
-	I could output it to a variable in the Values config, though outputting it might be a little weird.
-
-	http://wiki.roblox.com/index.php/Tweening
-]]--
 
 local sp = script.Parent
 local player = game.Players.LocalPlayer
