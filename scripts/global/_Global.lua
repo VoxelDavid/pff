@@ -1,9 +1,8 @@
 --[===================================[--
-  This scripts contains all variables used in the game as well
-  as all of the Global Functions and script-configured values.
+  This script contains all of the variables accessed throughout the game.
 
-  Remember to include "repeat wait() until _G.config" in all functions!
-  Some may not need it, but it's better to be safe than sorry.
+  All children of this script are Global Functions accessed by "call scripts"
+  More info: http://github.com/voxeldavid/pff/wiki/call-scripts
 
   Keep orginized by:
   - Ordering tables alphabetically
@@ -11,8 +10,8 @@
   - Putting singular variables above Tables.
 --]===================================]--
 
--- Game Version
-_G.version = "Alpha 0.1.0" -- The game Version. Be sure to keep this regularly updated!
+-- Game Version -- Keep this regularly updated!
+_G.version = "Alpha 0.1.0"
 
 -- Loose Variables
 _G.conf = script.Configuration -- Where all values accessed by scripts are stored.
