@@ -1,27 +1,26 @@
 --[===================================[--
-  Description:
-    This script holds all of the configurable variables used throughout the game.
+  This scripts contains all variables used in the game as well
+  as all of the Global Functions and script-configured values.
 
-  Prerequisites:
-    Include "repeat wait() until _G.config" in all functions.
-    Some may not need it, but it's better to be safe than sorry.
+  Remember to include "repeat wait() until _G.config" in all functions!
+  Some may not need it, but it's better to be safe than sorry.
 
-  Keeping Organized:
-    Order tables alphabetically.
-    Keep variables of the same class (IE: Bool, Int, etc.) grouped together.
-    Singular variables should be kept above Tables.
+  Keep orginized by:
+  - Ordering tables alphabetically
+  - Keeping variables of the same type (IE: Bool, Int, etc.) grouped together.
+  - Putting singular variables above Tables.
 --]===================================]--
 
 -- Game Version
-_G.version = "Alpha 0.1.0"  -- The game Version. Be sure to keep this regularly updated!
+_G.version = "Alpha 0.1.0" -- The game Version. Be sure to keep this regularly updated!
 
 -- Loose Variables
-_G.conf = script.Configuration -- Where all Values are stored.
+_G.conf = script.Configuration -- Where all values accessed by scripts are stored.
 
 -- Variables for all lighting related objects/scripts
 _G.lighting = {
-	brightness_when_day    = 0.3,  -- How bright a light should be in the day.
-	brightness_when_night  = 1,    -- How bright a light should be at night.
+	brightness_when_day    = 0.3,  -- How bright a light will be in the day.
+	brightness_when_night  = 1,    -- How bright a light will be at night.
 	flicker_frequency      = 3,    -- How frequently a fire based light will flicker each second.
 
 	candle = {
@@ -46,10 +45,10 @@ _G.lighting = {
 -- Variables for the Day/Night time cycle.
 _G.time_cycle = {
 	enabled      = true,  -- If the Time Cycle should be enabled.
-	sun_ambient  = true,  -- If the ambient should change for sunrise and sunset. (Not implemented)
+	sun_ambient  = true,  -- (Not implemented) If the ambient should change for sunrise and sunset.
 	speed        = 1,     -- How fast the time will change.
-	day_length   = 8,     -- How many minutes it will take to go from sunrise to sunset. (Not implemented)
-	night_length = 4,     -- How many minutes it will take for night to pass. (Not implemented)
+	day_length   = 8,     -- (Not implemented) How many minutes it will take to go from sunrise to sunset.
+	night_length = 4,     -- (Not implemented) How many minutes it will take for night to pass.
 }
 
 -- Special Users
@@ -69,5 +68,7 @@ _G.users = {
 	}
 }
 
+-- Let other scripts know that the variabes are ready for use.
 _G.config = true
+
 print("Loaded " .. script.Name)
