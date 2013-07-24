@@ -1,59 +1,58 @@
 --[===================================[--
-  Description:
-    This function is used to change the time of day.
+  This function loops through the Day/Night and will output if
+  it's Sunrise, Day, Sunset or Night to _G.conf.time_of_day so
+  other scripts can hook into it and adjust based on the time.
 
-    It outputs the time to values inside of this script so other scripts
-    can hook into those values and adjust based on the time.
+  Associated variables:
+  _G.time_cycle
+    enabled      (Bool)
+    sun_ambient  (Bool)
+    speed        (Int)
+    day_length   (Int)
+    night_length (Int)
 --]===================================]--
 
-repeat wait() until _G.config -- Wait for the configuration file before doing anything else.
-
-local l = game:service("Lighting")
+-- Wait for the configuration file before doing anything else.
+repeat wait() until _G.config
 
 function time_cycle()
+
+	-- If the time cycle is disabled don't do anything else.
 	if _G.time_cycle.enabled == false then return end
-	while wait(_G.wait_time) do
-		-- Time Cycle
+
+	while wait() do
+
+		local l = game:service("Lighting")
+
+		local time_of_day = _G.conf.time_of_day
+
+		local sunrise_start = 360
+		local sunrise_end   = sunrise_start + 60
+		local sunset_start  = 1060
+		local sunset_end    = sunset_start + 60
+
+		-- The time cycle
 		l:SetMinutesAfterMidnight(l:GetMinutesAfterMidnight() + _G.time_cycle.speed)
 
-		-- If Sunsets and Sunrises should change the ambient color, then:
-		if _G.time_cycle.sun_ambient == true then
-			local time_of_day   = _G.values.time_of_day
+		-- During sunrise and sunset make the sky a nice orange color
+		if l:GetMinutesAfterMidnight() > sunrise_start and l:GetMinutesAfterMidnight() < sunrise_end then
+			time_of_day.Value = 1 -- Sunrise
 
-			-- These values should remain the same. They've been set to a very specific time.
-			-- Originals: Sunrise 300, Sunset 1020
-			local sunrise_start = 360
-			local sunrise_end   = sunrise_start + 60
-			local sunset_start  = 1060
-			local sunset_end    = sunset_start + 60
+		-- Between Sunrises's end and Sunset's start
+		elseif l:GetMinutesAfterMidnight() > sunrise_end and l:GetMinutesAfterMidnight() < sunset_start then
+			time_of_day.Value = 2 -- Day
 
-			--[[
-				So far this works as intended aside from the ambient changing. Something I'm unsure about is,
-				if I use while loops to change the lighting, will that stop the rest of the script from functioning?
-				WIll this be my first use of coroutines?
+		-- Between Sunset's start and Sunset's end
+		elseif l:GetMinutesAfterMidnight() > sunset_start and l:GetMinutesAfterMidnight() < sunset_end then
+			time_of_day.Value = 3 -- Sunset
 
-				Another thing is, how can I still get time_of_day to be changed even if the ambient is set to off,
-				without repeating this mass amount of If statements?
-			]]
-
-			-- During sunrise and sunset make the sky a nice orange color
-			if l:GetMinutesAfterMidnight() > sunrise_start and l:GetMinutesAfterMidnight() < sunrise_end then
-				time_of_day.Value = 1 -- Sunrise
-
-			-- Between Sunrises's end and Sunset's start
-			elseif l:GetMinutesAfterMidnight() > sunrise_end and l:GetMinutesAfterMidnight() < sunset_start then
-				time_of_day.Value = 2 -- Day
-
-			-- Between Sunset's start and Sunset's end
-			elseif l:GetMinutesAfterMidnight() > sunset_start and l:GetMinutesAfterMidnight() < sunset_end then
-				time_of_day.Value = 3 -- Sunset
-
-			-- Between Sunset's end and Sunrise's start
-			elseif l:GetMinutesAfterMidnight() > sunset_end and l:GetMinutesAfterMidnight() < sunrise_start then
-				time_of_day.Value = 4 -- Night
-			end
+		-- Between Sunset's end and Sunrise's start
+		elseif l:GetMinutesAfterMidnight() > sunset_end and l:GetMinutesAfterMidnight() < sunrise_start then
+			time_of_day.Value = 4 -- Night
 		end
+
 	end
+
 end
 
 print("Loaded " .. script.Name)
