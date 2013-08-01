@@ -1,23 +1,24 @@
---[===================================[--
-  This function loops through the Day/Night and will output if
-  it's Sunrise, Day, Sunset or Night to _G.conf.time_of_day so
-  other scripts can hook into it and adjust based on the time.
+--[[--
+  |--------------------------------------------------------------------------
+  | Time Cycle
+  |--------------------------------------------------------------------------
+  |
+  | This function loops through the Day/Night and will output if it's Sunrise,
+  | Day, Sunset or Night to the _G.conf.time_of_day value so other scripts can
+  | hook into it and adjust based on the time.
+  |
+  | Associated variables:
+  | _G.time_cycle
+  |   enabled      (Bool) Controls whether the while loop will run or not.
+  |   speed        (Int)  How quickly the cycle goes
+  |
+  |--------------------------------------------------------------------------
+--]]--
 
-  Associated variables:
-  _G.time_cycle
-    enabled      (Bool)
-    sun_ambient  (Bool)
-    speed        (Int)
-    day_length   (Int)
-    night_length (Int)
---]===================================]--
-
--- Wait for the configuration file before doing anything else.
 repeat wait() until _G.config
 
 function time_cycle()
 
-	-- If the time cycle is disabled don't do anything else.
 	if _G.time_cycle.enabled == false then return end
 
 	while wait() do
@@ -34,21 +35,19 @@ function time_cycle()
 		-- The time cycle
 		l:SetMinutesAfterMidnight(l:GetMinutesAfterMidnight() + _G.time_cycle.speed)
 
-		-- During sunrise and sunset make the sky a nice orange color
+		-- Check the time against the 4 grouped variables above and output the time of day acordingly.
 		if l:GetMinutesAfterMidnight() > sunrise_start and l:GetMinutesAfterMidnight() < sunrise_end then
-			time_of_day.Value = 1 -- Sunrise
-
-		-- Between Sunrises's end and Sunset's start
+			-- Sunrise
+			time_of_day.Value = 1
 		elseif l:GetMinutesAfterMidnight() > sunrise_end and l:GetMinutesAfterMidnight() < sunset_start then
-			time_of_day.Value = 2 -- Day
-
-		-- Between Sunset's start and Sunset's end
+			-- Day
+			time_of_day.Value = 2
 		elseif l:GetMinutesAfterMidnight() > sunset_start and l:GetMinutesAfterMidnight() < sunset_end then
-			time_of_day.Value = 3 -- Sunset
-
-		-- Between Sunset's end and Sunrise's start
+			-- Sunset
+			time_of_day.Value = 3
 		elseif l:GetMinutesAfterMidnight() > sunset_end and l:GetMinutesAfterMidnight() < sunrise_start then
-			time_of_day.Value = 4 -- Night
+			-- Night
+			time_of_day.Value = 4
 		end
 
 	end

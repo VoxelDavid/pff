@@ -1,14 +1,19 @@
---[===================================[--
-  This script contains all of the variables accessed throughout the game.
-
-  All children of this script are Global Functions accessed by "call scripts"
-  More info: http://github.com/voxeldavid/pff/wiki/call-scripts
-
-  Keep orginized by:
-  - Ordering tables alphabetically
-  - Keeping variables of the same type (IE: Bool, Int, etc.) grouped together.
-  - Putting singular variables above Tables.
---]===================================]--
+--[[--
+  |--------------------------------------------------------------------------
+  | GLBOAL
+  |--------------------------------------------------------------------------
+  |
+  | This script contains all of the variables accessed throughout the game.
+  |
+  | All children of this script are Global Functions accessed by "call scripts"
+  |
+  | Keep orginized by:
+  | - Ordering tables alphabetically
+  | - Keeping variables of the same type (IE: Bool, Int, etc.) grouped together.
+  | - Putting singular variables above Tables.
+  |
+  |--------------------------------------------------------------------------
+--]]--
 
 -- Game Version -- Keep this regularly updated!
 _G.version = "Alpha 0.1.0"

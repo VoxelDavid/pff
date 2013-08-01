@@ -1,10 +1,13 @@
---[===================================[--
-  When clicked it will toggle between "lit" and "extinguised", editing a PointLight
-  and Fire object to create a somewhat realistic fire effect.
-
-  Usage: Copy one of the fire based lighting models from assets_models in the root
-  directory of the repo to the game.
---]===================================]--
+--[[--
+  |--------------------------------------------------------------------------
+  | Light Fire
+  |--------------------------------------------------------------------------
+  |
+  | When clicked it will toggle between "lit" and "extinguished", editing a
+	| PointLight and Fire object to create a somewhat realistic fire effect.
+  |
+  |--------------------------------------------------------------------------
+--]]--
 
 -- Wait for the configuration file before doing anything else.
 repeat wait() until _G.config
@@ -43,4 +46,4 @@ function _G.light_fire(object, light, flame, active)
 
 end
 
-print("Loaded _G." .. script.Name)
+print("Loaded _G."..script.Name)
