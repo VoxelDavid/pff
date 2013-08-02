@@ -1,4 +1,4 @@
---[[--
+--[==[--
   |--------------------------------------------------------------------------
   | GLBOAL
   |--------------------------------------------------------------------------
@@ -13,7 +13,7 @@
   | - Putting singular variables above Tables.
   |
   |--------------------------------------------------------------------------
---]]--
+--]==]--
 
 -- Game Version -- Keep this regularly updated!
 _G.version = "Alpha 0.1.0"
@@ -75,4 +75,4 @@ _G.users = {
 -- Let other scripts know that the variabes are ready for use.
 _G.config = true
 
-print("Loaded " .. script.Name)
+print("Loaded "..script.Name)

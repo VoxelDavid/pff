@@ -1,4 +1,4 @@
---[[--
+--[==[--
   |--------------------------------------------------------------------------
   | Light Fire
   |--------------------------------------------------------------------------
@@ -7,7 +7,7 @@
 	| PointLight and Fire object to create a somewhat realistic fire effect.
   |
   |--------------------------------------------------------------------------
---]]--
+--]==]--
 
 -- Wait for the configuration file before doing anything else.
 repeat wait() until _G.config

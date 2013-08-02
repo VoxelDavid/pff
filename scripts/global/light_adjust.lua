@@ -1,4 +1,4 @@
---[[--
+--[==[--
   |--------------------------------------------------------------------------
   | Light Adjust
   |--------------------------------------------------------------------------
@@ -13,7 +13,7 @@
   | parameter and if the value is 3 (Sunset), it returns it to normal.
   |
   |--------------------------------------------------------------------------
---]]--
+--]==]--
 
 -- Wait for the configuration file before doing anything else.
 repeat wait() until _G.config
