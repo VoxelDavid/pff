@@ -10,7 +10,7 @@
 --]==]--
 
 -- Wait for the configuration file before doing anything else.
-repeat wait() until _G.config
+repeat wait() until _G.ready
 
 function _G.light_fire(object, light, flame, active)
 

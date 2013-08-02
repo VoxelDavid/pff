@@ -19,7 +19,7 @@
 _G.version = "Alpha 0.1.0"
 
 -- Loose Variables
-_G.conf = script.Configuration -- Where all values accessed by scripts are stored.
+_G.config = script.Configuration -- Where all values accessed by Scripts are stored.
 
 -- Variables for all lighting related objects/scripts
 _G.lighting = {
@@ -73,6 +73,6 @@ _G.users = {
 }
 
 -- Let other scripts know that the variabes are ready for use.
-_G.config = true
+_G.ready = true
 
 print("Loaded "..script.Name)

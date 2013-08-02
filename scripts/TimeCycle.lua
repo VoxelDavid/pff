@@ -4,7 +4,7 @@
   |--------------------------------------------------------------------------
   |
   | This function loops through the Day/Night and will output if it's Sunrise,
-  | Day, Sunset or Night to the _G.conf.time_of_day value so other scripts can
+  | Day, Sunset or Night to the _G.config.time_of_day value so other scripts can
   | hook into it and adjust based on the time.
   |
   | Associated variables:
@@ -15,7 +15,7 @@
   |--------------------------------------------------------------------------
 --]==]--
 
-repeat wait() until _G.config
+repeat wait() until _G.ready
 
 function time_cycle()
 
@@ -25,7 +25,7 @@ function time_cycle()
 
 		local l = game:service("Lighting")
 
-		local time_of_day = _G.conf.time_of_day
+		local time_of_day = _G.config.time_of_day
 
 		local sunrise_start = 360
 		local sunrise_end   = sunrise_start + 60
