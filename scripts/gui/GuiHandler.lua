@@ -18,7 +18,7 @@
   |--------------------------------------------------------------------------
 --]==]--
 
-repeat wait() until _G.config
+repeat wait() until _G.ready
 
 local sp = script.Parent
 
@@ -39,131 +39,120 @@ AboutPanel.Title.Text     = about_text.title
 AboutPanel.Paragraph.Text = about_text.par1 .. about_text.par2
 AboutPanel.Version.Text   = about_text.version
 
--- About Panel
 
-local AboutPanel_enabled
+function ShowFrame(frame)
+	--[[
+	  Tweens the Frame specified in the function call onto the screen
 
-function ShowAboutPanel()
-	AboutPanel_enabled = false
-	AboutPanel:TweenPosition(UDim2.new(0.325,0, 0.2,0), "Out", "Elastic", 1, true)
-end
+	  @param (string) frame : The name of the Frame object to Tween
+	  Example use: ShowFrame("About")
+	--]]
 
-function HideAboutPanel()
-	AboutPanel:TweenPosition(UDim2.new(0.325,0, -0.5,0), "Out", "Quint", 0.5, true)
-	AboutPanel_enabled = true
-end
+	local frame = string.lower(frame)
 
-function ToggleAboutPanel()
-	if AboutPanel_enabled == true then
-		AboutPanel_enabled = false
-		ShowAboutPanel()
-	else
-		HideAboutPanel()
-		AboutPanel_enabled = true
+	if frame == "about" then
+		AboutPanel:TweenPosition(UDim2.new(0.325,0, 0.2,0), "Out", "Elastic", 1, true)
+	elseif frame == "admin" then
+		AdminPanel:TweenPosition(UDim2.new(0.325,0, 0.2,0), "Out", "Elastic", 1, true)
+	elseif frame == "cats" then
+		CatsPanel:TweenPosition(UDim2.new(0.325,0, 0.2,0), "Out", "Elastic", 1, true)
 	end
 end
 
--- Admin Panel
+function HideFrame(frame)
+	--[[
+	  Tweens the Frame specified in the function call off-screen.
 
-local AdminPanel_enabled
+	  @param (string) frame : The name of the Frame object to Tween
+	  Example use: HideFrame("About")
+	--]]
 
-function ShowAdminPanel()
-	AdminPanel_enabled = false
-	AdminPanel:TweenPosition(UDim2.new(0.325,0, 0.2,0), "Out", "Elastic", 1, true)
-end
+	local frame = string.lower(frame)
 
-function HideAdminPanel()
-	AdminPanel:TweenPosition(UDim2.new(0.325,0, -0.5,0), "Out", "Quint", 0.5, true)
-	AdminPanel_enabled = true
-end
-
-function ToggleAdminPanel()
-	if AdminPanel_enabled == true then
-		AdminPanel_enabled = false
-		ShowAdminPanel()
-	else
-		HideAdminPanel()
-		AdminPanel_enabled = true
+	if frame == "about" then
+		AboutPanel:TweenPosition(UDim2.new(0.325,0, -0.5,0), "Out", "Quint", 0.5, true)
+	elseif frame == "admin" then
+		AdminPanel:TweenPosition(UDim2.new(0.325,0, -0.5,0), "Out", "Quint", 0.5, true)
+	elseif frame == "cats" then
+		CatsPanel:TweenPosition(UDim2.new(0.325,0, -0.5,0), "Out", "Quint", 0.5, true)
 	end
 end
 
--- Cats Panel
+function ToggleFrame(frame)
+	--[[
+	  Toggles between ShowFrame and HideFrame functions.
 
-local CatsPanel_enabled
+	  @param (string) frame : The name of the Frame object to Tween
+	  Example use: ToggleFrame("About")
+	--]]
 
-function ShowCatsPanel()
-	CatsPanel_enabled = false
-	CatsPanel:TweenPosition(UDim2.new(0.325,0, 0.2,0), "Out", "Elastic", 1, true)
-end
+	local frame = string.lower(frame)
+	local enabled = true
 
-function HideCatsPanel()
-	CatsPanel:TweenPosition(UDim2.new(0.325,0, -0.5,0), "Out", "Quint", 0.5, true)
-	CatsPanel_enabled = true
-end
+	-- I think I'll need to use Bool values in the ScrenGuis
+	-- so I can enable/disable them easily... Or I could define
+	-- values in this script.
 
-function ToggleCatsPanel()
-	if CatsPanel_enabled == true then
-		CatsPanel_enabled = false
-		ShowCatsPanel()
+	-- Using bool values in the Frames is probably the best option.
+	-- I can check that frames value. Not sure if I could do that with variables.
+
+	if enabled == true then
+		enabled = false
+		ShowFrame(frame)
 	else
-		HideCatsPanel()
-		CatsPanel_enabled = true
+		HideFrame(frame)
+		enabled = true
 	end
 end
 
--- Hide Others
+--[[
+  Tweens all frames off-screen, leaving only the one specified as the parameter visible.
 
+  @param (string) excluded_frame : Frame object to exclude from hiding.
+  Example use: HideOthers("About")
+--]]
 function HideOthers(excluded_frame)
 	for _,v in pairs(sp:GetChildren()) do
-		if v:IsA("Frame") and v.Name ~= excluded_frame then
-			HideAboutPanel()
-			HideAdminPanel()
-			HideCatsPanel()
+		if v:IsA("Frame") then
+			local frame = excluded_frame
+			-- Damn you, logic! How do I make this work?
+			HideAboutPanel(frame)
+			HideAdminPanel(frame)
+			HideCatsPanel(frame)
 		end
 	end
 end
 
 -- Function Calls
 
-function OpenAbout()
-	HideOthers()
-	ToggleAboutPanel()
-end
+-- This is a mess. I need to improve these function calls later.
 
-function HideAbout()
-	ToggleAboutPanel()
-end
+sp.OpenAbout.MouseButton1Down:connect(function()
+	ToggleFrame("About")
+end)
+sp.OpenAbout.MouseButton1Down:connect(function()
+	HideOthers("About")
+	ToggleFrame("About")
+end)
 
-function OpenAdmin()
-	HideOthers()
-	ToggleAdminPanel()
-end
+sp.OpenAbout.MouseButton1Down:connect(function()
+	ToggleFrame("Admin")
+end)
+sp.OpenAbout.MouseButton1Down:connect(function()
+	HideOthers("Admin")
+	ToggleFrame("Admin")
+end)
 
-function HideAdmin()
-	ToggleAdminPanel()
-end
-
-function OpenCats()
-	HideOthers()
-	ToggleCatsPanel()
-end
-
-function HideCats()
-	ToggleCatsPanel()
-end
+sp.OpenAbout.MouseButton1Down:connect(function()
+	ToggleFrame("Cats")
+end)
+sp.OpenAbout.MouseButton1Down:connect(function()
+	HideOthers("Cats")
+	ToggleFrame("Cats")
+end)
 
 sp.HideAll.MouseButton1Down:connect(function()
 	HideOthers()
 end)
-
-
-sp.OpenAbout.MouseButton1Down:connect(OpenAbout)
-sp.About.CloseButton.MouseButton1Down:connect(HideAbout)
-
-sp.OpenAdmin.MouseButton1Down:connect(OpenAdmin)
-sp.Admin.CloseButton.MouseButton1Down:connect(HideAdmin)
-
-sp.OpenCats.MouseButton1Down:connect(OpenCats)
-CatsPanel.CloseButton.MouseButton1Down:connect(HideCats)
 
 print("Loaded "..script.Name)
