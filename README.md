@@ -4,7 +4,7 @@
 Project Final Farewell (PFF) was originally planned as a recreation of my old
 game [Island Tycoon](http://www.roblox.com/Island-Tycoon-place?id=15541427).
 
-At this point I have no directory as to what I want to make anymore. Currently
+At this point I have no direction as to what I want to make anymore. Currently
 this repository is a placeholder for something in the future.
 
 
