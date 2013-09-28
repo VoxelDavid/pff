@@ -12,16 +12,16 @@ this repository is a placeholder for something in the future.
 
 These are the directories you will encounter in the project:
 
-	models   : Models used in the game.
-	places   : Places with any number of scripts/models, primarily for running tests.
-	scripts  : All of the Scripts used throughout the game. (This folder is for non-global Scripts)
-	  global : Scripts making use of the _G table.
-	  gui    : Scripts used in Guis.
+	build        : Game files primarily for running tests.
+	build/models : Models used in the game.
+	scripts      : All of the Scripts used throughout the game.
+	  global     : Scripts making use of the _G table.
+	  gui        : Scripts used in Guis.
 
-Run the following command to get a local copy of the Wiki that's up here on
-GitHub:
+Run the following commands to get a local copy of the Wiki on GitHub:
 
-	$ submodule init && submodule update
+	$ submodule init
+	$ submodule update
 
 
 ### Contributing:
