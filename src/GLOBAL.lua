@@ -48,16 +48,17 @@ _G.lighting = {
 
 -- Variables for the Day/Night time cycle.
 _G.time_cycle = {
-	enabled      = true,  -- If the Time Cycle should be enabled.
-	sun_ambient  = true,  -- (Not implemented) If the ambient should change for sunrise and sunset.
-	speed        = 1,     -- How fast the time will change.
-	day_length   = 8,     -- (Not implemented) How many minutes it will take to go from sunrise to sunset.
-	night_length = 4,     -- (Not implemented) How many minutes it will take for night to pass.
+	enabled        = true,  -- If the Time Cycle should be enabled.
+	sky_ambiance   = true,  -- (Not implemented) If the Sky's ambiance should change for sunrise and sunset.
+	time_increment = 1,     -- The amount added to the current time every loop.
+	loop_speed     = 0.5,   -- How quickly the loop will iterate.
+	day_length     = 8,     -- (Not implemented) How many minutes it will take to go from sunrise to sunset.
+	night_length   = 4,     -- (Not implemented) How many minutes it will take for night to pass.
 }
 
 -- Special Users
 _G.users = {
-	-- Adminitrators
+	-- Administrators
 	admins = {
 		"D3lego",
 		"MonsterBone",
@@ -72,7 +73,7 @@ _G.users = {
 	}
 }
 
--- Let other scripts know that the variabes are ready for use.
+-- Let other scripts know that the variables are ready for use.
 _G.ready = true
 
 print("Loaded "..script.Name)
