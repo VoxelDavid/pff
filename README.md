@@ -14,7 +14,7 @@ These are the directories you will encounter in the project:
 
 	build        : Game files primarily for running tests.
 	build/models : Models used in the game.
-	scripts      : All of the Scripts used throughout the game.
+	src          : All of the Scripts used throughout the game.
 	  global     : Scripts making use of the _G table.
 	  gui        : Scripts used in Guis.
 
