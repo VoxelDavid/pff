@@ -1,6 +1,6 @@
 
 --[[
- ## Time Handler
+ ## Lighting Handler
 
  This script takes care of lighting related tasks, such as the Day/Night cycle,
  setting a 'time of day' value for other scripts to hook into, so they can adjust
@@ -25,7 +25,7 @@ local l = game:service("Lighting");
  Starts the main loop
 
 ]]--
-function TimeHandler()
+function LightingHandler()
     while wait(config.loop_speed) do
         TimeCycle();
         OutputTimeOfDay();
@@ -99,4 +99,4 @@ end;
 print("Loaded " .. script.Name);
 
 -- Run the function to get the loop started.
-TimeHandler();
+LightingHandler();
