@@ -1,17 +1,15 @@
---[==[--
-  |--------------------------------------------------------------------------
-  | Light Flicker
-  |--------------------------------------------------------------------------
-  |
-  |--------------------------------------------------------------------------
---]==]--
 
+--[[
+ ## Light Flicker
 
--- Wait for the configuration file before doing anything else.
-repeat wait() until _G.ready
+ [function description]
+]]--
+
+repeat wait() until _G.ready;
 
 function _G.light_flicker(light)
-	-- Code
-end
+    -- code
+end;
 
-print("Loaded _G."..script.Name)
+-- The script is loaded!
+print("Loaded _G."..script.Name);

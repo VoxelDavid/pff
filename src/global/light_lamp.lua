@@ -1,21 +1,15 @@
---[==[--
-  |--------------------------------------------------------------------------
-  | Light Lamp
-  |--------------------------------------------------------------------------
-  |
-  | @ToDo:
-  | - Give the lamp an option (Value?) to flicker.
-  | - Have the light turn on and off depending on the time_of_day value.
-  |
-  |--------------------------------------------------------------------------
---]==]--
 
--- Wait for the configuration file before doing anything else.
-repeat wait() until _G.ready
+--[[
+ ## Light Lamp
 
+ [function description]
+]]--
+
+repeat wait() until _G.ready;
 
 function _G.light_lamp()
-	-- Code
-end
+    -- code
+end;
 
-print("Loaded _G."..script.Name)
+-- The script is loaded!
+print("Loaded _G."..script.Name);
