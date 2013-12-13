@@ -5,11 +5,11 @@
  [function description]
 ]]--
 
-repeat wait() until _G.ready;
+repeat wait() until _G.ready
 
 function _G.light_flicker(light)
     -- code
-end;
+end
 
 -- The script is loaded!
-print("Loaded _G."..script.Name);
+print("Loaded _G."..script.Name)

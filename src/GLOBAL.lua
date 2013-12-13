@@ -12,8 +12,8 @@
 -- ## Variables
 -- ##
 
-_G.version = "Alpha 0.1.0";        -- Game Version — Keep this regularly updated!
-_G.config = script.Configuration;  -- Where all values accessed by Scripts are stored.
+_G.version = "Alpha 0.1.0"        -- Game Version — Keep this regularly updated!
+_G.config = script.Configuration  -- Where all values accessed by Scripts are stored.
 
 
 -- ##
@@ -30,20 +30,20 @@ _G.lighting = {
 		range       = 14,  -- Candle's PointLight range.
 		light_speed = 6,   -- How quickly the fire will be lit. Bigger number = slower transition.
 		ext_speed   = 3,   -- How quickly the fire will be extinguished. Bigger number = slower transition.
-	};
+	},
 
 	fireplace = {
 		range       = 18,  -- Fireplace's PointLight range.
 		light_speed = 12,  -- How quickly the fire will be lit. Bigger number = slower transition.
 		ext_speed   = 3,   -- How quickly the fire will be extinguished. Bigger number = slower transition.
-	};
+	},
 
 	torch = {
 		range       = 16,  -- Torch's PointLight range.
 		light_speed = 8,   -- How quickly the fire will be lit. Bigger number = slower transition.
 		ext_speed   = 3,   -- How quickly the fire will be extinguished. Bigger number = slower transition.
-	};
-};
+	},
+}
 
 -- Special Users
 _G.users = {
@@ -52,18 +52,18 @@ _G.users = {
 		"D3lego",
 		"MonsterBone",
 		"Player1",
-	};
+	},
 
 	-- Friends and other important people.
 	vips = {
 		"",
 		"",
 		"",
-	};
-};
+	},
+}
 
 -- Let other scripts know that the variables are ready for use.
-_G.ready = true;
+_G.ready = true
 
 -- The script is loaded!
-print("Loaded "..script.Name);
+print("Loaded "..script.Name)

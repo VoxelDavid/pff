@@ -12,29 +12,29 @@
  value is 3 (Sunset), it returns the brightness to normal.
 ]]--
 
-repeat wait() until _G.ready;
+repeat wait() until _G.ready
 
 function _G.light_adjust(light)
 	-- 1 = Sunrise, 2 = Day, 3 = Sunset, 4 = Night.
-	local time_of_day = _G.config.time_of_day;
+	local time_of_day = _G.config.time_of_day
 
 	-- If the time is Sunrise or Day.
 	if time_of_day.Value == 1 or time_of_day.Value == 2 then
 		-- Fade out the brightness to the predefined brightness in the global config.
 		while light.Brightness > _G.lighting.brightness_when_day do
-			wait(0.1);
-			light.Brightness = light.Brightness - 0.03;
-		end;
+			wait(0.1)
+			light.Brightness = light.Brightness - 0.03
+		end
 
 	-- If the time is Sunset or Night.
 	elseif time_of_day.Value == 3 or time_of_Day.Value == 4 then
 		-- Fade in the brightness back to normal.
 		while light.Brightness < _G.lighting.brightness_when_night do
-			wait(0.1);
-			light.Brightness = light.Brightness + 0.03;
-		end;
-	end;
-end;
+			wait(0.1)
+			light.Brightness = light.Brightness + 0.03
+		end
+	end
+end
 
 -- The script is loaded!
-print("Loaded _G."..script.Name);
+print("Loaded _G."..script.Name)
