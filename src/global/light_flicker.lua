@@ -1,6 +1,7 @@
 
 --[[
- ## Light Flicker
+ Light Flicker
+ =============
 
  [function description]
 ]]--

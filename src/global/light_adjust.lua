@@ -1,6 +1,7 @@
 
 --[[
- ## Light Adjust
+ Light Adjust
+ ============
 
  Adjust light source depending on the time of day.
 

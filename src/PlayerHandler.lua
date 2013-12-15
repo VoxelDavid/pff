@@ -1,6 +1,7 @@
 
 --[[
- ## Player Handler
+ Player Handler
+ ==============
 
  This script takes care of Player related tasks, such as Data Persistence,
  Leaderboards, and generating player-specific configuration objects/values.

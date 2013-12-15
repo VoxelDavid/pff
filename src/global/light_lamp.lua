@@ -1,6 +1,7 @@
 
 --[[
- ## Light Lamp
+ Light Lamp
+ ==========
 
  [function description]
 ]]--

@@ -1,6 +1,7 @@
 
 --[[
- ## Light Fire
+ Light Fire
+ ==========
 
  When clicked it will toggle between "lit" and "extinguished", editing a
  PointLight and Fire object to create a somewhat realistic fire effect.

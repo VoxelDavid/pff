@@ -1,6 +1,7 @@
 
 --[[
- ## Lighting Handler
+ Lighting Handler
+ ================
 
  This script takes care of lighting related tasks, such as the Day/Night cycle,
  setting a 'time of day' value for other scripts to hook into, so they can adjust

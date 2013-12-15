@@ -1,6 +1,7 @@
 
 --[[
- ## GLOBAL
+ GLOBAL
+ ======
 
  This script contains all of the variables accessed throughout the game. All
  children of this script are Global Functions accessed by "call scripts".
