@@ -30,7 +30,12 @@ function timeCycle()
 end
 
 function outputTimeOfDay()
-  _G.values.TimeOfDay.Value = getCurrentTime()
+  local timeOfDay = _G.values.TimeOfDay
+
+  -- Only update the time if it's changed.
+  if timeOfDay.Value ~= getCurrentTime() then
+    timeOfDay.Value = getCurrentTime()
+  end
 end
 
 function getCurrentTime()
