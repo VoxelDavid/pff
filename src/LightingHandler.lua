@@ -8,8 +8,11 @@
 local timeIncrement = .75 -- The amount added on to the current time every recurrence.
 local loopSpeed = .25     -- How long the loop will wait() before adding timeIncrement.
 
-local lighting = game:GetService("Lighting")
-local currentTime = lighting:GetMinutesAfterMidnight()
+local lighting = game.Lighting
+
+--[[ Note: the 'currentTime' variable needs to be defined inside of the functions
+     that will be looped. If it's defined here, it will never get updated by the
+     loop redefining it every recurrence. ]]
 
 repeat wait() until _G.ready
 
@@ -21,10 +24,14 @@ function runLightingLoop()
 end
 
 function timeCycle()
+  local currentTime = lighting:GetMinutesAfterMidnight()
+
   lighting:SetMinutesAfterMidnight(currentTime + timeIncrement)
 end
 
 function outputTimeOfDay()
+  local currentTime = lighting:GetMinutesAfterMidnight()
+
   local timeOfDay = _G.values.TimeOfDay
 
   local sunrise = 360
