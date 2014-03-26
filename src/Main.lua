@@ -13,5 +13,4 @@ _G.values  = script        -- Location of Values. Bool, string, int, etc.
 -- Alert other scripts that global values are ready for use.
 _G.ready = true
 
--- The script is loaded!
 print("Loaded "..script.Name)
