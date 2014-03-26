@@ -13,7 +13,7 @@ local currentTime = lighting:GetMinutesAfterMidnight()
 
 repeat wait() until _G.ready
 
-function lightingLoop()
+function runLightingLoop()
   while wait(loopSpeed) do
     outputTimeOfDay()
     timeCycle()
@@ -55,6 +55,6 @@ end
 
 print("Loaded " .. script.Name)
 
--- Run the function to get the loop started.
-lightingLoop()
+-- Generate the TimeOfDay value and get the loop started.
 generateTimeValue()
+runLightingLoop()
