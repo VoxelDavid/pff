@@ -5,8 +5,8 @@
   value for other scripts to hook into.
 ]]
 
-local timeIncrement = .75 -- The amount added on to the current time every recurrence.
-local loopSpeed = .25     -- How long the loop will wait() before adding timeIncrement.
+local timeIncrement = 1.5 -- The amount added on to the current time every recurrence.
+local loopSpeed = 0       -- How long the loop will wait() before adding timeIncrement.
 
 local lighting = game.Lighting
 
@@ -19,6 +19,7 @@ repeat wait() until _G.ready
 function runLightingLoop()
   while wait(loopSpeed) do
     outputTimeOfDay()
+    -- changeAmbiance()
     timeCycle()
   end
 end
@@ -35,6 +36,24 @@ function outputTimeOfDay()
   -- Only update the time if it's changed.
   if timeOfDay.Value ~= getCurrentTime() then
     timeOfDay.Value = getCurrentTime()
+  end
+end
+
+function changeAmbiance()
+  -- http://wiki.roblox.com/index.php?title=Color3#Useful_Code
+  function rgb(r, g, b)
+    return Color3.new(r/255, g/255, b/255)
+  end
+
+  local currentTime = getCurrentTime()
+
+  -- Need more phases in the day for a smoother transition.
+  if currentTime == "sunrise" then
+  elseif currentTime == "day" then
+    lighting.OutdoorAmbient = rgb(255,255,255)
+  elseif currentTime == "sunset" then
+    lighting.OutdoorAmbient = rgb(100,100,255)
+  elseif currentTime == "night" then
   end
 end
 
