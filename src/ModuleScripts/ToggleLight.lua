@@ -1,45 +1,71 @@
-
 --[[
- Light Fire
- ==========
+  When clicked it will toggle between an off and on state. Editing a PointLight
+  and an optional Fire object to create a somewhat realistic effect.
+]]
 
- When clicked it will toggle between "lit" and "extinguished", editing a
- PointLight and Fire object to create a somewhat realistic fire effect.
-]]--
+--[[ These are the different variations of light sources and their respective
+     properties that exist in the game. They're called by the 'className'
+     parameter in toggleLight() ]]
 
-repeat wait() until _G.ready
+local classes = {
+  candle = {
+    range = 14,
+    igniteSpeed = 6,
+    extinguishSpeed = 3
+  },
+  fireplace = {
+    range = 18,
+    igniteSpeed = 12,
+    extinguishSpeed = 3
+  },
+  torch = {
+    range = 16,
+    igniteSpeed = 8,
+    extinguishSpeed = 3
+  }
+}
 
-function _G.light_fire(object, light, flame, active)
-	-- Get the object type specified in the function call and
-	-- lowercase it.
-	local object = string.lower(object)
+local class, light, fire
 
-	-- If the light is extinguished, fade it in, otherwise
-	-- if it's lit extinguish it quickly.
-	if active.Value == false then
-		flame.Enabled = true
+--[[ 'className' is a string of one of the applicable objects in the 'classes' table.
+     'lightSource' is the location where a PointLight (and optionally a Fire object)
+     is stored. eg. script.Parent. and 'active' is a boolean value in the game. ]]
 
-		while light.Range < _G.lighting[object].range do
-			wait()
-			-- Divide the object's range by light_speed. This ensures
-			-- it will stop at exactly the right Range.
-			light.Range = light.Range + _G.lighting[object].range / _G.lighting[object].light_speed
-		end
+function toggleLight(className, lightSource, active)
+  class = className
+  light = lightSource.PointLight
+  -- Fire object is optional. Must be included in the same place as the PointLight.
+  fire = lightSource:FindFirstChild("Fire")
 
-		active.Value = true
-	else
-		flame.Enabled = false
-
-		while light.Range > 0 do
-			-- Divide the object's range by ext_speed. This value is
-			-- lower than light_speed so it goes out quicker.
-			light.Range = light.Range - _G.lighting[object].range / _G.lighting[object].ext_speed
-			wait()
-		end
-
-		active.Value = false
-	end
+  if active.Value then
+    turnOff()
+    active.Value = false
+  else
+    turnOn()
+    active.Value = true
+  end
 end
 
--- The script is loaded!
-print("Loaded _G."..script.Name)
+function turnOn()
+  if fire then
+    fire.Enabled = true
+  end
+
+  while light.Range < classes[class].range do
+    light.Range = light.Range + (classes[class].range / classes[class].igniteSpeed)
+    wait()
+  end
+end
+
+function turnOff()
+  if fire then
+    fire.Enabled = false
+  end
+
+  while light.Range > 0 do
+    light.Range = light.Range - (classes[class].range / classes[class].extinguishSpeed)
+    wait()
+  end
+end
+
+return toggleLight
