@@ -32,6 +32,4 @@ function fadeIn(lightSource)
   end
 end
 
-return {
-  fade = adjustBrightness
-}
+return adjustBrightness
