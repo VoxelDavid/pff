@@ -25,12 +25,6 @@ function timeCycle()
 end
 
 function outputTimeOfDay()
-  -- Generate the TimeOfDay value if it doesn't already exist.
-  if not _G.values:FindFirstChild("TimeOfDay") then
-    local timeValue = Instance.new("StringValue", _G.values)
-    timeValue.Name = "TimeOfDay"
-  end
-
   local timeOfDay = _G.values.TimeOfDay
 
   local sunrise = 360
@@ -51,7 +45,16 @@ function outputTimeOfDay()
   end
 end
 
+function generateTimeValue()
+  -- Generate the TimeOfDay value if it doesn't already exist.
+  if not _G.values:FindFirstChild("TimeOfDay") then
+    local timeValue = Instance.new("StringValue", _G.values)
+    timeValue.Name = "TimeOfDay"
+  end
+end
+
 print("Loaded " .. script.Name)
 
 -- Run the function to get the loop started.
 lightingLoop()
+generateTimeValue()
