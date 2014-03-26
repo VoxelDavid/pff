@@ -18,16 +18,16 @@ function adjustBrightness(lightSource)
   end
 end
 
-function fadeIn(lightSource)
-  while lightSource.Brightness < brightnessWhenNight do
-    lightSource.Brightness = lightSource.Brightness + .03
+function fadeOut(lightSource)
+  while lightSource.Brightness > brightnessWhenDay do
+    lightSource.Brightness = lightSource.Brightness - .03
     wait(.1)
   end
 end
 
-function fadeOut(lightSource)
-  while lightSource.Brightness > brightnessWhenDay do
-    lightSource.Brightness = lightSource.Brightness - .03
+function fadeIn(lightSource)
+  while lightSource.Brightness < brightnessWhenNight do
+    lightSource.Brightness = lightSource.Brightness + .03
     wait(.1)
   end
 end
