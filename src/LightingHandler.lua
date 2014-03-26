@@ -30,9 +30,11 @@ function timeCycle()
 end
 
 function outputTimeOfDay()
-  local currentTime = lighting:GetMinutesAfterMidnight()
+  _G.values.TimeOfDay.Value = getCurrentTime()
+end
 
-  local timeOfDay = _G.values.TimeOfDay
+function getCurrentTime()
+  local currentTime = lighting:GetMinutesAfterMidnight()
 
   local sunrise = 360
   local day     = sunrise + 60
@@ -41,14 +43,18 @@ function outputTimeOfDay()
 
   -- Check the time against the four grouped variables above and
   -- output the time of day acordingly.
-  if currentTime > sunrise and currentTime < day then
-    timeOfDay.Value = "sunrise"
-  elseif currentTime > day and currentTime < sunset then
-    timeOfDay.Value = "day"
-  elseif currentTime > sunset and currentTime < night then
-    timeOfDay.Value = "sunset"
-  elseif currentTime > night and currentTime < sunrise then
-    timeOfDay.Value = "night"
+
+  -- >= is needed for the first value, otherwise it ends up returning nil,
+  -- or some other undefined value.
+  if currentTime >= sunrise and currentTime < day then
+    return "sunrise"
+  elseif currentTime >= day and currentTime < sunset then
+    return "day"
+  elseif currentTime >= sunset and currentTime < night then
+    return "sunset"
+  -- sunrise is a smaller value than night, need to use 'or' instead of 'and'
+  elseif currentTime >= night or currentTime < sunrise then
+    return "night"
   end
 end
 
