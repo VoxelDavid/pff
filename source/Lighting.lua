@@ -47,15 +47,15 @@ function getCurrentTime()
   -- Check the time against the four grouped variables above and
   -- output the time of day acordingly.
 
-  -- >= is needed for the first value, otherwise it ends up returning nil,
-  -- or some other undefined value.
+  -- The '>=' operand is needed or else there's a point where no value is true,
+  -- causing the script to break.
   if currentTime >= sunrise and currentTime < day then
     return "sunrise"
   elseif currentTime >= day and currentTime < sunset then
     return "day"
   elseif currentTime >= sunset and currentTime < night then
     return "sunset"
-  -- sunrise is a smaller value than night, need to use 'or' instead of 'and'
+  -- Sunrise is a smaller value than night, need to use 'or' instead of 'and'.
   elseif currentTime >= night or currentTime < sunrise then
     return "night"
   end
