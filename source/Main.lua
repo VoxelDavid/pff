@@ -6,9 +6,9 @@
  get require()'d in 'call scripts' inside objects in the Workspace.
 ]]
 
-_G.version = "Alpha 0.1.0" -- Game version - keep this regularly updated!
-_G.modules = script        -- Location of ModuleScripts
-_G.values  = script        -- Location of Values. Bool, string, int, etc.
+_G.version = "0.1.0" -- Game version - keep this regularly updated!
+_G.modules = script -- Location of ModuleScripts
+_G.values  = script -- Location of Values. Bool, string, int, etc.
 
 -- Alert other scripts that global values are ready for use.
 _G.ready = true
