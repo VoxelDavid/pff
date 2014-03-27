@@ -29,7 +29,7 @@ local class, light, fire
 
 --[[ 'className' is a string of one of the applicable objects in the 'classes' table.
      'lightSource' is the location where a PointLight (and optionally a Fire object)
-     is stored. eg. script.Parent. and 'active' is a boolean value in the game. ]]
+     is stored (eg. script.Parent). and 'active' is a boolean value in the game. ]]
 
 function toggleLight(className, lightSource, active)
   class = className
