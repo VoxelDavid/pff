@@ -14,8 +14,6 @@ local lighting = game.Lighting
      that will be looped. If it's defined here, it will never get updated by the
      loop redefining it every recurrence. ]]
 
-repeat wait() until _G.ready
-
 function runLightingLoop()
   while wait(loopSpeed) do
     outputTimeOfDay()
@@ -30,7 +28,7 @@ function timeCycle()
 end
 
 function outputTimeOfDay()
-  local timeOfDay = _G.values.TimeOfDay
+  local timeOfDay = script.TimeOfDay
 
   -- Only update the time if it's changed.
   if timeOfDay.Value ~= getCurrentTime() then
@@ -65,9 +63,11 @@ end
 
 function generateTimeValue()
   -- Generate the TimeOfDay value if it doesn't already exist.
-  if not _G.values:FindFirstChild("TimeOfDay") then
-    local timeValue = Instance.new("StringValue", _G.values)
+  if not script:FindFirstChild("TimeOfDay") then
+    local timeValue = Instance.new("StringValue", script)
     timeValue.Name = "TimeOfDay"
+
+    _G.TimeOfDay = script:FindFirstChild("TimeOfDay")
   end
 end
 

@@ -6,10 +6,10 @@
 local brightnessWhenDay   = .3
 local brightnessWhenNight = 1
 
-repeat wait() until _G.values:FindFirstChild("TimeOfDay")
+repeat wait(.1) until _G.TimeOfDay
 
 function adjustBrightness(lightSource)
-  local timeOfDay = _G.values.TimeOfDay
+  local timeOfDay = _G.TimeOfDay
 
   if timeOfDay.Value == "sunrise" or timeOfDay.Value == "day" then
     fadeOut(lightSource)
