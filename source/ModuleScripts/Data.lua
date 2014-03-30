@@ -8,7 +8,7 @@
 local DataStore = game:GetService("DataStoreService")
 
 -- Creates a new key/value pair in the data store.
-function create(storeName, key, value)
+function post(storeName, key, value)
   local dataStore = DataStore:GetDataStore(storeName)
   dataStore:SetAsync(key, value)
 end
@@ -39,8 +39,8 @@ function delete(storeName, key)
 end
 
 return {
-  POST = create,
   -- Named after the HTTP request methods. :)
+  POST = post,
   PUT = put,
   GET = get,
   DELETE = delete
