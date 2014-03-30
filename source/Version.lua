@@ -6,6 +6,10 @@ repeat wait() until _G.ready
 
 local Data = require(_G.modules.Data)
 
+local version = _G.version -- v0.1.0-alpha.1
+local versionNumber = version:match("v%d\.%d\.%d") -- v0.1.0
+local preReleaseVersion = version:match("\-%a*\.%d") -- -alpha.1
+
 --[[
   Takes the version string and seperates each part into a key/value pair in a table.
   eg. v0.1.0-alpha.1 would be turned into:
@@ -20,10 +24,6 @@ local Data = require(_G.modules.Data)
 
 ]]
 function convertVersionToTable()
-  local version = _G.version -- v0.1.0-alpha.1
-  local versionNumber = version:match("v%d\.%d\.%d") -- v0.1.0
-  local preReleaseVersion = version:match("\-%a*\.%d") -- -alpha.1
-
   local versionTable = {
     full = version
   }
