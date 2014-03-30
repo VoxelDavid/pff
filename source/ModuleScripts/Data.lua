@@ -13,13 +13,35 @@ function create(storeName, key, value)
   dataStore:SetAsync(key, value)
 end
 
+-- Updates/creates a key/value pair in the data store.
+function put(storeName, key, value)
+  local dataStore = DataStore:GetDataStore(storeName)
+
+  function updateCallback()
+    return value
+  end
+
+  return dataStore:UpdateAsync(key, updateCallback)
+end
+
 -- Returns the key from the data store for use in the game.
 function get(storeName, key)
   local dataStore = DataStore:GetDataStore(storeName)
   return dataStore:GetAsync(key)
 end
 
+-- Sets the key's value to nil, as there is currently no way to
+-- actually delete a key.
+function delete(storeName, key)
+  local deletedValue = "404"
+
+  post(storeName, key, deletedValue)
+end
+
 return {
   POST = create,
-  GET = get
+  -- Named after the HTTP request methods. :)
+  PUT = put,
+  GET = get,
+  DELETE = delete
 }
