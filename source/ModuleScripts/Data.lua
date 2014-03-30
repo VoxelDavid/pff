@@ -40,12 +40,10 @@ function get(storeName, key)
   return dataStore:GetAsync(key)
 end
 
--- Sets the key's value to nil, as there is currently no way to
--- actually delete a key.
+-- Sets the key's value to the string "deleted" to indicate
+-- that it's been removed.
 function delete(storeName, key)
-  local deletedValue = "404"
-
-  post(storeName, key, deletedValue)
+  post(storeName, key, "deleted")
 end
 
 return {
