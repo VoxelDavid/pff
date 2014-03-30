@@ -1,6 +1,16 @@
 --[[
   This module is used to easily make calls to the data store service.
 
+  Usage:
+
+    local data = require(path.to.module)
+
+    data.PUT("Server", "version", "v0.1.0")
+    print(data.GET("Server", "version")) -- "v0.1.0"
+
+    data.DELETE("Server", "version")
+    print(data.GET("Server", "version")) -- "deleted"
+
   ToDo:
   - Implement Scopes
 ]]
