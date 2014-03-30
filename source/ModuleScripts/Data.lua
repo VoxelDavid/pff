@@ -21,7 +21,7 @@ function put(storeName, key, value)
     return value
   end
 
-  return dataStore:UpdateAsync(key, updateCallback)
+  dataStore:UpdateAsync(key, updateCallback)
 end
 
 -- Returns the key from the data store for use in the game.
