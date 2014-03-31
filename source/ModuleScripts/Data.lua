@@ -52,7 +52,8 @@ local Data = {
     dataStore:SetAsync(key, value)
   end,
 
-  -- Updates/creates a key/value pair in the data store.
+  -- Updates a key/value pair in the data store and will create
+  -- the pair if not found.
   put = function(self, storeName, key, value, scope)
     local scope = scope or globalScope
     local dataStore = DataStore:GetDataStore(storeName, scope)
