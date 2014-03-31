@@ -17,6 +17,14 @@
     data:put("Server", "version", "v0.1.0-alpha.1", "customNamespace")
     print(data:get("Server", "version")) -- "v0.1.0" (Assuming you used the earlier example, otherwise no value will appear.)
     print(data:get("Server", "version", "customNamespace")) -- "v0.1.0-alpha.1"
+
+  If you want to understand how some aspects of this module works, then I
+  encourage you to take a look at the following Wiki pages:
+
+  - http://wiki.roblox.com/index.php?title=Module_scripts
+  - http://wiki.roblox.com/index.php?title=Data_store
+  - http://wiki.roblox.com/index.php?title=Methods
+  - http://wiki.roblox.com/index.php?title=Boolean#Or
 ]]
 
 local DataStore = game:GetService("DataStoreService")
