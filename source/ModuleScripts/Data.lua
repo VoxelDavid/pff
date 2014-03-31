@@ -17,39 +17,37 @@
 
 local DataStore = game:GetService("DataStoreService")
 
--- Creates a new key/value pair in the data store.
-function post(storeName, key, value)
-  local dataStore = DataStore:GetDataStore(storeName)
-  dataStore:SetAsync(key, value)
-end
+local Data = {
+  -- Functions are named after the HTTP request methods. :)
 
--- Updates/creates a key/value pair in the data store.
-function put(storeName, key, value)
-  local dataStore = DataStore:GetDataStore(storeName)
+  -- Creates a new key/value pair in the data store.
+  POST = function(storeName, key, value)
+    local dataStore = DataStore:GetDataStore(storeName)
+    dataStore:SetAsync(key, value)
+  end,
 
-  function updateCallback()
-    return value
+  -- Updates/creates a key/value pair in the data store.
+  PUT = function(storeName, key, value)
+    local dataStore = DataStore:GetDataStore(storeName)
+
+    function updateCallback()
+      return value
+    end
+
+    dataStore:UpdateAsync(key, updateCallback)
+  end,
+
+  -- Returns the key from the data store for use in the game.
+  GET = function(storeName, key)
+    local dataStore = DataStore:GetDataStore(storeName)
+    return dataStore:GetAsync(key)
+  end,
+
+  -- Sets the key's value to the string "deleted" to indicate
+  -- that it's been removed.
+  DELETE = function(storeName, key)
+    post(storeName, key, "deleted")
   end
-
-  dataStore:UpdateAsync(key, updateCallback)
-end
-
--- Returns the key from the data store for use in the game.
-function get(storeName, key)
-  local dataStore = DataStore:GetDataStore(storeName)
-  return dataStore:GetAsync(key)
-end
-
--- Sets the key's value to the string "deleted" to indicate
--- that it's been removed.
-function delete(storeName, key)
-  post(storeName, key, "deleted")
-end
-
-return {
-  -- Named after the HTTP request methods. :)
-  POST = post,
-  PUT = put,
-  GET = get,
-  DELETE = delete
 }
+
+return Data
