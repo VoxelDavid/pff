@@ -29,7 +29,7 @@
 
 local DataStore = game:GetService("DataStoreService")
 
-local globalScope = "global" -- default scope
+local DEFAULT_SCOPE = "global"
 
 local Data = {
   -- Functions are named after the HTTP request methods. :)
@@ -46,7 +46,7 @@ local Data = {
 
   -- Creates a new key/value pair in the data store.
   post = function(self, storeName, key, value, scope)
-    local scope = scope or globalScope
+    local scope = scope or DEFAULT_SCOPE
     local dataStore = DataStore:GetDataStore(storeName, scope)
 
     dataStore:SetAsync(key, value)
@@ -55,7 +55,7 @@ local Data = {
   -- Updates a key/value pair in the data store and will create
   -- the pair if not found.
   put = function(self, storeName, key, value, scope)
-    local scope = scope or globalScope
+    local scope = scope or DEFAULT_SCOPE
     local dataStore = DataStore:GetDataStore(storeName, scope)
 
     function updateCallback()
@@ -67,7 +67,7 @@ local Data = {
 
   -- Returns the key from the data store for use in the game.
   get = function(self, storeName, key, scope)
-    local scope = scope or globalScope
+    local scope = scope or DEFAULT_SCOPE
     local dataStore = DataStore:GetDataStore(storeName, scope)
 
     return dataStore:GetAsync(key)
@@ -76,7 +76,7 @@ local Data = {
   -- Sets the key's value to the string "deleted" to indicate
   -- that it's been removed.
   delete = function(self, storeName, key, scope)
-    local scope = scope or globalScope
+    local scope = scope or DEFAULT_SCOPE
 
     self:post(storeName, key, "deleted", scope)
   end
