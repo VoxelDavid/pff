@@ -3,7 +3,8 @@
 
   Usage:
 
-    local data = require(path.to.module)
+    -- Where this module is located in the game.
+    local data = require(game.Workspace.DataModule)
 
     data:put("Server", "version", "v0.1.0")
     print(data:get("Server", "version")) -- "v0.1.0"
