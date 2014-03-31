@@ -34,6 +34,16 @@ local globalScope = "global" -- default scope
 local Data = {
   -- Functions are named after the HTTP request methods. :)
 
+  --[[
+    Parameters:
+
+    - self      {table}  Set automatically when the colon is used to call the function.
+    - storeName {string} The name of the DataStore you want to access.
+    - key       {string} The key name to be used with the value when inserting the data.
+    - value     {any}    Accepts any value (Other than 'nil') to be applied as the value for 'key'.
+    - scope     {string} Optional last argument to set the scope/namespace of the Data Store.
+  ]]
+
   -- Creates a new key/value pair in the data store.
   post = function(self, storeName, key, value, scope)
     local scope = scope or globalScope
