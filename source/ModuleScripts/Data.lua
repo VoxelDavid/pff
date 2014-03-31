@@ -1,7 +1,7 @@
 --[[
   This module is used to easily make calls to the data store service.
 
-  Usage:
+  Usage example:
 
     -- Where this module is located in the game.
     local data = require(game.Workspace.DataModule)
