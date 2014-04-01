@@ -65,4 +65,3 @@ function convertVersionToTable(fullVersion)
   return versionTable
 end
 
-convertVersionToTable()
