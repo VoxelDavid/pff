@@ -51,6 +51,10 @@ function convertVersionToTable(fullVersion)
     local prereleaseNumber = prereleaseVersion:match("%d") -- 1
 
     versionTable[prereleaseName] = prereleaseNumber
+
+    -- A value used to check if the current version is a prerelease
+    -- without needing to look for "alpha" or "beta" strings.
+    versionTable.prerelease = true
   end
 
   majorMinorPatch()
