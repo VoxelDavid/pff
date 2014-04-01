@@ -7,8 +7,8 @@ repeat wait() until _G.ready
 local Data = require(_G.modules.Data)
 
 --[[
-  Takes the version string and seperates each part into a key/value pair in a table.
-  eg. v0.1.0-alpha.1 would be turned into:
+  Takes the version string and seperates each part into a key/value pair in
+  a table. Eg. "v0.1.0-alpha.1" would be turned into:
 
   {
     "full" = "v0.1.0-alpha.1",
@@ -18,7 +18,6 @@ local Data = require(_G.modules.Data)
     "alpha" = 1,
     "prerelease" = true
   }
-
 ]]
 function convertVersionToTable(fullVersion)
   -- fullVersion = "v0.1.0-alpha.1"
