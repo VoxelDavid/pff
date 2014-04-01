@@ -15,7 +15,8 @@ local Data = require(_G.modules.Data)
     "major" = 0,
     "minor" = 1,
     "patch" = 0,
-    "alpha" = 1
+    "alpha" = 1,
+    "prerelease" = true
   }
 
 ]]
@@ -46,8 +47,10 @@ function convertVersionToTable(fullVersion)
   end
 
   function prerelease()
-    versionTable[prereleaseVersion:match("%a+")] = prereleaseVersion:match("%d") -- alpha = 1
-  end
+    local prereleaseName = prereleaseVersion:match("%a+") -- alpha
+    local prereleaseNumber = prereleaseVersion:match("%d") -- 1
+
+    versionTable[prereleaseName] = prereleaseNumber
   end
 
   majorMinorPatch()
