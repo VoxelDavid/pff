@@ -28,9 +28,9 @@ function convertVersionToTable()
     full = version
   }
 
-  -- This is a horrible way of doing things. There has to be an existing
-  -- method to acomplish this task. This code needs to be revised asap.
   function majorMinorPatch()
+    -- Is there a method I can use to accomplish this
+    -- without an iterator variable?
     local iterator = 0
     for digit in versionNumber:gmatch("%d") do
       if iterator == 0 then
@@ -46,13 +46,14 @@ function convertVersionToTable()
   end
 
   function preRelease()
-    if preReleaseVersion then
-      versionTable[preReleaseVersion:match("%a+")] = preReleaseVersion:match("%d") -- alpha = 1
-    end
+    versionTable[preReleaseVersion:match("%a+")] = preReleaseVersion:match("%d") -- alpha = 1
   end
 
   majorMinorPatch()
-  preRelease()
+
+  if preReleaseVersion then
+    preRelease()
+  end
 
   return versionTable
 end
