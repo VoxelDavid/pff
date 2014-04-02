@@ -21,8 +21,8 @@ local Data = require(_G.modules.Data)
 ]]
 function convertVersionToTable(fullVersion)
   -- fullVersion = "v0.1.0-alpha.1"
-  local versionNumber = fullVersion:match("v%d\.%d\.%d") -- "v0.1.0"
-  local prereleaseVersion = fullVersion:match("\-%a*\.%d") -- "-alpha.1"
+  local versionNumber = fullVersion:match("v%d+\.%d+\.%d+") -- "v0.1.0"
+  local prereleaseVersion = fullVersion:match("\-%a*\.%d+") -- "-alpha.1"
 
   local versionTable = {
     full = fullVersion
@@ -32,22 +32,22 @@ function convertVersionToTable(fullVersion)
     -- Is there a method I can use to accomplish this
     -- without an iterator variable?
     local iterator = 0
-    for digit in versionNumber:gmatch("%d") do
+    for digit in versionNumber:gmatch("%d+") do
       if iterator == 0 then
-        versionTable.major = digit
+        versionTable.major = tonumber(digit)
       elseif iterator == 1 then
-        versionTable.minor = digit
+        versionTable.minor = tonumber(digit)
       elseif iterator == 2 then
-        versionTable.patch = digit
+        versionTable.patch = tonumber(digit)
       end
 
-      iterator = iterator +1
+      iterator = iterator + 1
     end
   end
 
   function prerelease()
     local prereleaseName = prereleaseVersion:match("%a+") -- alpha
-    local prereleaseNumber = prereleaseVersion:match("%d") -- 1
+    local prereleaseNumber = prereleaseVersion:match("%d+") -- 1
 
     versionTable[prereleaseName] = prereleaseNumber
 
