@@ -65,6 +65,13 @@ function convertVersionToTable(fullVersion)
   return versionTable
 end
 
+--[[
+  This convoluted function deciphers the server's semantic version number and
+  returns if it's up to date or not.
+
+  The complicated thing is, v0.5.0 is a greater version than v0.4.9, making
+  lots of 'if' statements required to figure everything out.
+]]
 function latestSemanticVersion()
   local currentVersion = convertVersionToTable(_G.version)
   local latestVersion = convertVersionToTable(Data:get("Server", "version"))
