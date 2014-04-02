@@ -134,3 +134,6 @@ function latestSemanticVersion()
   return compareVersions(currentVersion, latestVersion)
 end
 
+latestSemanticVersion()
+
+print("Loaded " .. script.Name)
