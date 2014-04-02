@@ -65,3 +65,56 @@ function convertVersionToTable(fullVersion)
   return versionTable
 end
 
+function latestSemanticVersion()
+  local currentVersion = convertVersionToTable(_G.version)
+  local latestVersion = convertVersionToTable(Data:get("Server", "version"))
+
+  print("Current version: " .. _G.version)
+  print("Latest version: " .. Data:get("Server", "version"))
+
+  function compareVersions(current, latest)
+    local majorUpdated
+    local minorUpdated
+
+    if current.major > latest.major then
+      majorUpdated = true
+      print "MAJOR was updated."
+    elseif current.major == latest.major then
+      print "MAJOR is the same as latest."
+    elseif current.major > latest.major then
+      majorUpdated = true
+      print "MAJOR is greated than latest."
+    else
+      print "MAJOR is out of date."
+    end
+
+    -- If MAJOR has been updated but MINOR is a lower value than latest, return true
+
+    if majorUpdated and (current.minor < latest.minor) or (current.minor == 0) then
+      minorUpdated = true
+      print "MINOR decreased in value, MAJOR was updated."
+    elseif current.minor == latest.minor then
+      print "MINOR is the same as latest."
+    elseif current.minor > latest.minor then
+      minorUpdated = true
+      print "MINOR is greated than latest."
+    else
+      print "MINOR is out of date."
+    end
+
+    -- If MINOR has been updated but PATCH is a lower value than latest, return true
+
+    if minorUpdated and (current.patch < latest.patch) or (current.patch == 0) then
+      print "PATCH decreased in value, MINOR was updated."
+    elseif current.patch == latest.patch then
+      print "PATCH is the same as latest."
+    elseif current.patch > latest.patch then
+      print "PATCH is greated than latest."
+    else
+      print "PATCH is out of date."
+    end
+  end
+
+  compareVersions(currentVersion, latestVersion)
+end
+
