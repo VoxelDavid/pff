@@ -109,6 +109,9 @@ function latestSemanticVersion()
     elseif current.patch > latest.patch then
       -- PATCH is greater than latest.
       return true
+    elseif current.patch == latest.patch then
+      -- PATCH is the same as latest.
+      return true
     else
       return false
     end
