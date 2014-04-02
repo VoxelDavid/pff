@@ -27,13 +27,13 @@ local Data = require(_G.modules.Data)
     "prerelease" = true
   }
 ]]
-function convertVersionToTable(fullVersion)
-  -- fullVersion = "v0.1.0-alpha.1"
-  local versionNumber = fullVersion:match("v%d+\.%d+\.%d+") -- "v0.1.0"
-  local prereleaseVersion = fullVersion:match("\-%a*\.%d+") -- "-alpha.1"
+function convertVersionToTable(versionString)
+  -- versionString = "v0.1.0-alpha.1"
+  local versionNumber = versionString:match("v%d+\.%d+\.%d+") -- "v0.1.0"
+  local prereleaseVersion = versionString:match("\-%a*\.%d+") -- "-alpha.1"
 
   local versionTable = {
-    full = fullVersion
+    full = versionString
   }
 
   function majorMinorPatch()
