@@ -1,5 +1,13 @@
 --[[
+  This script is used to check the current game versions and return if they are
+  up-to-date or not.
 
+  The two versions are the built-in PlaceVersion value and a string set in
+  Main.lua following the Semantic Versioning Specification (http://semver.org).
+
+  PlaceVersion is a quick way to see if the server instance is out of date, while
+  SemVer is a way to be more descriptive with the current game version, along with
+  making it clear when creating releases of the software.
 ]]
 
 repeat wait() until _G.ready
