@@ -69,45 +69,65 @@ function latestSemanticVersion()
   local currentVersion = convertVersionToTable(_G.version)
   local latestVersion = convertVersionToTable(Data:get("Server", "version"))
 
-  print("Current version: " .. _G.version)
-  print("Latest version: " .. Data:get("Server", "version"))
+  local majorUpdated
+  local minorUpdated
 
-  function compareVersions(current, latest)
-    local majorUpdated
-    local minorUpdated
-
+  function compareMajor(current, latest)
     if current.major > latest.major then
+      -- MAJOR was updated.
       majorUpdated = true
-      print "MAJOR was updated."
-    elseif current.major < latest.major then
-      majorUpdated = false
-      print "MAJOR is out of date."
-    end
-
-    -- If MAJOR has been updated but MINOR is a lower value than latest, return true
-
-    if current.minor < latest.minor and majorUpdated == true then
-      minorUpdated = true
-      print "MINOR decreased in value, MAJOR was updated."
-    elseif current.minor > latest.minor then
-      minorUpdated = true
-      print "MINOR is greater than latest"
-    elseif current.minor < latest.minor or majorUpdated == false then
-      minorUpdated = false
-      print "MINOR is out of date"
-    end
-
-    -- If MINOR has been updated but PATCH is a lower value than latest, return true
-
-    if current.patch < latest.patch and minorUpdated == true then
-      print "PATCH decreased in value, MINOR was updated."
-    elseif current.patch > latest.patch then
-      print "PATCH is greater than latest."
-    elseif current.patch < latest.patch or minorUpdated == false then
-      print "PATCH is out of date."
+      return true
+    elseif current.major == latest.major then
+      -- MAJOR is the same as latest.
+      return true
+    else
+      return false
     end
   end
 
-  compareVersions(currentVersion, latestVersion)
+  function compareMinor(current, latest)
+    if current.minor < latest.minor and majorUpdated == true then
+      -- MINOR decreased in value, MAJOR was updated.
+      minorUpdated = true
+      return true
+    elseif current.minor > latest.minor then
+      -- MINOR went up in value
+      minorUpdated = true
+      return true
+    elseif current.minor == latest.minor then
+      -- MINOR is the same as latest.
+      return true
+    else
+      return false
+    end
+  end
+
+  function comparePatch(current, latest)
+    if current.patch < latest.patch and minorUpdated == true then
+      -- PATCH decreased in value, MINOR was updated.
+      return true
+    elseif current.patch > latest.patch then
+      -- PATCH is greater than latest.
+      return true
+    else
+      return false
+    end
+  end
+
+  function compareVersions(current, latest)
+    local major = compareMajor(current, latest)
+    local minor = compareMinor(current, latest)
+    local patch = comparePatch(current, latest)
+
+    -- print(major, minor, patch)
+
+    if major and minor and patch then
+      return true
+    else
+      return false
+    end
+  end
+
+  return compareVersions(currentVersion, latestVersion)
 end
 
