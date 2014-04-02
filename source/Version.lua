@@ -79,38 +79,31 @@ function latestSemanticVersion()
     if current.major > latest.major then
       majorUpdated = true
       print "MAJOR was updated."
-    elseif current.major == latest.major then
-      print "MAJOR is the same as latest."
-    elseif current.major > latest.major then
-      majorUpdated = true
-      print "MAJOR is greated than latest."
-    else
+    elseif current.major < latest.major then
+      majorUpdated = false
       print "MAJOR is out of date."
     end
 
     -- If MAJOR has been updated but MINOR is a lower value than latest, return true
 
-    if majorUpdated and (current.minor < latest.minor) or (current.minor == 0) then
+    if current.minor < latest.minor and majorUpdated == true then
       minorUpdated = true
       print "MINOR decreased in value, MAJOR was updated."
-    elseif current.minor == latest.minor then
-      print "MINOR is the same as latest."
     elseif current.minor > latest.minor then
       minorUpdated = true
-      print "MINOR is greated than latest."
-    else
-      print "MINOR is out of date."
+      print "MINOR is greater than latest"
+    elseif current.minor < latest.minor or majorUpdated == false then
+      minorUpdated = false
+      print "MINOR is out of date"
     end
 
     -- If MINOR has been updated but PATCH is a lower value than latest, return true
 
-    if minorUpdated and (current.patch < latest.patch) or (current.patch == 0) then
+    if current.patch < latest.patch and minorUpdated == true then
       print "PATCH decreased in value, MINOR was updated."
-    elseif current.patch == latest.patch then
-      print "PATCH is the same as latest."
     elseif current.patch > latest.patch then
-      print "PATCH is greated than latest."
-    else
+      print "PATCH is greater than latest."
+    elseif current.patch < latest.patch or minorUpdated == false then
       print "PATCH is out of date."
     end
   end
