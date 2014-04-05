@@ -41,6 +41,36 @@ local Tween = {
       options.override,
       options.callback
     )
+  end,
+
+  size = function(self, gui, udim, options)
+    local options = merge(options, self.options) or self.options
+    local position = UDim2.new(unpack(udim))
+
+    gui:TweenSize(
+      position,
+      options.easingDirection,
+      options.easingStyle,
+      options.speed,
+      options.override,
+      options.callback
+    )
+  end,
+
+  sizeAndPosition = function(self, gui, udimSize, udimPos, options)
+    local options = merge(options, self.options) or self.options
+    local size = UDim2.new(unpack(udimSize))
+    local position = UDim2.new(unpack(udimPos))
+
+    gui:TweenSizeAndPosition(
+      size,
+      position,
+      options.easingDirection,
+      options.easingStyle,
+      options.speed,
+      options.override,
+      options.callback
+    )
   end
 }
 
