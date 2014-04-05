@@ -33,7 +33,14 @@ local Tween = {
     local options = merge(options, self.options) or self.options
     local position = UDim2.new(unpack(udim))
 
-    gui:TweenPosition(position)
+    gui:TweenPosition(
+      position,
+      options.easingDirection,
+      options.easingStyle,
+      options.speed,
+      options.override,
+      options.callback
+    )
   end
 }
 
