@@ -41,22 +41,11 @@ local Tween = {
   Combines two tables together, overriding key/value pairs if nessecary.
 ]]
 function merge(table1, table2)
-  -- I tried a simpler method which returned 'table2', but that was overwriting
-  -- the original table for whatever reason.
-
   -- http://stackoverflow.com/a/7470789
-
-  local merge = {}
-
-  for k,v in pairs(table1) do -- Make a copy of table2's values.
-    merge[k] = v
+  for k,v in pairs(table1) do
+    table2[k] = v
   end
-
-  for k,v in pairs(table2) do -- Override the copied values
-    merge[k] = v
-  end
-
-  return merge
+  return table2
 end
 
 return Tween
