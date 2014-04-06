@@ -55,12 +55,22 @@ local Tween = {
 --[[
   Combines two tables together, overriding key/value pairs if nessecary.
 ]]
-function merge(table1, table2)
-  -- http://stackoverflow.com/a/7470789
-  for k,v in pairs(table1) do
-    table2[k] = v
+function merge(options, defaultOptions)
+  local mergedOptions = {}
+
+  if options then
+    for k,v in pairs(defaultOptions) do
+      mergedOptions[k] = v
+    end
+
+    for k,v in pairs(options) do
+      mergedOptions[k] = v
+    end
+
+    return mergedOptions
+  else
+    return false
   end
-  return table2
 end
 
 return Tween
