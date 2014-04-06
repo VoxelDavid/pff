@@ -31,7 +31,7 @@ local Tween = {
   options = {
     easingDirection = "Out", -- http://wiki.roblox.com/index.php?title=EasingDirection
     easingStyle = "Quad",    -- http://wiki.roblox.com/index.php?title=EasingStyle
-    speed = 1,
+    time = 1,
     override = false,
     callback = nil
   },
@@ -40,14 +40,14 @@ local Tween = {
     local opts = merge(options, self.options) or self.options
     local position = UDim2.new(unpack(udim))
 
-    gui:TweenPosition(position, opts.easingDirection, opts.easingStyle, opts.speed, opts.override, opts.callback)
+    gui:TweenPosition(position, opts.easingDirection, opts.easingStyle, opts.time, opts.override, opts.callback)
   end,
 
   size = function(self, gui, udim, options)
     local opts = merge(options, self.options) or self.options
     local position = UDim2.new(unpack(udim))
 
-    gui:TweenSize(position, opts.easingDirection, opts.easingStyle, opts.speed, opts.override, opts.callback)
+    gui:TweenSize(position, opts.easingDirection, opts.easingStyle, opts.time, opts.override, opts.callback)
   end,
 
   sizeAndPosition = function(self, gui, udimSize, udimPos, options)
@@ -55,7 +55,7 @@ local Tween = {
     local size = UDim2.new(unpack(udimSize))
     local position = UDim2.new(unpack(udimPos))
 
-    gui:TweenSizeAndPosition(position, size, opts.easingDirection, opts.easingStyle, opts.speed, opts.override, opts.callback)
+    gui:TweenSizeAndPosition(position, size, opts.easingDirection, opts.easingStyle, opts.time, opts.override, opts.callback)
   end
 }
 
