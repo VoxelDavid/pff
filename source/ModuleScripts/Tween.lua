@@ -1,8 +1,8 @@
 --[[
   This module aims to make the already pretty straightforward Gui Tweening even
-  easier with some JavaScript style parameters.
+  easier with the use of Tables.
 
-  With the way extra parameters are passed to the tweening functions you can
+  With the way option parameters are passed to the tweening functions you can
   have them in any order you like.
 
   Example usage:
@@ -10,10 +10,17 @@
     local frame = script.Parent.Frame
 
     Tween:position(frame, {.325,0, .2,0}, {
+      -- Order doesn't matter here.
       easingStyle = "Elastic",
       speed = 3,
       override = true
     })
+
+  You can see the possible options that can go into the second table a few lines
+  below this comment, but they are also the same as the default Tweening params.
+
+  Feel free to edit the default options as well, just remember that they will
+  apply to everything.
 
   ToDo:
   - Shorthand options. Eg. {"Out", "Quad", 1, true}
