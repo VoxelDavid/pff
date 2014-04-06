@@ -9,7 +9,7 @@
 
     local frame = script.Parent.Frame
 
-    Tween:position(frame, {.325, .2}, {
+    Tween:position(frame, {.325,0, .2,0}, {
       easingStyle = "Elastic",
       speed = 3,
       override = true
