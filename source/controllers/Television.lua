@@ -2,19 +2,19 @@
 local sp = script.Parent
 local screen = sp.Screen
 local button = sp.ClickDetector
-local active = false
 local lightSource = screen.PointLight
 
 local screenProducesLight = true
 
+local tvIsActive = false -- Unconfigurable.
 local OFF_COLOR = "Black"
 
 function toggleState()
-  if active == false then
-    active = not active
+  if tvIsActive == false then
+    tvIsActive = not tvIsActive
     turnOnTV()
   else
-    active = not active
+    tvIsActive = not tvIsActive
     turnOffTV()
   end
 end
@@ -26,9 +26,7 @@ function turnOnTV()
   while true do
     local randomColor = Color3.new(math.random(), math.random(), math.random())
 
-    if active == false then
-      break
-    end
+    if tvIsActive == false then break end
 
     -- Change the randomly chosen color if it's the same as the current color.
     while randomColor == screen.Color do
