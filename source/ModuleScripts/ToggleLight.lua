@@ -1,7 +1,7 @@
 --[[
   When clicked it will toggle between an off and on state. Editing a PointLight
   and an optional Fire object to create a somewhat realistic effect.
-]]
+--]]
 
 --[[ These are the different variations of light sources and their respective
      properties that exist in the game. They're called by the 'className'

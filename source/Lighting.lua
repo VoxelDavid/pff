@@ -3,7 +3,7 @@
 
   The main functionality consists of a time cycle, and creating a 'time of day'
   value for other scripts to hook into.
-]]
+--]]
 
 local timeIncrement = 1.5 -- The amount added on to the current time every recurrence.
 local loopSpeed = 0       -- How long the loop will wait() before adding timeIncrement.

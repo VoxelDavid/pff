@@ -1,7 +1,7 @@
 --[[
   This script simply hooks into the TimeOfDay global value and fades
   the brightness in or out depending on the value.
-]]
+--]]
 
 local brightnessWhenDay = .3
 local brightnessWhenNight = 1

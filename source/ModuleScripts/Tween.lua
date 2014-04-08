@@ -25,7 +25,7 @@
   ToDo:
   - Shorthand options. Eg. {"Out", "Quad", 1, true}
   - Allowing the Offset to be omitted from UDim. Eg. {.325, .2}
-]]
+--]]
 
 local Tween = {
   options = {

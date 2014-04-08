@@ -8,7 +8,7 @@
   PlaceVersion is a quick way to see if the server instance is out of date, while
   SemVer is a way to be more descriptive with the current game version, along with
   making it clear when creating releases of the software.
-]]
+--]]
 
 repeat wait() until _G.ready
 

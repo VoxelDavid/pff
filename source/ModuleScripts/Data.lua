@@ -25,7 +25,7 @@
   - http://wiki.roblox.com/index.php?title=Data_store
   - http://wiki.roblox.com/index.php?title=Methods
   - http://wiki.roblox.com/index.php?title=Boolean#Or
-]]
+--]]
 
 local DataStore = game:GetService("DataStoreService")
 

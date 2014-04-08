@@ -14,7 +14,7 @@
     local bool = true
 
     console.warn("A descriptive warning description", bool) -- No output.
-]]
+--]]
 
 local TestService = game:GetService("TestService")
 
