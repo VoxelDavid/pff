@@ -5,10 +5,10 @@ local screenProducesLight = true -- If the PointLight will be used or not.
 local Television = {
   toggle = function(self, screen, light, active)
     if active.Value == false then
-      active.Value = not active.Value
+      active.Value = not active.Value -- true
       self.turnOn(screen, light, active)
     else
-      active.Value = not active.Value
+      active.Value = not active.Value -- false
       self.turnOff(screen, light)
     end
   end,
