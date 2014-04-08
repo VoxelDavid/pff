@@ -1,6 +1,6 @@
 
-local offColor = "Black"
-local screenProducesLight = true
+local offColor = "Black" -- BrickColor of the screen when it's off.
+local screenProducesLight = true -- If the PointLight will be used or not.
 
 local Television = {
   toggle = function(self, screen, light, active)
