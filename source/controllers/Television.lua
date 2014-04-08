@@ -1,57 +1,54 @@
 
-local sp = script.Parent
-local screen = sp.Screen
-local button = sp.Glass.ClickDetector
-local lightSource = screen.PointLight
-
 local offColor = "Black"
 local screenProducesLight = true
 
-local tvIsActive = false -- Unconfigurable.
+local Television = {
 
-function toggleState()
-  if tvIsActive == false then
-    tvIsActive = not tvIsActive
-    turnOnTV()
-  else
-    tvIsActive = not tvIsActive
-    turnOffTV()
-  end
-end
-button.MouseClick:connect(toggleState)
-
-function turnOnTV()
-  local loopSpeed = .6
-
-  while true do
-    local randomColor = Color3.new(math.random(), math.random(), math.random())
-
-    if tvIsActive == false then break end
-
-    -- Change the randomly chosen color if it's the same as the current color.
-    while randomColor == screen.Color do
-      randomColor = randomColor
+  toggleState = function(self, screen, light, active)
+    if active.Value == false then
+      active.Value = not active.Value
+      self:turnOnTV(screen, light, active)
+    else
+      active.Value = not active.Value
+      self:turnOffTV(screen, light)
     end
+  end,
 
-    changeScreenLightColorTo(randomColor)
-    changeScreenColorTo(randomColor)
-    wait(loopSpeed)
+  turnOnTV = function(self, screen, light, active)
+    local loopSpeed = .6
+
+    while true do
+      local randomColor = Color3.new(math.random(), math.random(), math.random())
+
+      if active.Value == false then break end
+
+      -- Change the randomly chosen color if it's the same as the current color.
+      while randomColor == screen.Color do
+        randomColor = randomColor
+      end
+
+      changeScreenLightColorTo(light, randomColor)
+      changeScreenColorTo(screen, randomColor)
+      wait(loopSpeed)
+    end
+  end,
+
+  turnOffTV = function(self, screen, light)
+    light.Enabled = false
+    changeScreenColorTo(screen, offColor)
   end
-end
 
-function turnOffTV()
-  lightSource.Enabled = false
-  changeScreenColorTo(offColor)
-end
+}
 
-function changeScreenLightColorTo(color)
+function changeScreenLightColorTo(light, color)
   if screenProducesLight == true then
-    lightSource.Enabled = true
-    lightSource.Color = color
+    light.Enabled = true
+    light.Color = color
   end
 end
 
-function changeScreenColorTo(color)
+function changeScreenColorTo(screen, color)
   screen.BrickColor = BrickColor.new(color)
 end
 
+return Television
