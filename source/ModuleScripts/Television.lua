@@ -17,9 +17,11 @@ local Television = {
     local loopSpeed = .6
 
     while true do
-      local randomColor = Color3.new(math.random(), math.random(), math.random())
+      if active.Value == false then
+        break -- Break out of the loop if the TV is off.
+      end
 
-      if active.Value == false then break end
+      local randomColor = Color3.new(math.random(), math.random(), math.random())
 
       -- Change the randomly chosen color if it's the same as the current color.
       while randomColor == screen.Color do
