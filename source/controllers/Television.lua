@@ -4,10 +4,10 @@ local screen = sp.Screen
 local button = sp.ClickDetector
 local lightSource = screen.PointLight
 
+local offColor = "Black"
 local screenProducesLight = true
 
 local tvIsActive = false -- Unconfigurable.
-local OFF_COLOR = "Black"
 
 function toggleState()
   if tvIsActive == false then
@@ -41,7 +41,7 @@ end
 
 function turnOffTV()
   lightSource.Enabled = false
-  changeScreenColorTo(OFF_COLOR)
+  changeScreenColorTo(offColor)
 end
 
 function changeScreenLightColorTo(color)
