@@ -3,18 +3,17 @@ local offColor = "Black"
 local screenProducesLight = true
 
 local Television = {
-
-  toggleState = function(self, screen, light, active)
+  toggle = function(self, screen, light, active)
     if active.Value == false then
       active.Value = not active.Value
-      self:turnOnTV(screen, light, active)
+      self:turnOn(screen, light, active)
     else
       active.Value = not active.Value
-      self:turnOffTV(screen, light)
+      self:turnOff(screen, light)
     end
   end,
 
-  turnOnTV = function(self, screen, light, active)
+  turnOn = function(self, screen, light, active)
     local loopSpeed = .6
 
     while true do
@@ -33,11 +32,10 @@ local Television = {
     end
   end,
 
-  turnOffTV = function(self, screen, light)
+  turnOff = function(self, screen, light)
     light.Enabled = false
     changeScreenColorTo(screen, offColor)
   end
-
 }
 
 function changeScreenLightColorTo(light, color)
