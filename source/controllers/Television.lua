@@ -1,7 +1,7 @@
 
 local sp = script.Parent
 local screen = sp.Screen
-local button = sp.ClickDetector
+local button = sp.Glass.ClickDetector
 local lightSource = screen.PointLight
 
 local offColor = "Black"
