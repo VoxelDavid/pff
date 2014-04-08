@@ -3,6 +3,9 @@ local sp = script.Parent
 local screen = sp.Screen
 local button = sp.ClickDetector
 local active = false
+local lightSource = screen.PointLight
+
+local screenProducesLight = true
 
 local OFF_COLOR = "Black"
 
@@ -32,13 +35,22 @@ function turnOnTV()
       randomColor = randomColor
     end
 
+    changeScreenLightColorTo(randomColor)
     changeScreenColorTo(randomColor)
     wait(loopSpeed)
   end
 end
 
 function turnOffTV()
+  lightSource.Enabled = false
   changeScreenColorTo(OFF_COLOR)
+end
+
+function changeScreenLightColorTo(color)
+  if screenProducesLight == true then
+    lightSource.Enabled = true
+    lightSource.Color = color
+  end
 end
 
 function changeScreenColorTo(color)
