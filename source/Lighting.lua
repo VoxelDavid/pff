@@ -39,25 +39,29 @@ end
 function getCurrentTime()
   local currentTime = lighting:GetMinutesAfterMidnight()
 
-  local sunrise = 360
-  local day     = sunrise + 60
-  local sunset  = 1060
-  local night   = sunset + 60
+  local midnight = 0
+  local dawn     = 300
+  local morning  = 360
+  local midday   = 720
+  local evening  = 1050
+  local dusk     = 1100
 
-  -- Check the time against the four grouped variables above and
-  -- output the time of day acordingly.
-
-  -- The '>=' operand is needed or else there's a point where no value is true,
+  -- The '>=' operator is needed or else there's a point where no value is true,
   -- causing the script to break.
-  if currentTime >= sunrise and currentTime < day then
-    return "sunrise"
-  elseif currentTime >= day and currentTime < sunset then
-    return "day"
-  elseif currentTime >= sunset and currentTime < night then
-    return "sunset"
-  -- Sunrise is a smaller value than night, need to use 'or' instead of 'and'.
-  elseif currentTime >= night or currentTime < sunrise then
-    return "night"
+
+  if currentTime >= midnight and currentTime < dawn then
+    return "midnight"
+  elseif currentTime >= dawn and currentTime < morning then
+    return "dawn"
+  elseif currentTime >= morning and currentTime < midday then
+    return "morning"
+  elseif currentTime >= midday and currentTime < evening then
+    return "midday"
+  elseif currentTime >= evening and currentTime < dusk then
+    return "evening"
+  -- 'midnight' is a smaller value than 'dusk', need to use the 'or' operator.
+  elseif currentTime >= dusk or currentTime < midnight then
+    return "dusk"
   end
 end
 
