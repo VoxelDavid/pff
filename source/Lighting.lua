@@ -27,15 +27,6 @@ function timeCycle()
   lighting:SetMinutesAfterMidnight(currentTime + timeIncrement)
 end
 
-function outputTimeOfDay()
-  local timeOfDay = script.TimeOfDay
-
-  -- Only update the time if it's changed.
-  if timeOfDay.Value ~= getCurrentTime() then
-    timeOfDay.Value = getCurrentTime()
-  end
-end
-
 function getCurrentTime()
   local currentTime = lighting:GetMinutesAfterMidnight()
 
@@ -75,6 +66,15 @@ function generateTimeValue()
   end
 
   _G.TimeOfDay = script.TimeOfDay
+end
+
+function outputTimeOfDay()
+  local timeOfDay = script.TimeOfDay
+
+  -- Only update the time if it's changed.
+  if timeOfDay.Value ~= getCurrentTime() then
+    timeOfDay.Value = getCurrentTime()
+  end
 end
 
 print("Loaded " .. script.Name)
