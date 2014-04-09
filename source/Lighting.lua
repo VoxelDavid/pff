@@ -62,13 +62,15 @@ function getCurrentTime()
 end
 
 function generateTimeValue()
-  -- Generate the TimeOfDay value if it doesn't already exist.
+  -- Generate the TimeOfDay value if it doesn't exist and define it as a global
+  -- variable for other scripts to hook into.
+
   if not script:FindFirstChild("TimeOfDay") then
     local timeValue = Instance.new("StringValue", script)
     timeValue.Name = "TimeOfDay"
-
-    _G.TimeOfDay = script:FindFirstChild("TimeOfDay")
   end
+
+  _G.TimeOfDay = script.TimeOfDay
 end
 
 print("Loaded " .. script.Name)
