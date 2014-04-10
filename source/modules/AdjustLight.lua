@@ -11,9 +11,9 @@ repeat wait(.1) until _G.TimeOfDay
 function adjustBrightness(lightSource)
   local timeOfDay = _G.TimeOfDay
 
-  if timeOfDay.Value == "sunrise" or timeOfDay.Value == "day" then
+  if timeOfDay.Value == "dawn" or timeOfDay.Value == "morning" then
     fadeOut(lightSource)
-  elseif timeOfDay.Value == "sunset" or timeOfDay.Value == "night" then
+  elseif timeOfDay.Value == "evening" or timeOfDay.Value == "dusk" then
     fadeIn(lightSource)
   end
 end
