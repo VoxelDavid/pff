@@ -8,7 +8,7 @@ local brightnessWhenNight = 1
 
 repeat wait(.1) until _G.TimeOfDay
 
-function adjustBrightness(lightSource)
+local AdjustLight = function(lightSource)
   local timeOfDay = _G.TimeOfDay
 
   --[[
@@ -37,4 +37,4 @@ function fadeIn(lightSource)
   end
 end
 
-return adjustBrightness
+return AdjustLight
