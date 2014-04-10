@@ -19,6 +19,7 @@ local lighting = game.Lighting
 function runLightingLoop()
   while wait(loopSpeed) do
     outputTimeOfDay()
+    changeAmbiance()
     timeCycle()
   end
 end
@@ -65,6 +66,32 @@ function getCurrentTime()
   end
 end
 
+--[[
+  Changes the map's ambiance acording to the values returned by
+  getCurrentTime().
+--]]
+function changeAmbiance()
+  local currentTime = getCurrentTime()
+
+  local ambient
+
+  if currentTime == "midnight" then
+    ambient = rgb(50,50,50)
+  elseif currentTime == "dawn" then
+    ambient = rgb(80,80,80)
+  elseif currentTime == "morning" then
+    ambient = rgb(120,120,120)
+  elseif currentTime == "midday" then
+    ambient = rgb(168,168,168)
+  elseif currentTime == "evening" then
+    ambient = rgb(120,120,120)
+  elseif currentTime == "dusk" then
+    ambient = rgb(80,80,80)
+  end
+
+  lighting.Ambient = ambient
+  lighting.OutdoorAmbient = ambient
+end
 
 --[[
   Creates the TimeOfDay value if it doesn't exist and defines it as a global
@@ -90,6 +117,10 @@ function outputTimeOfDay()
   if timeOfDay.Value ~= getCurrentTime() then
     timeOfDay.Value = getCurrentTime()
   end
+end
+
+function rgb(r, g, b)
+  return Color3.new(r/255, g/255, b/255)
 end
 
 print("Loaded " .. script.Name)
