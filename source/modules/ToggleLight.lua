@@ -3,9 +3,8 @@
   and an optional Fire object to create a somewhat realistic effect.
 --]]
 
---[[ These are the different variations of light sources and their respective
-     properties that exist in the game. They're called by the 'className'
-     parameter in toggleLight() ]]
+-- These are the different variations of light sources and their respective
+-- properties that exist inside the game.
 
 local classes = {
   candle = {
@@ -27,10 +26,17 @@ local classes = {
 
 local class, light, fire
 
---[[ 'className' is a string of one of the applicable objects in the 'classes' table.
-     'lightSource' is the location where a PointLight (and optionally a Fire object)
-     is stored (eg. script.Parent). and 'active' is a boolean value in the game. ]]
+--[[
+  - className {string}
+    The name of one of the tables inside of 'classes'
 
+  - lightSource {string}
+    The location where a PointLight (and optionally a Fire object) are stored.
+    (eg. script.Parent)
+
+  - active {BoolValue}
+    A boolean value to control if the current light is on or off.
+--]]
 function toggleLight(className, lightSource, active)
   class = className
   light = lightSource.PointLight
