@@ -6,11 +6,11 @@
 local brightnessWhenDay = .3
 local brightnessWhenNight = 1
 
-repeat wait(.1) until _G.TimeOfDay
+repeat wait() until _G.TimeOfDay
+
+local timeOfDay = _G.TimeOfDay
 
 local AdjustLight = function(lightSource)
-  local timeOfDay = _G.TimeOfDay
-
   --[[
     'morning' and 'dusk' are included incase the game's time is set in a place
     where it won't be triggered by 'dawn' or 'evening' for a while, fading out
