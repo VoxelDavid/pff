@@ -21,12 +21,19 @@ function runLightingLoop()
   end
 end
 
+--[[
+  Increments a value onto the current time to cycle through the day/night.
+--]]
 function timeCycle()
   local currentTime = lighting:GetMinutesAfterMidnight()
 
   lighting:SetMinutesAfterMidnight(currentTime + timeIncrement)
 end
 
+--[[
+  Uses variables to denote the times of the day, checks them against the
+  current time and returns a string of the time of day.
+--]]
 function getCurrentTime()
   local currentTime = lighting:GetMinutesAfterMidnight()
 
@@ -56,10 +63,12 @@ function getCurrentTime()
   end
 end
 
-function generateTimeValue()
-  -- Generate the TimeOfDay value if it doesn't exist and define it as a global
-  -- variable for other scripts to hook into.
 
+--[[
+  Creates the TimeOfDay value if it doesn't exist and defines it as a global
+  variable for other scripts to hook into.
+--]]
+function generateTimeValue()
   if not script:FindFirstChild("TimeOfDay") then
     local timeValue = Instance.new("StringValue", script)
     timeValue.Name = "TimeOfDay"
@@ -68,6 +77,10 @@ function generateTimeValue()
   _G.TimeOfDay = script.TimeOfDay
 end
 
+--[[
+  Takes the returned string from getCurrentTime() and applies it to the TimeOfDay
+  value.
+--]]
 function outputTimeOfDay()
   local timeOfDay = script.TimeOfDay
 
