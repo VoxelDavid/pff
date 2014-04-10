@@ -10,9 +10,11 @@ local loopSpeed = 0       -- How long the loop will wait() before adding timeInc
 
 local lighting = game.Lighting
 
---[[ Note: the 'currentTime' variable needs to be defined inside of the functions
-     that will be looped. If it's defined here, it will never get updated by the
-     loop redefining it every recurrence. ]]
+--[[
+  Note: the 'currentTime' variable needs to be defined inside the scope of
+  the functions that will be looped. If it's defined in the global scope, it
+  will never be redefined by the loop (getting the current time).
+--]]
 
 function runLightingLoop()
   while wait(loopSpeed) do
