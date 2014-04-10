@@ -37,7 +37,7 @@ local class, light, fire
   - active {BoolValue}
     A boolean value to control if the current light is on or off.
 --]]
-function toggleLight(className, lightSource, active)
+local ToggleLight = function(className, lightSource, active)
   class = className
   light = lightSource.PointLight
   -- Fire object is optional. Must be included in the same place as the PointLight.
@@ -74,4 +74,4 @@ function turnOff()
   end
 end
 
-return toggleLight
+return ToggleLight
