@@ -157,6 +157,5 @@ function latestPlaceVersion()
     return false
   end
 end
-latestSemanticVersion()
 
 print("Loaded " .. script.Name)
