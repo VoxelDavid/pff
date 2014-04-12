@@ -37,3 +37,5 @@ function cloneObjectsTo(location)
     clonedChild.Parent = location
   end
 end
+
+print("Loaded " .. script.Name)
