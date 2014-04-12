@@ -26,7 +26,7 @@ local Data = require(_G.modules.Data)
     "alpha" = 1,
     "prerelease" = true
   }
-]]
+--]]
 function convertVersionToTable(versionString)
   -- versionString = "v0.1.0-alpha.1"
   local versionNumber = versionString:match("v%d+\.%d+\.%d+") -- "v0.1.0"
@@ -37,8 +37,8 @@ function convertVersionToTable(versionString)
   }
 
   function majorMinorPatch()
-    -- Is there a method I can use to accomplish this
-    -- without an iterator variable?
+    -- Is there a method I can use to accomplish this without an iterator
+    -- variable?
     local iterator = 0
     for digit in versionNumber:gmatch("%d+") do
       if iterator == 0 then
@@ -79,7 +79,7 @@ end
 
   The complicated thing is, v0.5.0 is a greater version than v0.4.9, making
   lots of 'if' statements required to figure everything out.
-]]
+--]]
 function latestSemanticVersion()
   local currentVersion = convertVersionToTable(_G.version)
   local latestVersion = convertVersionToTable(Data:get("Server", "version"))
@@ -89,12 +89,10 @@ function latestSemanticVersion()
 
   function compareMajor(current, latest)
     if current.major > latest.major then
-      -- MAJOR was updated.
       majorUpdated = true
-      return true
+      return true -- MAJOR was updated.
     elseif current.major == latest.major then
-      -- MAJOR is the same as latest.
-      return true
+      return true -- MAJOR is the same as latest.
     else
       return false
     end
@@ -102,16 +100,13 @@ function latestSemanticVersion()
 
   function compareMinor(current, latest)
     if current.minor < latest.minor and majorUpdated == true then
-      -- MINOR decreased in value, MAJOR was updated.
       minorUpdated = true
-      return true
+      return true -- MINOR decreased in value, MAJOR was updated.
     elseif current.minor > latest.minor then
-      -- MINOR went up in value
       minorUpdated = true
-      return true
+      return true -- MINOR went up in value
     elseif current.minor == latest.minor then
-      -- MINOR is the same as latest.
-      return true
+      return true -- MINOR is the same as latest.
     else
       return false
     end
@@ -119,14 +114,11 @@ function latestSemanticVersion()
 
   function comparePatch(current, latest)
     if current.patch < latest.patch and minorUpdated == true then
-      -- PATCH decreased in value, MINOR was updated.
-      return true
+      return true -- PATCH decreased in value, MINOR was updated.
     elseif current.patch > latest.patch then
-      -- PATCH is greater than latest.
-      return true
+      return true -- PATCH is greater than latest.
     elseif current.patch == latest.patch then
-      -- PATCH is the same as latest.
-      return true
+      return true -- PATCH is the same as latest.
     else
       return false
     end
