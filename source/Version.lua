@@ -14,6 +14,8 @@ repeat wait() until _G.ready
 
 local Data = require(_G.modules.Data)
 
+local Version = {}
+
 --[[
   Takes the version string and seperates each part into a key/value pair in
   a table. Eg. "v0.1.0-alpha.1" would be turned into:
@@ -27,7 +29,7 @@ local Data = require(_G.modules.Data)
     "prerelease" = true
   }
 --]]
-function convertVersionToTable(versionString)
+function Version:convertToTable(versionString)
   -- versionString = "v0.1.0-alpha.1"
   local versionNumber = versionString:match("v%d+\.%d+\.%d+") -- "v0.1.0"
   local prereleaseVersion = versionString:match("\-%a*\.%d+") -- "-alpha.1"
@@ -80,9 +82,9 @@ end
   The complicated thing is, v0.5.0 is a greater version than v0.4.9, making
   lots of 'if' statements required to figure everything out.
 --]]
-function latestSemanticVersion()
-  local currentVersion = convertVersionToTable(_G.version)
-  local latestVersion = convertVersionToTable(Data:get("Server", "version"))
+function Version:latestSemantic()
+  local currentVersion = self:convertToTable(_G.version)
+  local latestVersion = self:convertToTable(Data:get("Server", "version"))
 
   local majorUpdated
   local minorUpdated
@@ -147,8 +149,8 @@ end
 
   (SO much easier than the semantic version number)
 --]]
-function latestPlaceVersion()
-  local currentPlaceVersion = game.PlaceVersion
+function Version:latestPlace()
+  local currentVersion = game.PlaceVersion
   local latestVersion = Data:get("Server", "placeVersion")
 
   if currentVersion >= latestVersion then
@@ -158,4 +160,4 @@ function latestPlaceVersion()
   end
 end
 
-print("Loaded " .. script.Name)
+return Version
