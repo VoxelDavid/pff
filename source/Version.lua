@@ -149,6 +149,22 @@ function latestSemanticVersion()
   return compareVersions(currentVersion, latestVersion)
 end
 
+--[[
+  Compare the PlaceVersion value against the one on the server and return if
+  the current one is up to date or not.
+
+  (SO much easier than the semantic version number)
+--]]
+function latestPlaceVersion()
+  local currentPlaceVersion = game.PlaceVersion
+  local latestVersion = Data:get("Server", "placeVersion")
+
+  if currentVersion >= latestVersion then
+    return true
+  else
+    return false
+  end
+end
 latestSemanticVersion()
 
 print("Loaded " .. script.Name)
