@@ -160,4 +160,21 @@ function Version:latestPlace()
   end
 end
 
+--[[
+  Pushes up the current Semantic and Place versions to the "Server" datastore if
+  they are the same or greater than the ones stored.
+--]]
+function Version:updateStoredData()
+  local latestSemanticVersion = self:latestSemantic()
+  local latestPlaceVersion = self:latestPlace()
+
+  if latestSemanticVersion then
+    Data:put("Server", "version", _G.version)
+  end
+
+  if latestPlaceVersion then
+    Data:put("Server", "placeVersion", game.PlaceVersion)
+  end
+end
+
 return Version
