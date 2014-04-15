@@ -201,15 +201,12 @@ end
   they are the same or greater than the ones stored.
 --]]
 function Version:UpdateStoredData()
-  local latestSemanticVersion = self:LatestSemantic()
-  local latestPlaceVersion = self:LatestPlace()
-
-  if latestSemanticVersion then
-    Data:put("Server", "version", _G.version)
+  if self:LatestSemantic() then
+    Data:Put("Server", "version", _G.version)
   end
 
-  if latestPlaceVersion then
-    Data:put("Server", "placeVersion", game.PlaceVersion)
+  if self:LatestPlace() then
+    Data:Put("Server", "placeVersion", game.PlaceVersion)
   end
 end
 
