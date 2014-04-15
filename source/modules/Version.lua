@@ -41,11 +41,11 @@ function Version:ConvertToTable(versionString)
     local iterator = 0
     for digit in versionNumber:gmatch("%d+") do
       if iterator == 0 then
-        versionTable.major = tonumber(digit)
+        versionTable.major = tonumber(digit) -- 0
       elseif iterator == 1 then
-        versionTable.minor = tonumber(digit)
+        versionTable.minor = tonumber(digit) -- 1
       elseif iterator == 2 then
-        versionTable.patch = tonumber(digit)
+        versionTable.patch = tonumber(digit) -- 0
       end
 
       iterator = iterator + 1
