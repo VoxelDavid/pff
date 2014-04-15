@@ -35,7 +35,7 @@ function Version:ConvertToTable(versionString)
 
   local versionTable = {}
 
-  function majorMinorPatch()
+  local function majorMinorPatch()
     -- Is there a method I can use to accomplish this without an iterator
     -- variable?
     local iterator = 0
@@ -52,7 +52,7 @@ function Version:ConvertToTable(versionString)
     end
   end
 
-  function prerelease()
+  local function prerelease()
     local prereleaseName = prereleaseVersion:match("%a+") -- alpha
     local prereleaseNumber = prereleaseVersion:match("%d+") -- 1
 
@@ -98,7 +98,7 @@ function Version:LatestSemantic()
   local majorUpdated
   local minorUpdated
 
-  function compareMajor(current, latest)
+  local function compareMajor(current, latest)
     if current.major > latest.major then
       majorUpdated = true
       return true -- MAJOR was updated.
@@ -109,7 +109,7 @@ function Version:LatestSemantic()
     end
   end
 
-  function compareMinor(current, latest)
+  local function compareMinor(current, latest)
     if current.minor < latest.minor and majorUpdated == true then
       minorUpdated = true
       return true -- MINOR decreased in value, MAJOR was updated.
@@ -123,7 +123,7 @@ function Version:LatestSemantic()
     end
   end
 
-  function comparePatch(current, latest)
+  local function comparePatch(current, latest)
     if current.patch < latest.patch and minorUpdated == true then
       return true -- PATCH decreased in value, MINOR was updated.
     elseif current.patch > latest.patch then
@@ -135,7 +135,7 @@ function Version:LatestSemantic()
     end
   end
 
-  function comparePrerelease(current, latest)
+  local function comparePrerelease(current, latest)
     local pre = current.prerelease -- "alpha"
 
     if current[pre] >= latest[pre] then
@@ -145,7 +145,7 @@ function Version:LatestSemantic()
     end
   end
 
-  function compareVersions(current, latest)
+  local function compareVersions(current, latest)
     local major = compareMajor(current, latest)
     local minor = compareMinor(current, latest)
     local patch = comparePatch(current, latest)
