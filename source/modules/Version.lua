@@ -180,7 +180,14 @@ end
 --]]
 function Version:LatestPlace()
   local currentVersion = game.PlaceVersion
-  local latestVersion = Data:get("Server", "placeVersion")
+  local latestVersion
+
+  if Data:Get("Server", "placeVersion") then
+    latestVersion = Data:Get("Server", "placeVersion")
+  else
+    warn("Latest place version does not exist in the \"version\" DataStore. Set to game.PlaceVersion.")
+    latestVersion = game.PlaceVersion
+  end
 
   if currentVersion >= latestVersion then
     return true
