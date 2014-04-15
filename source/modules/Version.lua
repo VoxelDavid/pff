@@ -21,7 +21,6 @@ local Version = {}
   a table. Eg. "v0.1.0-alpha.1" would be turned into:
 
   {
-    "full" = "v0.1.0-alpha.1",
     "major" = 0,
     "minor" = 1,
     "patch" = 0,
@@ -34,9 +33,7 @@ function Version:ConvertToTable(versionString)
   local versionNumber = versionString:match("v%d+\.%d+\.%d+") -- "v0.1.0"
   local prereleaseVersion = versionString:match("\-%a*\.%d+") -- "-alpha.1"
 
-  local versionTable = {
-    full = versionString
-  }
+  local versionTable = {}
 
   function majorMinorPatch()
     -- Is there a method I can use to accomplish this without an iterator
