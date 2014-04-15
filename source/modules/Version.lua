@@ -61,9 +61,13 @@ function Version:ConvertToTable(versionString)
 
     versionTable[prereleaseName] = prereleaseNumber
 
-    -- A value used to check if the current version is a prerelease
-    -- without needing to look for "alpha" or "beta" strings.
-    versionTable.prerelease = true
+    --[[
+      A value used to easily get the current prerelease version number, without
+      having to search for "alpha" or "beta". eg:
+
+        print(versionTable[versionTable.prerelease]) -- 1
+    --]]
+    versionTable.prerelease = prereleaseName
   end
 
   majorMinorPatch()
@@ -133,14 +137,31 @@ function Version:LatestSemantic()
     end
   end
 
+  function comparePrerelease(current, latest)
+    local pre = current.prerelease -- "alpha"
+
+    if current[pre] >= latest[pre] then
+      return true
+    else
+      return false
+    end
+  end
+
   function compareVersions(current, latest)
     local major = compareMajor(current, latest)
     local minor = compareMinor(current, latest)
     local patch = comparePatch(current, latest)
+    local prerelease = comparePrerelease(current, latest)
 
-    -- print(major, minor, patch)
+    -- print(major, minor, patch, prerelease)
 
     if major and minor and patch then
+      if prerelease then
+        return true
+      else
+        return false
+      end
+
       return true
     else
       return false
