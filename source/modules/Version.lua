@@ -94,7 +94,8 @@ function Version:LatestSemantic()
     latestVersion = self:ConvertToTable(Data:Get("Server", "version"))
   else
     -- If you forget to set the place version in a new game.
-    error("Latest semantic version does not exist in the \"version\" DataStore.")
+    warn("Latest semantic version does not exist in the \"version\" DataStore. Set to _G.version.")
+    latestVersion = self:ConvertToTable(_G.version)
   end
 
   local majorUpdated
@@ -203,6 +204,10 @@ function Version:UpdateStoredData()
   if latestPlaceVersion then
     Data:put("Server", "placeVersion", game.PlaceVersion)
   end
+end
+
+function warn(message)
+  game:GetService("TestService"):Warn(false, message)
 end
 
 return Version
