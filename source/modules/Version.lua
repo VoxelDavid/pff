@@ -29,7 +29,7 @@ local Version = {}
     "prerelease" = true
   }
 --]]
-function Version:convertToTable(versionString)
+function Version:ConvertToTable(versionString)
   -- versionString = "v0.1.0-alpha.1"
   local versionNumber = versionString:match("v%d+\.%d+\.%d+") -- "v0.1.0"
   local prereleaseVersion = versionString:match("\-%a*\.%d+") -- "-alpha.1"
@@ -82,9 +82,9 @@ end
   The complicated thing is, v0.5.0 is a greater version than v0.4.9, making
   lots of 'if' statements required to figure everything out.
 --]]
-function Version:latestSemantic()
-  local currentVersion = self:convertToTable(_G.version)
-  local latestVersion = self:convertToTable(Data:get("Server", "version"))
+function Version:LatestSemantic()
+  local currentVersion = self:ConvertToTable(_G.version)
+  local latestVersion = self:ConvertToTable(Data:Get("Server", "version"))
 
   local majorUpdated
   local minorUpdated
@@ -149,7 +149,7 @@ end
 
   (SO much easier than the semantic version number)
 --]]
-function Version:latestPlace()
+function Version:LatestPlace()
   local currentVersion = game.PlaceVersion
   local latestVersion = Data:get("Server", "placeVersion")
 
@@ -164,9 +164,9 @@ end
   Pushes up the current Semantic and Place versions to the "Server" datastore if
   they are the same or greater than the ones stored.
 --]]
-function Version:updateStoredData()
-  local latestSemanticVersion = self:latestSemantic()
-  local latestPlaceVersion = self:latestPlace()
+function Version:UpdateStoredData()
+  local latestSemanticVersion = self:LatestSemantic()
+  local latestPlaceVersion = self:LatestPlace()
 
   if latestSemanticVersion then
     Data:put("Server", "version", _G.version)

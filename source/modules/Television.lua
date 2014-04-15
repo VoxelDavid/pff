@@ -3,17 +3,17 @@ local offColor = "Black" -- BrickColor of the screen when it's off.
 local screenProducesLight = true -- If the PointLight will be used or not.
 
 local Television = {
-  toggle = function(self, screen, light, active)
+  Toggle = function(self, screen, light, active)
     if active.Value == false then
       active.Value = not active.Value -- true
-      self.turnOn(screen, light, active)
+      self.TurnOn(screen, light, active)
     else
       active.Value = not active.Value -- false
-      self.turnOff(screen, light)
+      self.TurnOff(screen, light)
     end
   end,
 
-  turnOn = function(screen, light, active)
+  TurnOn = function(screen, light, active)
     local loopSpeed = .6
 
     while true do
@@ -34,7 +34,7 @@ local Television = {
     end
   end,
 
-  turnOff = function(screen, light)
+  TurnOff = function(screen, light)
     light.Enabled = false
     changeScreenColorTo(screen, offColor)
   end

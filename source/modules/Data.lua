@@ -4,19 +4,19 @@
   Usage example:
 
     -- Where this module is located in the game.
-    local data = require(game.Workspace.DataModule)
+    local Data = require(game.Workspace.DataModule)
 
-    data:put("Server", "version", "v0.1.0")
-    print(data:get("Server", "version")) -- "v0.1.0"
+    Data:Put("Server", "version", "v0.1.0")
+    print(Data:Get("Server", "version")) -- "v0.1.0"
 
-    data:delete("Server", "version")
-    print(data:get("Server", "version")) -- "deleted"
+    Data:Delete("Server", "version")
+    print(Data:Get("Server", "version")) -- "deleted"
 
   Namespaces/Scopes can be set as an optional last argument:
 
-    data:put("Server", "version", "v0.1.0-alpha.1", "customNamespace")
-    print(data:get("Server", "version")) -- "v0.1.0" (Assuming you used the earlier example, otherwise no value will appear.)
-    print(data:get("Server", "version", "customNamespace")) -- "v0.1.0-alpha.1"
+    Data:Put("Server", "version", "v0.1.0-alpha.1", "customNamespace")
+    print(Data:Get("Server", "version")) -- "v0.1.0" (Assuming you used the earlier example, otherwise no value will appear.)
+    print(Data:Get("Server", "version", "customNamespace")) -- "v0.1.0-alpha.1"
 
   If you want to understand how some aspects of this module works, then I
   encourage you to take a look at the following Wiki pages:
@@ -45,7 +45,7 @@ local Data = {
   ]]
 
   -- Creates a new key/value pair in the data store.
-  post = function(self, storeName, key, value, scope)
+  Post = function(self, storeName, key, value, scope)
     local scope = scope or DEFAULT_SCOPE
     local dataStore = DataStore:GetDataStore(storeName, scope)
 
@@ -54,7 +54,7 @@ local Data = {
 
   -- Updates a key/value pair in the data store and will create
   -- the pair if not found.
-  put = function(self, storeName, key, value, scope)
+  Put = function(self, storeName, key, value, scope)
     local scope = scope or DEFAULT_SCOPE
     local dataStore = DataStore:GetDataStore(storeName, scope)
 
@@ -66,7 +66,7 @@ local Data = {
   end,
 
   -- Returns the key from the data store for use in the game.
-  get = function(self, storeName, key, scope)
+  Get = function(self, storeName, key, scope)
     local scope = scope or DEFAULT_SCOPE
     local dataStore = DataStore:GetDataStore(storeName, scope)
 
@@ -75,10 +75,10 @@ local Data = {
 
   -- Sets the key's value to the string "deleted" to indicate
   -- that it's been removed.
-  delete = function(self, storeName, key, scope)
+  Delete = function(self, storeName, key, scope)
     local scope = scope or DEFAULT_SCOPE
 
-    self:post(storeName, key, "deleted", scope)
+    self:Post(storeName, key, "deleted", scope)
   end
 }
 

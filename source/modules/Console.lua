@@ -19,11 +19,11 @@
 local TestService = game:GetService("TestService")
 
 local Console = {
-  log = function(description)
+  Log = function(description)
     TestService:Message(description)
   end,
 
-  warn = function(description, condition)
+  Warn = function(description, condition)
     local condition = condition or false
 
     TestService:Warn(condition, description)

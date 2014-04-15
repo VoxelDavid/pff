@@ -36,21 +36,21 @@ local Tween = {
     callback = nil
   },
 
-  position = function(self, gui, udim, options)
+  Position = function(self, gui, udim, options)
     local opts = merge(options, self.options) or self.options
     local position = UDim2.new(unpack(udim))
 
     gui:TweenPosition(position, opts.easingDirection, opts.easingStyle, opts.time, opts.override, opts.callback)
   end,
 
-  size = function(self, gui, udim, options)
+  Size = function(self, gui, udim, options)
     local opts = merge(options, self.options) or self.options
     local position = UDim2.new(unpack(udim))
 
     gui:TweenSize(position, opts.easingDirection, opts.easingStyle, opts.time, opts.override, opts.callback)
   end,
 
-  sizeAndPosition = function(self, gui, udimSize, udimPos, options)
+  SizeAndPosition = function(self, gui, udimSize, udimPos, options)
     local opts = merge(options, self.options) or self.options
     local size = UDim2.new(unpack(udimSize))
     local position = UDim2.new(unpack(udimPos))
