@@ -18,21 +18,22 @@ game.Players.PlayerAdded:connect(function(player)
 end)
 
 function copyToPlayerCharacter(char)
-  local localPlayerStorage = cloneLocation(char)
+  local localPlayerStorage = storageLocation(char)
 
-  cloneObjectsTo(localPlayerStorage)
+  cloneDescendantsTo(localPlayerStorage)
 end
 
-function cloneLocation(location)
+function storageLocation(location)
   if not location:FindFirstChild(storageName) then
     local storage = Instance.new("Configuration", location)
     storage.Name = storageName
   end
+
   return location:FindFirstChild(storageName)
 end
 
-function cloneObjectsTo(location)
-  for _,child in pairs(script:GetChildren()) do
+function cloneDescendantsTo(location)
+  for index, child in pairs(script:GetChildren()) do
     local clonedChild = child:clone()
     clonedChild.Parent = location
   end
