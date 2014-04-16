@@ -199,11 +199,11 @@ end
 --]]
 function Version:UpdateStoredData()
   if self:LatestSemantic() then
-    Data:Put("Server", "version", _G.version)
+    Data:Update("Server", "version", _G.version)
   end
 
   if self:LatestPlace() then
-    Data:Put("Server", "placeVersion", game.PlaceVersion)
+    Data:Update("Server", "placeVersion", game.PlaceVersion)
   end
 end
 

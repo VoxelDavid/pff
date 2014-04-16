@@ -6,7 +6,7 @@
     -- Where this module is located in the game.
     local Data = require(game.Workspace.DataModule)
 
-    Data:Put("Server", "version", "v0.1.0")
+    Data:Update("Server", "version", "v0.1.0")
     print(Data:Get("Server", "version")) -- "v0.1.0"
 
     Data:Delete("Server", "version")
@@ -14,7 +14,7 @@
 
   Namespaces/Scopes can be set as an optional last argument:
 
-    Data:Put("Server", "version", "v0.1.0-alpha.1", "customNamespace")
+    Data:Update("Server", "version", "v0.1.0-alpha.1", "customNamespace")
     print(Data:Get("Server", "version")) -- "v0.1.0" (Assuming you used the earlier example, otherwise no value will appear.)
     print(Data:Get("Server", "version", "customNamespace")) -- "v0.1.0-alpha.1"
 
@@ -30,8 +30,6 @@ local DEFAULT_SCOPE = "global"
 
 local Data = {}
 
--- Data methods are named after the HTTP request methods. :)
-
 --[[
   string storeName The name of the DataStore you want to access.
   string key       The key name to be used with the value when storing the data.
@@ -40,7 +38,7 @@ local Data = {}
 --]]
 
 -- Creates a new key/value pair in the data store.
-function Data:Post(storeName, key, value, scope)
+function Data:Create(storeName, key, value, scope)
   local scope = scope or DEFAULT_SCOPE
   local dataStore = DataStore:GetDataStore(storeName, scope)
 
@@ -49,7 +47,7 @@ end
 
 -- Updates a key/value pair in the data store and will create the pair if not
 -- found.
-function Data:Put(storeName, key, value, scope)
+function Data:Update(storeName, key, value, scope)
   local scope = scope or DEFAULT_SCOPE
   local dataStore = DataStore:GetDataStore(storeName, scope)
 
@@ -73,7 +71,7 @@ end
 function Data:Delete(storeName, key, scope)
   local scope = scope or DEFAULT_SCOPE
 
-  self:Post(storeName, key, "deleted", scope)
+  self:Create(storeName, key, "deleted", scope)
 end
 
 return Data
