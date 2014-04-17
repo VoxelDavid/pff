@@ -18,16 +18,16 @@
 
 local TestService = game:GetService("TestService")
 
-local Console = {
-  Log = function(description)
-    TestService:Message(description)
-  end,
+local Console = {}
 
-  Warn = function(description, condition)
-    local condition = condition or false
+function Console:Log(description)
+  TestService:Message(description)
+end
 
-    TestService:Warn(condition, description)
-  end
-}
+function Console:Warn(description, condition)
+  local condition = condition or false
+
+  TestService:Warn(condition, description)
+end
 
 return Console
