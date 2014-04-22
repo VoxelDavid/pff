@@ -1,10 +1,6 @@
-## Project Final Farewell: A Roblox Project
+## RBX.Lua Dump
 
-Project Final Farewell (PFF) was originally planned as a recreation of my old game [Island Tycoon](http://www.roblox.com/Island-Tycoon-place?id=15541427).
-
-At this point I have no direction as to what I want to make anymore. Currently this repository is a placeholder for something in the future.
-
-I'm mainly just coding cool stuff with it and trying out different techniques.
+This is a Lua code repository written specifically for the [RBX](http://wiki.roblox.com/index.php?title=RBX.Lua_Glossary) Lua variation. Originally intended to be a game, it is now a generic repository of code for use in future projects.
 
 ## Contributing
 
