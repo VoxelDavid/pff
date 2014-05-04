@@ -1,53 +1,66 @@
 
-local offColor = "Black" -- BrickColor of the screen when it's off.
-local screenProducesLight = true -- If the PointLight will be used or not.
+Television = {
+  OffColor = "Black", -- BrickColor of the screen when it's off.
+  ScreenProducesLight = true -- If the PointLight will be used or not.
+}
 
-local Television = {}
+Television.__index = Television
 
+function Television.new(screen, light, active)
+  local instance = {
+    screen = screen,
+    light = light,
+    active = active
+  }
 
+  return setmetatable(instance, Television)
+end
 
+function Television:Toggle()
+  local active = self.active
 
-function Television:Toggle(screen, light, active)
   if active.Value then
     active.Value = not active.Value -- false
-    self:TurnOff(screen, light)
+    self:TurnOff()
   else
     active.Value = not active.Value -- true
-    self:TurnOn(screen, light, active)
+    self:TurnOn()
   end
 end
 
-function Television:TurnOn(screen, light, active)
+function Television:TurnOn()
   local loopSpeed = .6
 
   while true do
-    if active.Value == false then
+    if self.active.Value == false then
       break -- Break out of the loop if the TV is off.
     end
 
     local randomColor = Color3.new(math.random(), math.random(), math.random())
 
     -- Change the randomly chosen color if it's the same as the current color.
-    while randomColor == screen.Color do
+    while randomColor == self.screen.Color do
       randomColor = randomColor
     end
 
-    changeScreenLightColorTo(light, randomColor)
-    changeScreenColorTo(screen, randomColor)
-    wait(loopSpeed)
+    changeScreenColorTo(self.screen, randomColor)
+
+    if self.ScreenProducesLight then
+      changeScreenLightColorTo(self.light, randomColor)
+    end
+
+    wait(loopSpeed) -- Wait at the end of the loop so it can be run first.
   end
 end
 
-function Television:TurnOff(screen, light, active)
-  light.Enabled = false
-  changeScreenColorTo(screen, offColor)
+function Television:TurnOff()
+  self.light.Enabled = false
+  changeScreenColorTo(self.screen, self.OffColor)
 end
 
 function changeScreenLightColorTo(light, color)
-  if screenProducesLight == true then
-    light.Enabled = true
-    light.Color = color
-  end
+  light.Enabled = true
+  light.Color = color
 end
 
 function changeScreenColorTo(screen, color)
