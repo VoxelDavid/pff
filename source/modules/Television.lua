@@ -10,20 +10,18 @@ function Television.new(screen, light, active)
   local instance = {
     screen = screen,
     light = light,
-    active = active
+    active = active or false
   }
 
   return setmetatable(instance, Television)
 end
 
 function Television:Toggle()
-  local active = self.active
-
-  if active.Value then
-    active.Value = not active.Value -- false
+  if self.active then
+    self.active = not self.active -- false
     self:TurnOff()
   else
-    active.Value = not active.Value -- true
+    self.active = not self.active -- true
     self:TurnOn()
   end
 end
