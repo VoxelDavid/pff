@@ -1,96 +1,121 @@
 --[[
+  A robust module used to handle light sources -- candles, fireplaces, and
+  lamps, to name a few.
 
+  Usage example:
+
+    local LightSource = require(game.ServerScriptService.LightSource)
+
+    local light = LightSource.new(script.Parent)
+    light.Range = 20
+    light.IgniteSpeed = 5
+    light.ExtinguishSpeed = 10
 --]]
 
--- Constants
+-- Setup the LightSource constructor with default properties.
+local LightSource = {
+  -- The range of the light when activated.
+  Range = 8,
 
-local RANGE                 = 12
-local IGNITE_SPEED          = 6
-local EXTINGUISH_SPEED      = 3
+  -- How quickly the light will be activated and deactivated, respectively. The
+  -- lower the value, the quicker the transition.
+  IgniteSpeed = 5,
+  ExtinguishSpeed = 12
+}
 
-repeat wait() until _G.TimeOfDay
-local timeOfDay = _G.TimeOfDay
+--[[
+  Create a new light source instance.
 
-local LightSource = {}
+  @param Instance lightRoot
+    The container where a PointLight instance and an optional Fire instance are
+    stored.
 
-function LightSource:Init(lightRoot, activeValue, config)
-  local light      = lightRoot:FindFirstChild("PointLight")
-  local fire       = lightRoot:FindFirstChild("Fire")
-  local range      = config.range           or RANGE
-  local ignite     = config.igniteSpeed     or IGNITE_SPEED
-  local extinguish = config.extinguishSpeed or EXTINGUISH_SPEED
+  @ToDo
+    Allow for an optional 'active' param to be passed. When true, turn on the
+    newly created light source.
+--]]
+function LightSource.new(lightRoot)
+  local light  = lightRoot:FindFirstChild("PointLight")
+  local fire   = lightRoot:FindFirstChild("Fire")
 
-  if not light or not activeValue then
-    error("A PointLight and a BoolValue named \"Active\" must exist inside the location passed to the LightSource method.")
+  if not light then
+    -- Throw an error, giving a helpful stack trace to find which light source
+    -- is missing its PointLight object.
+    error("A PointLight must exist inside of the first parameter passed to Lightsource.new()")
   end
 
-  local init = {
-    source = light,
-    active = activeValue,
-    range = range,
-    igniteSpeed = ignite,
-    extinguishSpeed = extinguish
+  local instance = {
+    Light = light,
+    Active = false -- The lights are always off by default
   }
 
   if fire then
-    init.fire = fire
+    instance.Fire = fire
   end
 
-  return init
+  return setmetatable(instance, LightSource)
 end
+LightSource.__index = LightSource
 
-function LightSource:ToggleActive(lightRoot, activeValue, config)
-  local active = activeValue
-
-  if active.Value == true then
-    self:TurnOff(lightRoot, activeValue, config)
+--[[
+  Use the Active value in each instance to toggle the light source on and off,
+  using the respective methods.
+--]]
+function LightSource:ToggleActive()
+  if self.Active then
+    self:TurnOff()
   else
-    self:TurnOn(lightRoot, activeValue, config)
+    self:TurnOn()
   end
 
-  active.Value = not active.Value
+  self.Active = not self.Active
 end
 
-function LightSource:TurnOn(lightRoot, activeValue, config)
-  local light  = self:Init(lightRoot, activeValue, config)
-  local source = light.source
-  local fire   = light.fire
-  local range  = light.range
-  local speed  = light.igniteSpeed
+--[[
+  Fade in the Range property of a PointLight object to create a somewhat
+  realistic ignite effect.
 
-  print("Turn on")
+  All PointLights are disabled by default, so there is also a conditional
+  statement to enable them when first run.
+--]]
+function LightSource:TurnOn()
+  local light = self.Light
+  local fire = self.Fire
 
   -- The light source objects are disabled by default, so they need to be
   -- enabled when they're turned on.
-  if not source.Enabled then
-    source.Enabled = true
+  if not light.Enabled then
+    light.Enabled = true
   end
 
   if fire then
-   fire.Enabled = true
+    fire.Enabled = true
   end
 
-  while source.Range < range do
-    source.Range = source.Range + (range / speed)
+  while light.Range < self.Range do
+    -- Divide the desired range by the ignition speed to get a number that will
+    -- always end at the correct range.
+    light.Range = light.Range + (self.Range / self.IgniteSpeed)
     wait()
   end
 end
 
-function LightSource:TurnOff(lightRoot, activeValue, config)
-  local light  = self:Init(lightRoot, activeValue, config)
-  local source = light.source
-  local fire   = light.fire
-  local range  = light.range
-  local speed  = light.extinguishSpeed
-
-  print("Turn off")
+--[[
+  Fade out the Range property of a PointLight object to create a somewhat
+  realistic extinguish effect.
+--]]
+function LightSource:TurnOff()
+  local light = self.Light
+  local fire = self.Fire
 
   if fire then
    fire.Enabled = false
   end
 
-  while source.Range > 0 do
-    source.Range = source.Range - (range / speed)
+  while light.Range > 0 do
+    -- Divide the current range by the extinguish speed to get a number that will
+    -- always end at the correct range.
+    light.Range = light.Range - (self.Range / self.ExtinguishSpeed)
     wait()
   end
 end
