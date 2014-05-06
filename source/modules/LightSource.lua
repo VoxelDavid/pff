@@ -63,9 +63,9 @@ LightSource.__index = LightSource
 --]]
 function LightSource:ToggleActive()
   if self.Active then
-    self:TurnOff()
+    self:ShrinkRange()
   else
-    self:TurnOn()
+    self:GrowRange()
   end
 
   self.Active = not self.Active
@@ -78,7 +78,7 @@ end
   All PointLights are disabled by default, so there is also a conditional
   statement to enable them when first run.
 --]]
-function LightSource:TurnOn()
+function LightSource:GrowRange()
   local light = self.Light
   local fire = self.Fire
 
@@ -104,7 +104,7 @@ end
   Fade out the Range property of a PointLight object to create a somewhat
   realistic extinguish effect.
 --]]
-function LightSource:TurnOff()
+function LightSource:ShrinkRange()
   local light = self.Light
   local fire = self.Fire
 
