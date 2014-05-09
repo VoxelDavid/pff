@@ -20,7 +20,16 @@ local LightSource = {
   -- How quickly the light will be activated and deactivated, respectively. The
   -- lower the value, the quicker the transition.
   IgniteSpeed = 5,
-  ExtinguishSpeed = 12
+  ExtinguishSpeed = 12,
+
+  -- The value the PointLight's Brightness property will be when night and day.
+  Brightness = 1,
+  FadedBrightness = .3,
+
+  -- How long (in seconds) it takes for the light source's brightness to be
+  -- faded in/out.
+  BrightenSpeed = 2,
+  DarkenSpeed = 4
 }
 
 --[[
@@ -118,6 +127,59 @@ function LightSource:ShrinkRange()
     light.Range = light.Range - (self.Range / self.ExtinguishSpeed)
     wait()
   end
+end
+
+--[[
+  Methods used to increase and decrease the 'Brightness' property of a
+  PointLight instance, over a period of time.
+
+  Associated properties:
+  - Brightness
+  - FadedBrightness
+  - BrightenSpeed
+  - DarkenSpeed
+
+  A very big thank-you to StackOverflow user Odoth. Without his formula I
+  wouldn't have been able to get this functioning.
+
+  http://stackoverflow.com/q/23554388/2097156
+--]]
+function LightSource:IncreaseBrightness()
+  local light = self.Light
+  local startBrightness = light.Brightness
+  local startTime = tick()
+  local endTime = startTime + self.BrightenSpeed
+
+  while light.Brightness <= self.Brightness do
+    local currentTime = tick()
+    local timer = (currentTime - startTime) / (endTime - startTime)
+    local brightness = startBrightness - (startBrightness - self.Brightness) * timer
+
+    light.Brightness = brightness
+    wait()
+  end
+
+  -- Set the brightness in case the loop spills over.
+  light.Brightness = self.Brightness
+end
+
+function LightSource:DecreaseBrightness()
+  local light = self.Light
+  local startBrightness = light.Brightness
+  local startTime = tick()
+  local endTime = startTime + self.DarkenSpeed
+
+  while light.Brightness >= self.FadedBrightness do
+    local currentTime = tick()
+    local timer = (currentTime - startTime) / (endTime - startTime)
+    local brightness = startBrightness - (startBrightness - self.FadedBrightness) * timer
+
+    light.Brightness = brightness
+    wait()
+  end
+
+  -- Set the brightness in case the loop spills over.
+  light.Brightness = self.FadedBrightness
 end
 
 return LightSource
