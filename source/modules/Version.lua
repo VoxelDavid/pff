@@ -10,9 +10,9 @@
   making it clear when creating releases of the software.
 --]]
 
-repeat wait() until _G.ready
+repeat wait() until _G.Ready
 
-local Data = require(_G.modules.Data)
+local Data = require(_G.Modules.Data)
 
 local Version = {}
 
@@ -84,14 +84,14 @@ end
   lots of 'if' statements required to figure everything out.
 --]]
 function Version:LatestSemantic()
-  local currentVersion = self:ConvertToTable(_G.version)
+  local currentVersion = self:ConvertToTable(_G.Version)
   local latestVersion
 
   if Data:Get("Server", "version") then
     latestVersion = self:ConvertToTable(Data:Get("Server", "version"))
   else
     -- If you forget to set the place version in a new game.
-    warn("Latest semantic version does not exist in the \"version\" DataStore. Set to _G.version.")
+    warn("Latest semantic version does not exist in the \"version\" DataStore. Set to _G.Version.")
     latestVersion = currentVersion
   end
 
@@ -199,7 +199,7 @@ end
 --]]
 function Version:UpdateStoredData()
   if self:LatestSemantic() then
-    Data:Update("Server", "version", _G.version)
+    Data:Update("Server", "version", _G.Version)
   end
 
   if self:LatestPlace() then
