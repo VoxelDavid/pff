@@ -151,9 +151,8 @@ function LightSource:IncreaseBrightness()
   local endTime = startTime + self.BrightenSpeed
 
   while light.Brightness <= self.Brightness do
-    local currentTime = tick()
-    local timer = (currentTime - startTime) / (endTime - startTime)
-    local brightness = startBrightness - (startBrightness - self.Brightness) * timer
+    local speed = timer(startTime, endTime)
+    local brightness = startBrightness - (startBrightness - self.Brightness) * speed
 
     light.Brightness = brightness
     wait()
@@ -170,9 +169,8 @@ function LightSource:DecreaseBrightness()
   local endTime = startTime + self.DarkenSpeed
 
   while light.Brightness >= self.FadedBrightness do
-    local currentTime = tick()
-    local timer = (currentTime - startTime) / (endTime - startTime)
-    local brightness = startBrightness - (startBrightness - self.FadedBrightness) * timer
+    local speed = timer(startTime, endTime)
+    local brightness = startBrightness - (startBrightness - self.FadedBrightness) * speed
 
     light.Brightness = brightness
     wait()
@@ -180,6 +178,10 @@ function LightSource:DecreaseBrightness()
 
   -- Set the brightness in case the loop spills over.
   light.Brightness = self.FadedBrightness
+end
+
+function timer(startTime, endTime)
+  return (tick() - startTime) / (endTime - startTime)
 end
 
 return LightSource
