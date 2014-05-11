@@ -8,8 +8,8 @@
 
     local light = LightSource.new(script.Parent)
     light.Range = 20
-    light.IgniteSpeed = 5
-    light.ExtinguishSpeed = 10
+    light.IgniteSpeed = 1
+    light.ExtinguishSpeed = 2
 --]]
 
 -- Setup the LightSource constructor with default properties.
@@ -17,10 +17,10 @@ local LightSource = {
   -- The range of the light when activated.
   Range = 8,
 
-  -- How quickly the light will be activated and deactivated, respectively. The
-  -- lower the value, the quicker the transition.
-  IgniteSpeed = 5,
-  ExtinguishSpeed = 12,
+  -- How long (in seconds) it takes for the light source to be activated and
+  -- deactivated, respectively.
+  IgniteSpeed = .25,
+  ExtinguishSpeed = .5,
 
   -- The value the PointLight's Brightness property will be when night and day.
   Brightness = 1,
@@ -81,11 +81,11 @@ function LightSource:ToggleActive()
 end
 
 --[[
-  Fade in the Range property of a PointLight object to create a somewhat
-  realistic ignite effect.
+  Fade in and out the Range property of a Light instance to create a somewhat
+  realistic ignite/extinguish effect.
 
-  All PointLights are disabled by default, so there is also a conditional
-  statement to enable them when first run.
+  All lights are disabled by default, so there is a conditional statement in
+  GrowRange() to enable them when first run.
 --]]
 function LightSource:GrowRange()
   local light = self.Light
@@ -101,18 +101,21 @@ function LightSource:GrowRange()
     fire.Enabled = true
   end
 
-  while light.Range < self.Range do
-    -- Divide the desired range by the ignition speed to get a number that will
-    -- always end at the correct range.
-    light.Range = light.Range + (self.Range / self.IgniteSpeed)
+  local startRange = light.Range
+  local startTime = tick()
+  local endTime = startTime + self.IgniteSpeed
+
+  while self.Range >= light.Range do
+    local speed = timer(startTime, endTime)
+    local range = startRange - (startRange - self.Range) * speed
+
+    light.Range = range
     wait()
   end
+
+  light.Range = self.Range
 end
 
---[[
-  Fade out the Range property of a PointLight object to create a somewhat
-  realistic extinguish effect.
---]]
 function LightSource:ShrinkRange()
   local light = self.Light
   local fire = self.Fire
@@ -121,12 +124,23 @@ function LightSource:ShrinkRange()
    fire.Enabled = false
   end
 
-  while light.Range > 0 do
-    -- Divide the current range by the extinguish speed to get a number that will
-    -- always end at the correct range.
-    light.Range = light.Range - (self.Range / self.ExtinguishSpeed)
+  local startRange = light.Range
+  local startTime = tick()
+  local endTime = startTime + self.ExtinguishSpeed
+
+  -- The values are hard-coded because I don't expect for the light to be
+  -- anything but 0 when it's turned off. If there ever comes a point when it
+  -- would be something different, it's a very easy task to edit it.
+
+  while 0 < light.Range do
+    local speed = timer(startTime, endTime)
+
+    light.Range = startRange - (startRange * speed)
     wait()
   end
+
+  light.Range = self.OffRange
+end
 end
 
 --[[
