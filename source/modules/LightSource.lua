@@ -1,6 +1,6 @@
 --[[
-  A robust module used to handle light sources -- candles, fireplaces, and
-  lamps, to name a few.
+  A robust module used to handle in-game light sources. Candles, fireplaces,
+  lamps, you name it!
 
   Usage example:
 
@@ -10,6 +10,13 @@
     light.Range = 20
     light.IgniteSpeed = 1
     light.ExtinguishSpeed = 2
+
+  @ToDo:
+    Fix the math so the loops will always stop at the correct value, going the
+    desired speed. There's a very noticable "jerk" when GrowRange completes and
+    is then set to the correct value after the loop spills over.
+
+    Come up with a debounce solution for GrowRange and ShrinkRange.
 --]]
 
 -- Setup the LightSource constructor with default properties.
@@ -38,10 +45,6 @@ local LightSource = {
   @param Instance lightRoot
     The container where a PointLight instance and an optional Fire instance are
     stored.
-
-  @ToDo
-    Allow for an optional 'active' param to be passed. When true, turn on the
-    newly created light source.
 --]]
 function LightSource.new(lightRoot)
   -- Light and Fire instances are given unique names so they don't conflict
@@ -109,6 +112,7 @@ function LightSource:GrowRange()
     wait()
   end
 
+  -- Set the range in case the loop spills over.
   light.Range = self.Range
 end
 
@@ -125,8 +129,8 @@ function LightSource:ShrinkRange()
   local endTime = startTime + self.ExtinguishSpeed
 
   -- The values are hard-coded because I don't expect for the light to be
-  -- anything but 0 when it's turned off. If there ever comes a point when it
-  -- would be something different, it's a very easy task to edit it.
+  -- anything other than 0 when it's turned off. If there ever comes a point
+  -- when it would be something different, it's a very easy task to edit it.
 
   while 0 < light.Range do
     local speed = timer(startTime, endTime)
@@ -135,6 +139,7 @@ function LightSource:ShrinkRange()
     wait()
   end
 
+  -- Set the range in case the loop spills over.
   light.Range = self.OffRange
 end
 end
