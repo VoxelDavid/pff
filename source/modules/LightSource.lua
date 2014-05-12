@@ -44,23 +44,28 @@ local LightSource = {
     newly created light source.
 --]]
 function LightSource.new(lightRoot)
-  local light  = lightRoot:FindFirstChild("PointLight")
-  local fire   = lightRoot:FindFirstChild("Fire")
+  -- Light and Fire instances are given unique names so they don't conflict
+  -- with instances of the same class. I don't expect that situation, but it's
+  -- always good to be flexible.
 
-  if not light then
-    -- Throw an error, giving a helpful stack trace to find which light source
-    -- is missing its PointLight object.
-    error("A PointLight must exist inside of the first parameter passed to Lightsource.new()")
-  end
+  local light = Instance.new("PointLight", lightRoot)
+  light.Name = "LightSource"
+  light.Color = rgb(214, 128, 8)
+  light.Range = 16
+
+  -- Generating a Fire instance will be conditional in the future. For the
+  -- moment it will always be generated.
+  local fire = Instance.new("Fire", lightRoot)
+  fire.Name = "FireSource"
+  fire.Heat = 20
+  fire.Size = 2
 
   local instance = {
     Light = light,
-    Active = false -- The lights are always off by default
+    Fire = fire,
+    Active = true -- The lights are always on by default
   }
 
-  if fire then
-    instance.Fire = fire
-  end
 
   return setmetatable(instance, LightSource)
 end
@@ -83,19 +88,10 @@ end
 --[[
   Fade in and out the Range property of a Light instance to create a somewhat
   realistic ignite/extinguish effect.
-
-  All lights are disabled by default, so there is a conditional statement in
-  GrowRange() to enable them when first run.
 --]]
 function LightSource:GrowRange()
   local light = self.Light
   local fire = self.Fire
-
-  -- The light source objects are disabled by default, so they need to be
-  -- enabled when they're turned on.
-  if not light.Enabled then
-    light.Enabled = true
-  end
 
   if fire then
     fire.Enabled = true
@@ -194,8 +190,13 @@ function LightSource:DecreaseBrightness()
   light.Brightness = self.FadedBrightness
 end
 
+
 function timer(startTime, endTime)
   return (tick() - startTime) / (endTime - startTime)
+end
+
+function rgb(r, g, b)
+  return Color3.new(r/255, g/255, b/255)
 end
 
 return LightSource
