@@ -22,16 +22,17 @@
 -- Setup the LightSource constructor with default properties.
 local LightSource = {
   -- The range of the light when activated.
-  Range = 8,
+  Range = 16,
 
-  -- How long (in seconds) it takes for the light source to be activated and
-  -- deactivated, respectively.
-  IgniteSpeed = .25,
-  ExtinguishSpeed = .5,
-
-  -- The value the PointLight's Brightness property will be when night and day.
+  -- The value the PointLight's Brightness property will be when night and day,
+  -- respectively.
   Brightness = 1,
   FadedBrightness = .3,
+
+  -- How long (in seconds) it takes for the light source to be activated and
+  -- deactivated.
+  IgniteSpeed = .25,
+  ExtinguishSpeed = .5,
 
   -- How long (in seconds) it takes for the light source's brightness to be
   -- faded in/out.
