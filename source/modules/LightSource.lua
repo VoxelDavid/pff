@@ -70,7 +70,6 @@ function LightSource.new(lightRoot)
     Active = true -- The lights are always on by default
   }
 
-
   return setmetatable(instance, LightSource)
 end
 LightSource.__index = LightSource
@@ -142,7 +141,6 @@ function LightSource:ShrinkRange()
 
   -- Set the range in case the loop spills over.
   light.Range = self.OffRange
-end
 end
 
 --[[
