@@ -6,7 +6,7 @@
 
     local LightSource = require(game.ServerScriptService.LightSource)
 
-    local light = LightSource.new(script.Parent)
+    local light = LightSource.new("Candle", script.Parent)
     light.Range = 20
     light.IgniteSpeed = 1
     light.ExtinguishSpeed = 2
@@ -37,38 +37,115 @@ local LightSource = {
   -- How long (in seconds) it takes for the light source's brightness to be
   -- faded in/out.
   BrightenSpeed = 2,
-  DarkenSpeed = 4
+  DarkenSpeed = 4,
+
+  --[[
+    Presets are an easy way to tweak how the Light instances (and optionally
+    Fire instances) will appear in-game.
+
+    Any property a light or fire instance has can be used in the preset. The
+    only thing you need to keep in mind is Color3 values are written with Table
+    constructors, eg.
+
+      { 123, 123, 123 }
+
+    These settings are only applied when first generating instances. They are
+    not used anywhere but the 'new' function.
+  --]]
+  Presets = {
+    Candle = {
+      Light = {
+        Color = { 214, 128, 8 },
+        Range = 20,
+        Brightness = .5
+      },
+      Fire = {
+        Heat = 20,
+        Size = 2
+      }
+    }
+  }
 }
 
 --[[
   Create a new light source instance.
 
+  @param String/Table preset
+    A string containing the name of a table in LightSource.Presets, or a table
+    with custom preset data.
   @param Instance lightRoot
     The container where a PointLight instance and an optional Fire instance are
     stored.
 --]]
-function LightSource.new(lightRoot)
-  -- Light and Fire instances are given unique names so they don't conflict
-  -- with instances of the same class. I don't expect that situation, but it's
-  -- always good to be flexible.
+function LightSource.new(preset, lightRoot)
+  local self = LightSource
 
-  local light = Instance.new("PointLight", lightRoot)
-  light.Name = "LightSource"
-  light.Color = rgb(214, 128, 8)
-  light.Range = 16
+  --[[
+    Used to check if the Preset argument is a String (existing preset),
+    or a Table (custom preset).
+  --]]
+  local function checkPreset()
+    if type(preset) == "string" then
+      local chosenPreset = self.Presets[preset]
 
-  -- Generating a Fire instance will be conditional in the future. For the
-  -- moment it will always be generated.
-  local fire = Instance.new("Fire", lightRoot)
-  fire.Name = "FireSource"
-  fire.Heat = 20
-  fire.Size = 2
+      if not chosenPreset then
+        return warn("The preset name passed to LightSource.new() could not be found in \"LightSource.Presets\".")
+      end
+
+      return chosenPreset
+    elseif type(preset) == "table" then
+      -- Run checks on the custom preset and error if anything is missing.
+    end
+  end
+
+  --[[
+    Used to take the key/value pairs in the 'properties' argument and override
+    the properties with matching names in 'instance'.
+  --]]
+  local function applyProperties(instance, properties)
+    for prop,value in pairs(properties) do
+      -- If the key in 'properties' matches a property instance.
+      if instance[prop] then
+        --[[
+          Special handling for colors.
+
+          Note: 'type(prop)' returns 'userdata' in this case, so it can not be
+          used to see if the current property is a Color3 value.
+        --]]
+        if prop == "Color" or prop == "SecondaryColor" then
+          value = rgb(unpack(value))
+        end
+
+        instance[prop] = value
+      end
+    end
+  end
+
+  preset = checkPreset()
+
+  local lightInst = Instance.new("PointLight", lightRoot)
+  lightInst.Name = "LightSource"
+
+  local fireInst
+
+  local lightProps = preset.Light
+  local fireProps = preset.Fire
 
   local instance = {
-    Light = light,
-    Fire = fire,
+    Light = lightInst,
     Active = true -- The lights are always on by default
   }
+
+  if fireProps then
+    fireInst = Instance.new("Fire", lightRoot)
+    fireInst.Name = "FireSource"
+
+    applyProperties(fireInst, fireProps)
+
+    instance.Fire = fireInst
+  end
+
+  applyProperties(lightInst, lightProps)
 
   return setmetatable(instance, LightSource)
 end
@@ -201,6 +278,11 @@ end
 
 function rgb(r, g, b)
   return Color3.new(r/255, g/255, b/255)
+end
+
+function warn(message, condition)
+  local TestService = game:GetService("TestService")
+  TestService:Warn(condition or false, message)
 end
 
 return LightSource
