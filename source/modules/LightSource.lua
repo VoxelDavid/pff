@@ -281,10 +281,12 @@ function timer(startTime, endTime)
   return (tick() - startTime) / (endTime - startTime)
 end
 
+-- Allow for use or the RGB format when creating new Color3 values.
 function rgb(r, g, b)
   return Color3.new(r/255, g/255, b/255)
 end
 
+-- Make use of the TestService to output warning messages to the console.
 function warn(message, condition)
   local TestService = game:GetService("TestService")
   TestService:Warn(condition or false, message)
