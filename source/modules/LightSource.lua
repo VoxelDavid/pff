@@ -226,54 +226,61 @@ function LightSource:DecreaseRange()
 end
 
 --[[
-  Methods used to increase and decrease the 'Brightness' property of a
-  PointLight instance, over a period of time.
-
-  Associated properties:
-  - Brightness
-  - FadedBrightness
-  - BrightenSpeed
-  - DarkenSpeed
+  Used to increase and decrease the 'Brightness' property of a PointLight
+  instance over a period of time.
 
   A very big thank-you to StackOverflow user Odoth. Without his formula I
   wouldn't have been able to get this functioning.
 
   http://stackoverflow.com/q/23554388/2097156
 --]]
-function LightSource:IncreaseBrightness()
+function LightSource:ManipulateBrightness(task)
   local light = self.Light
   local startBrightness = light.Brightness
   local startTime = tick()
-  local endTime = startTime + self.BrightenSpeed
 
-  while light.Brightness <= self.Brightness do
-    local speed = timer(startTime, endTime)
-    local brightness = startBrightness - (startBrightness - self.Brightness) * speed
+  local function increase()
+    local endTime = startTime + self.BrightenSpeed
 
-    light.Brightness = brightness
-    wait()
+    while light.Brightness <= self.Brightness do
+      local speed = timer(startTime, endTime)
+      local brightness = startBrightness - (startBrightness - self.Brightness) * speed
+
+      light.Brightness = brightness
+      wait()
+    end
+
+    light.Brightness = self.Brightness
   end
 
-  -- Set the brightness in case the loop spills over.
-  light.Brightness = self.Brightness
+  local function decrease()
+    local endTime = startTime + self.DarkenSpeed
+
+    while light.Brightness >= self.FadedBrightness do
+      local speed = timer(startTime, endTime)
+      local brightness = startBrightness - (startBrightness - self.FadedBrightness) * speed
+
+      light.Brightness = brightness
+      wait()
+    end
+
+    light.Brightness = self.FadedBrightness
+  end
+
+  if task == "Increase" then
+    increase()
+  elseif task == "Decrease" then
+    decrease()
+  end
+end
+
+-- Aliases for the Increase and Decrease tasks
+function LightSource:IncreaseBrightness()
+  self:ManipulateBrightness("Increase")
 end
 
 function LightSource:DecreaseBrightness()
-  local light = self.Light
-  local startBrightness = light.Brightness
-  local startTime = tick()
-  local endTime = startTime + self.DarkenSpeed
-
-  while light.Brightness >= self.FadedBrightness do
-    local speed = timer(startTime, endTime)
-    local brightness = startBrightness - (startBrightness - self.FadedBrightness) * speed
-
-    light.Brightness = brightness
-    wait()
-  end
-
-  -- Set the brightness in case the loop spills over.
-  light.Brightness = self.FadedBrightness
+  self:ManipulateBrightness("Decrease")
 end
 
 
