@@ -14,8 +14,10 @@
 
 -- Setup the LightSource constructor with default properties.
 local LightSource = {
+  --
   -- The range of the light when activated.
   Range = 16,
+  Active = true,
 
   -- The value the PointLight's Brightness property will be when night and day,
   -- respectively.
@@ -126,7 +128,6 @@ function LightSource.new(preset, lightRoot)
 
   local instance = {
     Light = lightInst,
-    Active = true -- The lights are always on by default
   }
 
   if fireProps then
@@ -154,8 +155,6 @@ function LightSource:ToggleActive()
   else
     self:IncreaseRange()
   end
-
-  self.Active = not self.Active
 end
 
 --[[
@@ -168,13 +167,14 @@ function LightSource:ManipulateRange(task)
   local startRange = light.Range
   local startTime = tick()
 
+  self.Active = not self.Active
+
+  if fire then
+    fire.Enabled = not fire.Enabled
+  end
 
   local function grow()
     local endTime = startTime + self.IgniteSpeed
-
-    if fire then
-      fire.Enabled = true
-    end
 
     while self.Range >= light.Range do
       local speed = timer(startTime, endTime)
@@ -189,10 +189,6 @@ function LightSource:ManipulateRange(task)
 
   local function shrink()
     local endTime = startTime + self.ExtinguishSpeed
-
-    if fire then
-      fire.Enabled = false
-    end
 
     -- The values are hard-coded because I don't expect for the light to be
     -- anything other than 0 when it's turned off.
