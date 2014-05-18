@@ -10,13 +10,6 @@
     light.Range = 20
     light.IgniteSpeed = 1
     light.ExtinguishSpeed = 2
-
-  @ToDo:
-    Fix the math so the loops will always stop at the correct value, going the
-    desired speed. There's a very noticable "jerk" when GrowRange completes and
-    is then set to the correct value after the loop spills over.
-
-    Come up with a debounce solution for GrowRange and ShrinkRange.
 --]]
 
 -- Setup the LightSource constructor with default properties.
