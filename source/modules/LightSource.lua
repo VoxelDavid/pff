@@ -30,32 +30,32 @@ local LightSource = {
   -- How long (in seconds) it takes for the light source's brightness to be
   -- faded in/out.
   BrightenSpeed = 2,
-  DarkenSpeed = 4,
+  DarkenSpeed = 4
+}
 
-  --[[
-    Presets are an easy way to tweak how the Light instances (and optionally
-    Fire instances) will appear in-game.
+--[[
+  Presets are an easy way to tweak how the Light instances (and optionally
+  Fire instances) will appear in-game.
 
-    Any property a light or fire instance has can be used in the preset. The
-    only thing you need to keep in mind is Color3 values are written with Table
-    constructors, eg.
+  Any property a light or fire instance has can be used in the preset. The
+  only thing you need to keep in mind is Color3 values are written with Table
+  constructors, eg.
 
-      { 123, 123, 123 }
+    { 123, 123, 123 }
 
-    These settings are only applied when first generating instances. They are
-    not used anywhere but the 'new' function.
-  --]]
-  Presets = {
-    Candle = {
-      Light = {
-        Color = { 214, 128, 8 },
-        Range = 20,
-        Brightness = .5
-      },
-      Fire = {
-        Heat = 20,
-        Size = 2
-      }
+  These settings are only applied when first generating instances. They are
+  not used anywhere but the 'new' function.
+--]]
+local Presets = {
+  Candle = {
+    Light = {
+      Color = { 214, 128, 8 },
+      Range = 14,
+      Brightness = .5
+    },
+    Fire = {
+      Heat = 20,
+      Size = 2
     }
   }
 }
@@ -79,10 +79,10 @@ function LightSource.new(preset, lightRoot)
   --]]
   local function checkPreset()
     if type(preset) == "string" then
-      local chosenPreset = self.Presets[preset]
+      local chosenPreset = Presets[preset]
 
       if not chosenPreset then
-        return warn("The preset name passed to LightSource.new() could not be found in \"LightSource.Presets\".")
+        return warn("The preset name passed to LightSource.new() could not be found.")
       end
 
       return chosenPreset
