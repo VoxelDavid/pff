@@ -157,9 +157,9 @@ LightSource.__index = LightSource
 --]]
 function LightSource:ToggleActive()
   if self.Active then
-    self:ShrinkRange()
+    self:DecreaseRange()
   else
-    self:GrowRange()
+    self:IncreaseRange()
   end
 
   self.Active = not self.Active
@@ -169,55 +169,67 @@ end
   Fade in and out the Range property of a Light instance to create a somewhat
   realistic ignite/extinguish effect.
 --]]
-function LightSource:GrowRange()
+function LightSource:ManipulateRange(task)
   local light = self.Light
   local fire = self.Fire
-
-  if fire then
-    fire.Enabled = true
-  end
-
   local startRange = light.Range
   local startTime = tick()
-  local endTime = startTime + self.IgniteSpeed
 
-  while self.Range >= light.Range do
-    local speed = timer(startTime, endTime)
-    local range = startRange - (startRange - self.Range) * speed
 
-    light.Range = range
-    wait()
+  local function grow()
+    local endTime = startTime + self.IgniteSpeed
+
+    if fire then
+      fire.Enabled = true
+    end
+
+    while self.Range >= light.Range do
+      local speed = timer(startTime, endTime)
+      local range = startRange - (startRange - self.Range) * speed
+
+      light.Range = range
+      wait()
+    end
+
+    light.Range = self.Range
   end
 
-  -- Set the range in case the loop spills over.
-  light.Range = self.Range
+  local function shrink()
+    local endTime = startTime + self.ExtinguishSpeed
+
+    if fire then
+      fire.Enabled = false
+    end
+
+    -- The values are hard-coded because I don't expect for the light to be
+    -- anything other than 0 when it's turned off.
+
+    while 0 < light.Range do
+      local speed = timer(startTime, endTime)
+
+      light.Range = startRange - (startRange * speed)
+      wait()
+    end
+
+    light.Range = 0
+  end
+
+  if task == "Increase" then
+    grow()
+  elseif task == "Decrease" then
+    shrink()
+  else
+    return error("\""..task.."\" is not an applicable task of the ManipulateRange method.")
+  end
 end
 
-function LightSource:ShrinkRange()
-  local light = self.Light
-  local fire = self.Fire
+-- Aliases for the Increase and Decrease tasks.
+function LightSource:IncreaseRange()
+  self:ManipulateRange("Increase")
+end
 
-  if fire then
-   fire.Enabled = false
-  end
-
-  local startRange = light.Range
-  local startTime = tick()
-  local endTime = startTime + self.ExtinguishSpeed
-
-  -- The values are hard-coded because I don't expect for the light to be
-  -- anything other than 0 when it's turned off. If there ever comes a point
-  -- when it would be something different, it's a very easy task to edit it.
-
-  while 0 < light.Range do
-    local speed = timer(startTime, endTime)
-
-    light.Range = startRange - (startRange * speed)
-    wait()
-  end
-
-  -- Set the range in case the loop spills over.
-  light.Range = self.OffRange
+function LightSource:DecreaseRange()
+  self:ManipulateRange("Decrease")
 end
 
 --[[
