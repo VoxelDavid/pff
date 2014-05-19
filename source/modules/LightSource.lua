@@ -66,8 +66,8 @@ local Presets = {
   Create a new light source instance.
 
   @param String/Table preset
-    A string containing the name of a table in LightSource.Presets, or a table
-    with custom preset data.
+    A string containing the name of a table in Presets, or a table with custom
+    preset data.
   @param Instance lightRoot
     The container where a PointLight instance and an optional Fire instance are
     stored.
@@ -96,10 +96,17 @@ function LightSource.new(preset, lightRoot)
   --[[
     Used to take the key/value pairs in the 'properties' argument and override
     the properties with matching names in 'instance'.
+
+    @param Instance instance
+      The in-game object whose Properties will be overwriten by the second
+      parameter if a match is found.
+    @param Table properties
+      A table containing key/value pairs. The key name being the cooresponding
+      property found in the instance, and a value to overwrite the property.
   --]]
   local function applyProperties(instance, properties)
     for prop,value in pairs(properties) do
-      -- If the key in 'properties' matches a property instance.
+      -- If the key in 'properties' matches a property.
       if instance[prop] then
         --[[
           Special handling for colors.
