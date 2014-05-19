@@ -231,11 +231,6 @@ end
 --[[
   Used to increase and decrease the 'Brightness' property of a PointLight
   instance over a period of time.
-
-  A very big thank-you to StackOverflow user Odoth. Without his formula I
-  wouldn't have been able to get this functioning.
-
-  http://stackoverflow.com/q/23554388/2097156
 --]]
 function LightSource:ManipulateBrightness(task)
   local light = self.Light
@@ -286,7 +281,15 @@ function LightSource:DecreaseBrightness()
   self:ManipulateBrightness("Decrease")
 end
 
+--[[
+  Used with the Increase and Decrease methods for the Brightness and Range
+  properties.
 
+  A very big thank-you to StackOverflow user Odoth. Without his help I never
+  would have gotten the above mentioned methods functioning how I wanted.
+
+  http://stackoverflow.com/q/23554388/2097156
+--]]
 function timer(startTime, endTime)
   return (tick() - startTime) / (endTime - startTime)
 end
