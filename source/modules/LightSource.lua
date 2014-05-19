@@ -2,7 +2,8 @@
   A robust module used to handle in-game light sources. Candles, fireplaces,
   lamps, you name it!
 
-  Usage example:
+  Creating your own light source is super easy. Just require the module and
+  then it's used almost identically to Instance.new().
 
     local LightSource = require(game.ServerScriptService.LightSource)
 
@@ -12,7 +13,6 @@
     light.ExtinguishSpeed = 2
 --]]
 
--- Setup the LightSource constructor with default properties.
 local LightSource = {
   --
   -- The range of the light when activated.
@@ -98,8 +98,8 @@ function LightSource.new(preset, lightRoot)
     the properties with matching names in 'instance'.
 
     @param Instance instance
-      The in-game object whose Properties will be overwriten by the second
-      parameter if a match is found.
+      An in-game object whose properties will be matched against the
+      'properties' parameter.
     @param Table properties
       A table containing key/value pairs. The key name being the cooresponding
       property found in the instance, and a value to overwrite the property.
