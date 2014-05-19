@@ -115,7 +115,7 @@ function LightSource.new(preset, lightRoot)
           used to see if the current property is a Color3 value.
         --]]
         if prop == "Color" or prop == "SecondaryColor" then
-          value = rgb(unpack(value))
+          value = rgb(value)
         end
 
         instance[prop] = value
@@ -291,8 +291,21 @@ function timer(startTime, endTime)
   return (tick() - startTime) / (endTime - startTime)
 end
 
--- Allow for use or the RGB format when creating new Color3 values.
+--[[
+  Allow for use of the RGB format when creating new Color3 values.
+
+  @param Int/Table r
+    The "red" value, or a table containing all three, eg. '{ 123, 123, 123 }'
+  @param Int g
+    The "green" value.
+  @param Int b
+    The "blue" value.
+--]]
 function rgb(r, g, b)
+  if type(r) == "table" then
+    r,g,b = unpack(r)
+  end
+
   return Color3.new(r/255, g/255, b/255)
 end
 
