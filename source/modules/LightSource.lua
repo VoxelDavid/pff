@@ -84,7 +84,7 @@ function LightSource.new(preset, lightRoot)
       local chosenPreset = Presets[preset]
 
       if not chosenPreset then
-        return warn("The preset name passed to LightSource.new() could not be found.")
+        error("The preset name passed to LightSource.new() could not be found.")
       end
 
       return chosenPreset
@@ -215,7 +215,7 @@ function LightSource:ManipulateRange(task)
   elseif task == "Decrease" then
     shrink()
   else
-    return error("\""..task.."\" is not an applicable task of the ManipulateRange method.")
+    error("\""..task.."\" is not an applicable task of the ManipulateRange method.")
   end
 end
 
@@ -269,6 +269,8 @@ function LightSource:ManipulateBrightness(task)
     increase()
   elseif task == "Decrease" then
     decrease()
+  else
+    error("\""..task.."\" is not an applicable task of the ManipulateBrightness method.")
   end
 end
 
@@ -310,12 +312,6 @@ function rgb(r, g, b)
   end
 
   return Color3.new(r/255, g/255, b/255)
-end
-
--- Make use of the TestService to output warning messages to the console.
-function warn(message, condition)
-  local TestService = game:GetService("TestService")
-  TestService:Warn(condition or false, message)
 end
 
 return LightSource
