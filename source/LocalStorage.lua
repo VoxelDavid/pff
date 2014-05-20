@@ -5,7 +5,7 @@
   Until Roblox provides a means of copying local objects to players other than
   StarterGui or StarterPack, this script should act as a good supplement.
 
-  All desendants of this script are copied to the Player's character, so just
+  All descendants of this script are copied to the Player's character, so just
   plop in your LocalScripts or Values and be on your way.
 --]]
 
