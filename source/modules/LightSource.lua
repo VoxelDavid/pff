@@ -75,15 +75,26 @@ function LightSource.new(preset, lightRoot)
     Used to check if the Preset argument is a String (existing preset),
     or a Table (custom preset).
   --]]
-  local function checkPreset()
+  local function getPresetProperties(preset)
     if type(preset) == "string" then
-      local chosenPreset = Presets[preset]
+      local preset = Presets[preset]
 
-      if not chosenPreset then
+      if not preset then
         error("The preset name passed to LightSource.new() could not be found.")
       end
 
-      return chosenPreset
+      --[[
+        If a preset contains a Light and Fire instance it requires that two
+        tables be used to seperate their individual properties.
+
+        However, if only a Light instance is used, then the properties can be
+        placed directly into the preset, omitting the sub-tables.
+      --]]
+      if not preset.Light and not preset.Fire then
+        return preset
+      else
+        return preset.Light, preset.Fire
+      end
     elseif type(preset) == "table" then
       -- Run checks on the custom preset and error if anything is missing.
     end
@@ -119,12 +130,8 @@ function LightSource.new(preset, lightRoot)
     end
   end
 
+  local lightProps, fireProps = getPresetProperties(preset)
   local lightInst = Instance.new("PointLight", lightRoot)
-
-  preset = checkPreset()
-
-  local lightProps = preset.Light
-  local fireProps = preset.Fire
 
   -- Apply the preset's properties to the new light instance
   applyProperties(lightInst, lightProps)
