@@ -170,12 +170,12 @@ function LightSource:ManipulateRange(task)
   local startRange = light.Range
   local startTime = tick()
 
-  if fire then
-    fire.Enabled = not fire.Enabled
-  end
-
   local function grow()
     local endTime = startTime + self.IgniteSpeed
+
+    if fire then
+      fire.Enabled = true
+    end
 
     while self.Range >= light.Range do
       local speed = timer(startTime, endTime)
@@ -190,6 +190,10 @@ function LightSource:ManipulateRange(task)
 
   local function shrink()
     local endTime = startTime + self.ExtinguishSpeed
+
+    if fire then
+      fire.Enabled = false
+    end
 
     -- The values are hard-coded because I don't expect for the light to be
     -- anything other than 0 when it's turned off.
