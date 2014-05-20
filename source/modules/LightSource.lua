@@ -170,8 +170,6 @@ function LightSource:ManipulateRange(task)
   local startRange = light.Range
   local startTime = tick()
 
-  self.Active = not self.Active
-
   if fire then
     fire.Enabled = not fire.Enabled
   end
@@ -208,8 +206,10 @@ function LightSource:ManipulateRange(task)
 
   if task == "Increase" then
     grow()
+    self.Active = true
   elseif task == "Decrease" then
     shrink()
+    self.Active = false
   else
     error("\""..task.."\" is not an applicable task of the ManipulateRange method.")
   end
