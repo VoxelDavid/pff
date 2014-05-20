@@ -50,12 +50,22 @@ local Presets = {
   Candle = {
     Light = {
       Color = { 214, 128, 8 },
-      Range = 14,
-      Brightness = .5
+      Range = 14
     },
     Fire = {
       Heat = 20,
       Size = 2
+    }
+  },
+
+  Fireplace = {
+    Light = {
+      Color = { 240, 120, 6 },
+      Range = 20
+    },
+    Fire = {
+      Heat = 12,
+      Size = 7.5
     }
   }
 }
