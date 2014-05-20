@@ -72,31 +72,34 @@ local Presets = {
 --]]
 function LightSource.new(preset, lightRoot)
   --[[
-    Used to check if the Preset argument is a String (existing preset),
-    or a Table (custom preset).
+    Performs checks on the 'preset' parameter that's passed when calling the
+    method.
+
+    @return Table/Tuple
+      The function will either return a single table or a tuple with two tables.
   --]]
-  local function getPresetProperties(preset)
+  local function getPresetProperties()
+    -- If the preset is a string then do a lookup in the 'Presets' table, if it
+    -- doesn't exist throw an error.
     if type(preset) == "string" then
-      local preset = Presets[preset]
+      preset = Presets[preset]
 
       if not preset then
         error("The preset name passed to LightSource.new() could not be found.")
       end
+    end
 
-      --[[
-        If a preset contains a Light and Fire instance it requires that two
-        tables be used to seperate their individual properties.
+    --[[
+      If a preset contains a Light and Fire instance it requires that two
+      tables be used to seperate their individual properties.
 
-        However, if only a Light instance is used, then the properties can be
-        placed directly into the preset, omitting the sub-tables.
-      --]]
-      if not preset.Light and not preset.Fire then
-        return preset
-      else
-        return preset.Light, preset.Fire
-      end
-    elseif type(preset) == "table" then
-      -- Run checks on the custom preset and error if anything is missing.
+      However, if only a Light instance is used, then the properties can be
+      placed directly into the preset, omitting the sub-tables.
+    --]]
+    if not preset.Light and not preset.Fire then
+      return preset
+    else
+      return preset.Light, preset.Fire
     end
   end
 
@@ -130,7 +133,7 @@ function LightSource.new(preset, lightRoot)
     end
   end
 
-  local lightProps, fireProps = getPresetProperties(preset)
+  local lightProps, fireProps = getPresetProperties()
   local lightInst = Instance.new("PointLight", lightRoot)
 
   -- Apply the preset's properties to the new light instance
