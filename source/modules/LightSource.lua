@@ -225,7 +225,7 @@ function LightSource:ManipulateRange(task)
     shrink()
     self.Active = false
   else
-    error("\""..task.."\" is not an applicable task of the ManipulateRange method.")
+    error(taskDoesNotExist(task, "ManipulateBrightness"))
   end
 end
 
@@ -280,7 +280,7 @@ function LightSource:ManipulateBrightness(task)
   elseif task == "Decrease" then
     decrease()
   else
-    error("\""..task.."\" is not an applicable task of the ManipulateBrightness method.")
+    error(taskDoesNotExist(task, "ManipulateBrightness"))
   end
 end
 
@@ -322,6 +322,14 @@ function rgb(r, g, b)
   end
 
   return Color3.new(r/255, g/255, b/255)
+end
+
+--[[
+  Used by ManipulateRange and ManipulateBrightness to throw errors if the
+  specified task can't be found.
+--]]
+function taskDoesNotExist(taskName, methodName)
+  return "\""..taskName.."\" is not an applicable task of the "..methodName.." method."
 end
 
 return LightSource
