@@ -15,8 +15,6 @@
 
 local LightSource = {
   --
-  -- The range of the light when activated.
-  Range = 16,
   Active = true,
 
   -- The value the PointLight's Brightness property will be when night and day,
@@ -73,8 +71,6 @@ local Presets = {
     stored.
 --]]
 function LightSource.new(preset, lightRoot)
-  local self = LightSource
-
   --[[
     Used to check if the Preset argument is a String (existing preset),
     or a Table (custom preset).
@@ -123,32 +119,32 @@ function LightSource.new(preset, lightRoot)
     end
   end
 
-  preset = checkPreset()
-
   local lightInst = Instance.new("PointLight", lightRoot)
-  lightInst.Name = "LightSource"
 
-  local fireInst
+  preset = checkPreset()
 
   local lightProps = preset.Light
   local fireProps = preset.Fire
 
-  local instance = {
+  -- Apply the preset's properties to the new light instance
+  applyProperties(lightInst, lightProps)
+
+  local newLight = {
     Light = lightInst,
+    Range = lightInst.Range,
+    Brightness = lightInst.Brightness
   }
 
   if fireProps then
-    fireInst = Instance.new("Fire", lightRoot)
-    fireInst.Name = "FireSource"
+    local fireInst = Instance.new("Fire", lightRoot)
 
+    -- Apply the preset's properties to the new fire instance
     applyProperties(fireInst, fireProps)
 
-    instance.Fire = fireInst
+    newLight.Fire = fireInst
   end
 
-  applyProperties(lightInst, lightProps)
-
-  return setmetatable(instance, LightSource)
+  return setmetatable(newLight, LightSource)
 end
 LightSource.__index = LightSource
 
