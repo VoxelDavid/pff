@@ -3,10 +3,10 @@
 
   Usage example:
 
-    local console = require(game.Workspace.Console)
+    local Console = require(game.Workspace.Console)
 
-    console.log("Hello, World!") -- Prints blue text to the output.
-    console.warn("There's a problem!") -- Prints yellow text to the output.
+    Console:Log("Hello, World!") -- Prints blue text to the output.
+    Console:Warn("There's a problem!") -- Prints yellow text to the output.
 
   The warn function can optionally be used with a bool value to only warn if
   the condition is false:
