@@ -1,8 +1,13 @@
+local player     = game.Players.LocalPlayer
+local gui        = player.PlayerGui
 local starterGui = game.StarterGui
 
+-- The game's interface container.
+local interface = gui:FindFirstChild("Interface")
+
 function disableCoreGuis()
-  gui:SetCoreGuiEnabled("Health", false)
-  gui:SetCoreGuiEnabled("Backpack", false)
+  starterGui:SetCoreGuiEnabled("Health", false)
+  starterGui:SetCoreGuiEnabled("Backpack", false)
 end
 
 disableCoreGuis()
