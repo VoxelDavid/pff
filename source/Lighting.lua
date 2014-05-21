@@ -5,39 +5,42 @@
   value for other scripts to hook into.
 --]]
 
-local timeIncrement = 1.5 -- The amount added on to the current time every recurrence.
-local loopSpeed = 0       -- How long the loop will wait() before adding timeIncrement.
+local Lighting = {
+  -- The amount added on to the current time each loop.
+  TimeIncrement = 1.5,
 
-local lighting = game.Lighting
+  -- How long the loop will wait() before adding TimeIncrement.
+  LoopSpeed = 0
+}
 
 --[[
-  Note: the 'currentTime' variable needs to be defined inside the scope of
-  the functions that will be looped. If it's defined in the global scope, it
-  will never be redefined by the loop (getting the current time).
+  The primary method that controls what gets applied to the game.
 --]]
+function Lighting:Init()
+  self:GenerateTimeValue()
 
-function runLightingLoop()
-  while wait(loopSpeed) do
-    outputTimeOfDay()
-    changeAmbiance()
-    timeCycle()
+  while wait(self.LoopSpeed) do
+    self:OutputTimeOfDay()
+    self:ChangeAmbiance()
+    self:TimeCycle()
   end
 end
 
 --[[
   Increments a value onto the current time to cycle through the day/night.
 --]]
-function timeCycle()
-  local currentTime = lighting:GetMinutesAfterMidnight()
+function Lighting:TimeCycle()
+  local light = game.Lighting
+  local currentTime = light:GetMinutesAfterMidnight()
 
-  lighting:SetMinutesAfterMidnight(currentTime + timeIncrement)
+  light:SetMinutesAfterMidnight(currentTime + self.TimeIncrement)
 end
 
 --[[
   Uses variables to denote the times of the day, checks them against the
   current time and returns a string of the time of day.
 --]]
-function getCurrentTime()
+function Lighting:GetCurrentTime()
   local currentTime = lighting:GetMinutesAfterMidnight()
 
   local midnight = 0
@@ -67,11 +70,11 @@ function getCurrentTime()
 end
 
 --[[
-  Changes the map's ambiance acording to the values returned by
-  getCurrentTime().
+  Changes the map's ambiance according to the values returned by
+  GetCurrentTime().
 --]]
-function changeAmbiance()
-  local currentTime = getCurrentTime()
+function Lighting:ChangeAmbiance()
+  local currentTime = self:GetCurrentTime()
 
   local ambient
 
@@ -94,10 +97,10 @@ function changeAmbiance()
 end
 
 --[[
-  Creates the TimeOfDay value if it doesn't exist and defines it as a global
+  Creates the TimeOfDay value if it doesn't exist, and defines it as a global
   variable for other scripts to hook into.
 --]]
-function generateTimeValue()
+function Lighting:GenerateTimeValue()
   if not script:FindFirstChild("TimeOfDay") then
     local timeValue = Instance.new("StringValue", script)
     timeValue.Name = "TimeOfDay"
@@ -107,24 +110,17 @@ function generateTimeValue()
 end
 
 --[[
-  Takes the returned string from getCurrentTime() and applies it to the TimeOfDay
+  Takes the returned string from GetCurrentTime() and applies it to the TimeOfDay
   value.
 --]]
-function outputTimeOfDay()
+function Lighting:OutputTimeOfDay()
   local timeOfDay = script.TimeOfDay
 
   -- Only update the time if it's changed.
-  if timeOfDay.Value ~= getCurrentTime() then
-    timeOfDay.Value = getCurrentTime()
+  if timeOfDay.Value ~= self:GetCurrentTime() then
+    timeOfDay.Value = self:GetCurrentTime()
   end
 end
 
-function rgb(r, g, b)
-  return Color3.new(r/255, g/255, b/255)
-end
-
-print("Loaded " .. script.Name)
-
--- Generate the TimeOfDay value and get the loop started.
-generateTimeValue()
-runLightingLoop()
+-- Run the script
+Lighting:Init()
