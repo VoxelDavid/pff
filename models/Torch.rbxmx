@@ -1,0 +1,419 @@
+<roblox xmlns:xmime="http://www.w3.org/2005/05/xmlmime" xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xsi:noNamespaceSchemaLocation="http://www.roblox.com/roblox.xsd" version="4">
+	<External>null</External>
+	<External>nil</External>
+	<Item class="Model" referent="RBXCB55884D7A9342DBBA24EE29BD7D7186">
+		<Properties>
+			<CoordinateFrame name="ModelInPrimary">
+				<X>0</X>
+				<Y>0</Y>
+				<Z>0</Z>
+				<R00>1</R00>
+				<R01>0</R01>
+				<R02>0</R02>
+				<R10>0</R10>
+				<R11>1</R11>
+				<R12>0</R12>
+				<R20>0</R20>
+				<R21>0</R21>
+				<R22>1</R22>
+			</CoordinateFrame>
+			<string name="Name">Torch</string>
+			<Ref name="PrimaryPart">null</Ref>
+		</Properties>
+		<Item class="Part" referent="RBX1B9858461AC04E069E27073EBAC3B5D9">
+			<Properties>
+				<bool name="Anchored">true</bool>
+				<float name="BackParamA">-0.5</float>
+				<float name="BackParamB">0.5</float>
+				<token name="BackSurface">0</token>
+				<token name="BackSurfaceInput">0</token>
+				<float name="BottomParamA">-0.5</float>
+				<float name="BottomParamB">0.5</float>
+				<token name="BottomSurface">0</token>
+				<token name="BottomSurfaceInput">0</token>
+				<int name="BrickColor">217</int>
+				<CoordinateFrame name="CFrame">
+					<X>-77.350029</X>
+					<Y>6.71994591</Y>
+					<Z>17.4099922</Z>
+					<R00>-0.999999821</R00>
+					<R01>-3.43799167e-009</R01>
+					<R02>-1.93715096e-007</R02>
+					<R10>1.82977367e-008</R10>
+					<R11>0.99999994</R11>
+					<R12>-6.10622664e-014</R12>
+					<R20>2.98023224e-007</R20>
+					<R21>2.17081766e-008</R21>
+					<R22>-0.99999994</R22>
+				</CoordinateFrame>
+				<bool name="CanCollide">true</bool>
+				<float name="Elasticity">0.5</float>
+				<float name="Friction">0.300000012</float>
+				<float name="FrontParamA">-0.5</float>
+				<float name="FrontParamB">0.5</float>
+				<token name="FrontSurface">0</token>
+				<token name="FrontSurfaceInput">0</token>
+				<float name="LeftParamA">-0.5</float>
+				<float name="LeftParamB">0.5</float>
+				<token name="LeftSurface">0</token>
+				<token name="LeftSurfaceInput">0</token>
+				<bool name="Locked">false</bool>
+				<token name="Material">512</token>
+				<string name="Name">Smoke</string>
+				<float name="Reflectance">0</float>
+				<float name="RightParamA">-0.5</float>
+				<float name="RightParamB">0.5</float>
+				<token name="RightSurface">0</token>
+				<token name="RightSurfaceInput">0</token>
+				<Vector3 name="RotVelocity">
+					<X>0</X>
+					<Y>0</Y>
+					<Z>0</Z>
+				</Vector3>
+				<float name="TopParamA">-0.5</float>
+				<float name="TopParamB">0.5</float>
+				<token name="TopSurface">0</token>
+				<token name="TopSurfaceInput">0</token>
+				<float name="Transparency">1</float>
+				<Vector3 name="Velocity">
+					<X>0</X>
+					<Y>0</Y>
+					<Z>0</Z>
+				</Vector3>
+				<token name="formFactorRaw">0</token>
+				<token name="shape">1</token>
+				<Vector3 name="size">
+					<X>1</X>
+					<Y>1</Y>
+					<Z>1</Z>
+				</Vector3>
+			</Properties>
+			<Item class="Smoke" referent="RBX66A89C934BA5464A8C8DF8223F083EEB">
+				<Properties>
+					<Color3 name="Color">4290756543</Color3>
+					<bool name="Enabled">true</bool>
+					<string name="Name">Smoke</string>
+					<float name="opacity_xml">0.0500000007</float>
+					<float name="riseVelocity_xml">3</float>
+					<float name="size_xml">1</float>
+				</Properties>
+			</Item>
+		</Item>
+		<Item class="Part" referent="RBXD859B86F881549378E71706A40F82A83">
+			<Properties>
+				<bool name="Anchored">true</bool>
+				<float name="BackParamA">-0.5</float>
+				<float name="BackParamB">0.5</float>
+				<token name="BackSurface">0</token>
+				<token name="BackSurfaceInput">0</token>
+				<float name="BottomParamA">-0.5</float>
+				<float name="BottomParamB">0.5</float>
+				<token name="BottomSurface">0</token>
+				<token name="BottomSurfaceInput">0</token>
+				<int name="BrickColor">217</int>
+				<CoordinateFrame name="CFrame">
+					<X>-77.1500244</X>
+					<Y>5.71994591</Y>
+					<Z>17.8099537</Z>
+					<R00>-0.999999821</R00>
+					<R01>-3.43799167e-009</R01>
+					<R02>-1.1920929e-007</R02>
+					<R10>1.82977367e-008</R10>
+					<R11>0.99999994</R11>
+					<R12>-6.10622664e-014</R12>
+					<R20>2.23517418e-007</R20>
+					<R21>2.17081766e-008</R21>
+					<R22>-0.99999994</R22>
+				</CoordinateFrame>
+				<bool name="CanCollide">true</bool>
+				<float name="Elasticity">0.5</float>
+				<float name="Friction">0.300000012</float>
+				<float name="FrontParamA">-0.5</float>
+				<float name="FrontParamB">0.5</float>
+				<token name="FrontSurface">0</token>
+				<token name="FrontSurfaceInput">0</token>
+				<float name="LeftParamA">-0.5</float>
+				<float name="LeftParamB">0.5</float>
+				<token name="LeftSurface">0</token>
+				<token name="LeftSurfaceInput">0</token>
+				<bool name="Locked">false</bool>
+				<token name="Material">512</token>
+				<string name="Name">Fire</string>
+				<float name="Reflectance">0</float>
+				<float name="RightParamA">-0.5</float>
+				<float name="RightParamB">0.5</float>
+				<token name="RightSurface">0</token>
+				<token name="RightSurfaceInput">0</token>
+				<Vector3 name="RotVelocity">
+					<X>0</X>
+					<Y>0</Y>
+					<Z>0</Z>
+				</Vector3>
+				<float name="TopParamA">-0.5</float>
+				<float name="TopParamB">0.5</float>
+				<token name="TopSurface">0</token>
+				<token name="TopSurfaceInput">0</token>
+				<float name="Transparency">1</float>
+				<Vector3 name="Velocity">
+					<X>0</X>
+					<Y>0</Y>
+					<Z>0</Z>
+				</Vector3>
+				<token name="formFactorRaw">0</token>
+				<token name="shape">1</token>
+				<Vector3 name="size">
+					<X>1</X>
+					<Y>1</Y>
+					<Z>1</Z>
+				</Vector3>
+			</Properties>
+			<Item class="Fire" referent="RBXF22EE257BA134F66A874692230A73D33">
+				<Properties>
+					<Color3 name="Color">4290666240</Color3>
+					<bool name="Enabled">true</bool>
+					<string name="Name">Fire</string>
+					<Color3 name="SecondaryColor">4289527808</Color3>
+					<float name="heat_xml">15</float>
+					<float name="size_xml">5</float>
+				</Properties>
+			</Item>
+			<Item class="PointLight" referent="RBXF7F60F12EBF14A31A5E0AEF5A5DC65F6">
+				<Properties>
+					<float name="Brightness">0.600000024</float>
+					<Color3 name="Color">4294960576</Color3>
+					<bool name="Enabled">true</bool>
+					<string name="Name">PointLight</string>
+					<float name="Range">30</float>
+					<bool name="Shadows">true</bool>
+				</Properties>
+			</Item>
+			<Item class="Sound" referent="RBXDD6FAF078B524F208112A5EC613810FB">
+				<Properties>
+					<bool name="Looped">true</bool>
+					<string name="Name">Crackle</string>
+					<float name="Pitch">1</float>
+					<bool name="PlayOnRemove">false</bool>
+					<Content name="SoundId"><url>http://www.roblox.com/asset/?id=132897156</url></Content>
+					<float name="Volume">0.200000003</float>
+				</Properties>
+			</Item>
+			<Item class="BillboardGui" referent="RBX186A0AF3E2B84697AA50E161FEAF3D35">
+				<Properties>
+					<bool name="Active">false</bool>
+					<Ref name="Adornee">null</Ref>
+					<bool name="AlwaysOnTop">false</bool>
+					<bool name="Enabled">true</bool>
+					<Vector3 name="ExtentsOffset">
+						<X>0</X>
+						<Y>0</Y>
+						<Z>0</Z>
+					</Vector3>
+					<string name="Name">Bloom</string>
+					<Ref name="PlayerToHideFrom">null</Ref>
+					<UDim2 name="Size">
+						<XS>10</XS>
+						<XO>0</XO>
+						<YS>10</YS>
+						<YO>0</YO>
+					</UDim2>
+					<Vector2 name="SizeOffset">
+						<X>0</X>
+						<Y>0</Y>
+					</Vector2>
+					<Vector3 name="StudsOffset">
+						<X>0</X>
+						<Y>0</Y>
+						<Z>-1</Z>
+					</Vector3>
+				</Properties>
+				<Item class="ImageLabel" referent="RBXCF3A652DA7CE4024B77A615B05E1CCA0">
+					<Properties>
+						<bool name="Active">false</bool>
+						<Color3 name="BackgroundColor3">4294967295</Color3>
+						<float name="BackgroundTransparency">1</float>
+						<Color3 name="BorderColor3">4279970357</Color3>
+						<int name="BorderSizePixel">1</int>
+						<bool name="ClipsDescendants">false</bool>
+						<bool name="Draggable">false</bool>
+						<Content name="Image"><url>http://www.roblox.com/asset/?id=44586299</url></Content>
+						<Color3 name="ImageColor3">4294945280</Color3>
+						<Vector2 name="ImageRectOffset">
+							<X>0</X>
+							<Y>0</Y>
+						</Vector2>
+						<Vector2 name="ImageRectSize">
+							<X>0</X>
+							<Y>0</Y>
+						</Vector2>
+						<float name="ImageTransparency">0.5</float>
+						<string name="Name">ImageLabel</string>
+						<UDim2 name="Position">
+							<XS>0</XS>
+							<XO>0</XO>
+							<YS>0</YS>
+							<YO>0</YO>
+						</UDim2>
+						<float name="Rotation">0</float>
+						<UDim2 name="Size">
+							<XS>1</XS>
+							<XO>0</XO>
+							<YS>1</YS>
+							<YO>0</YO>
+						</UDim2>
+						<token name="SizeConstraint">0</token>
+						<bool name="Visible">true</bool>
+						<int name="ZIndex">1</int>
+					</Properties>
+				</Item>
+			</Item>
+			<Item class="Script" referent="RBXCC1E6FF2958640CEB5FCCF0F48C183A8">
+				<Properties>
+					<bool name="Disabled">false</bool>
+					<Content name="LinkedSource"><null></null></Content>
+					<string name="Name">LERP</string>
+					<ProtectedString name="Source"><![CDATA[--//Prsho
+script.Parent.Crackle:play()
+function lerp(a,b,t) --Linear Interpolation (LERP)
+	local r = a.r+t*(b.r-a.r)
+	local g = a.g+t*(b.g-a.g)
+	local b = a.b+t*(b.b-a.b)
+	return Color3.new(r/255,g/255,b/255)
+end
+math.randomseed(tick()+math.random(999999)+math.random(435646)+math.random(7855467))
+time_ = 5+math.random(5)
+bin = script.Parent
+light = bin.PointLight
+fire = bin.Fire
+bloom = bin.Bloom.ImageLabel
+coroutine.resume(coroutine.create(function()
+	while true do
+		wait(0.1)
+		local v = math.random(50,75)/100
+		light.Brightness = v
+		bloom.Parent.Size = UDim2.new(v*14,0,v*14,0)
+	end
+end))
+while true do
+	script.Parent.Crackle.Volume = bin.Size.magnitude/10
+	for f=1,time_*10 do
+		local f = f/(time_*10)
+		light.Color = lerp(Color3.new(212, 110, 28),Color3.new(255, 179, 0),f)
+		light.Range = (bin.Size.magnitude*30)+(f*8)
+		bloom.ImageColor3 = light.Color
+		fire.Heat = 4*(bin.Size.magnitude+f)
+		script.Parent.Crackle.Pitch = math.random(100,140)/100
+		fire.Color = Color3.new(light.Color.r,0.5*(light.Color.g+0.5),0.5*(light.Color.b))
+		fire.SecondaryColor = Color3.new(light.Color.r,0.5*(light.Color.g),0.5*(light.Color.b))
+		wait(0.1)
+	end
+	for f=1,time_*10 do
+		local f = f/(time_*10)
+		light.Color = lerp(Color3.new(255, 179, 0),Color3.new(212, 110, 28),f)
+		light.Range = (8+(bin.Size.magnitude*30))-(f*8)
+		bloom.ImageColor3 = light.Color
+		fire.Heat = (4+(bin.Size.magnitude*4))-(f*4)
+		script.Parent.Crackle.Pitch = math.random(100,140)/100
+		fire.Color = Color3.new(light.Color.r,0.5*(light.Color.g+0.5),0.5*(light.Color.b))
+		fire.SecondaryColor = Color3.new(light.Color.r,0.5*(light.Color.g),0.5*(light.Color.b))
+		wait(0.1)
+	end
+end]]></ProtectedString>
+				</Properties>
+			</Item>
+		</Item>
+		<Item class="Part" referent="RBX7620E32749BD4C4381C38A4F01E7A821">
+			<Properties>
+				<bool name="Anchored">true</bool>
+				<float name="BackParamA">-0.5</float>
+				<float name="BackParamB">0.5</float>
+				<token name="BackSurface">0</token>
+				<token name="BackSurfaceInput">0</token>
+				<float name="BottomParamA">-0.5</float>
+				<float name="BottomParamB">0.5</float>
+				<token name="BottomSurface">0</token>
+				<token name="BottomSurfaceInput">0</token>
+				<int name="BrickColor">217</int>
+				<CoordinateFrame name="CFrame">
+					<X>-77.2500305</X>
+					<Y>3.2199769</Y>
+					<Z>17.7099571</Z>
+					<R00>0.999994278</R00>
+					<R01>2.23516565e-007</R01>
+					<R02>1.82174063e-007</R02>
+					<R10>-2.45252437e-007</R10>
+					<R11>0.999995589</R11>
+					<R12>6.08683975e-014</R12>
+					<R20>-2.86482106e-007</R20>
+					<R21>2.98021003e-008</R21>
+					<R22>0.999996662</R22>
+				</CoordinateFrame>
+				<bool name="CanCollide">true</bool>
+				<float name="Elasticity">0.5</float>
+				<float name="Friction">0.300000012</float>
+				<float name="FrontParamA">-0.5</float>
+				<float name="FrontParamB">0.5</float>
+				<token name="FrontSurface">0</token>
+				<token name="FrontSurfaceInput">0</token>
+				<float name="LeftParamA">-0.5</float>
+				<float name="LeftParamB">0.5</float>
+				<token name="LeftSurface">0</token>
+				<token name="LeftSurfaceInput">0</token>
+				<bool name="Locked">false</bool>
+				<token name="Material">512</token>
+				<string name="Name">Log</string>
+				<float name="Reflectance">0</float>
+				<float name="RightParamA">-0.5</float>
+				<float name="RightParamB">0.5</float>
+				<token name="RightSurface">0</token>
+				<token name="RightSurfaceInput">0</token>
+				<Vector3 name="RotVelocity">
+					<X>0</X>
+					<Y>0</Y>
+					<Z>0</Z>
+				</Vector3>
+				<float name="TopParamA">-0.5</float>
+				<float name="TopParamB">0.5</float>
+				<token name="TopSurface">0</token>
+				<token name="TopSurfaceInput">0</token>
+				<float name="Transparency">0</float>
+				<Vector3 name="Velocity">
+					<X>0</X>
+					<Y>0</Y>
+					<Z>0</Z>
+				</Vector3>
+				<token name="formFactorRaw">3</token>
+				<token name="shape">1</token>
+				<Vector3 name="size">
+					<X>0.799999952</X>
+					<Y>4</Y>
+					<Z>0.800000012</Z>
+				</Vector3>
+			</Properties>
+			<Item class="CylinderMesh" referent="RBX7D2AD0FD0E5F40EF8F8BCF6D2F1875BF">
+				<Properties>
+					<float name="Bevel">0</float>
+					<float name="Bevel Roundness">0</float>
+					<float name="Bulge">0</float>
+					<token name="LODX">2</token>
+					<token name="LODY">2</token>
+					<string name="Name">Mesh</string>
+					<Vector3 name="Offset">
+						<X>0</X>
+						<Y>0</Y>
+						<Z>0</Z>
+					</Vector3>
+					<Vector3 name="Scale">
+						<X>1</X>
+						<Y>1</Y>
+						<Z>1</Z>
+					</Vector3>
+					<Vector3 name="VertexColor">
+						<X>1</X>
+						<Y>1</Y>
+						<Z>1</Z>
+					</Vector3>
+				</Properties>
+			</Item>
+		</Item>
+	</Item>
+</roblox>
